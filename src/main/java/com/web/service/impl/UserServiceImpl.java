@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     UserRepository userRepositoryImpl;
 
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService {
     UserConverter userConverter;
     @Override
     public UserLoginResponse isLogin(UserLoginDTO userLoginDTO) {
-        UserEntity userEntity = userRepositoryImpl.findByUsernameAndPassword(userLoginDTO);
+        UserEntity userEntity = userRepositoryImpl.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
         UserLoginResponse userLoginResponse = userConverter.toConverterUserLogin(userEntity);
         return userLoginResponse;
     }

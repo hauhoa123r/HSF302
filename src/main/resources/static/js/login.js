@@ -2,12 +2,13 @@
 $('login').click(()=>{
     var formLogin = $('#form-login').serializeArray();
     var json = {};
-    $.each((formLogin), function(i,it){
+    $.each((formLogin),(i,it) => {
             json[""+it.name+""] = it.value;
     });
+    loginAccount(json);
 });
 
-function loginAccount(jdon){
+ function loginAccount(jdon) {
     $.ajax({
         type: "POST",
         url : "/user",

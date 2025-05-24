@@ -1,14 +1,15 @@
 
-$('login').click(()=>{
+$('#login').click((e)=>{
+    e.preventDefault();
     var formLogin = $('#form-login').serializeArray();
     var json = {};
-    $.each((formLogin),(i,it) => {
+    $.each(formLogin,(i,it) => {
             json[""+it.name+""] = it.value;
     });
     loginAccount(json);
 });
 
- function loginAccount(jdon) {
+ function loginAccount(json) {
     $.ajax({
         type: "POST",
         url : "/user",
@@ -19,7 +20,7 @@ $('login').click(()=>{
             alert("Login Success!")
         },
         error : function(response){
-            alert("Login Failed!")
+            console.log(response);
         }
     });
 }

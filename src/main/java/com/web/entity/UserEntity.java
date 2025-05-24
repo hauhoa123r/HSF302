@@ -39,4 +39,13 @@ public class UserEntity {
 
     @Column(name = "created_at")
     private Date created_at;
+
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "address")
+    private String address;
 }

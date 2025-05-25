@@ -17,4 +17,7 @@ public class UserLoginResponse {
     private String role;
     private String phone;
     private String email;
+    private String dateOfBirth;
+    private String gender;
+    private String address;
 }

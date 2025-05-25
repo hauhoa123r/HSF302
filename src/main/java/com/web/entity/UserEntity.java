@@ -22,6 +22,9 @@ public class UserEntity {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -36,4 +39,13 @@ public class UserEntity {
 
     @Column(name = "created_at")
     private Date created_at;
+
+    @Column(name = "date_of_birth")
+    private String dateOfBirth;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "address")
+    private String address;
 }

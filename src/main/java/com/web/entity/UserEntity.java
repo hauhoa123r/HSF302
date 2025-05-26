@@ -48,4 +48,10 @@ public class UserEntity {
 
     @Column(name = "address")
     private String address;
+
+    @OneToOne(mappedBy = "userEntity")
+    private MemberEntity memberEntity;
+
+    @OneToOne(mappedBy = "userEntity")
+    private TrainerEntity trainerEntity;
 }

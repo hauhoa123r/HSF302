@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping("")
     public String hello(Model model) {
-        return "index";
+        return "fragments/layout";
     }
 }
 

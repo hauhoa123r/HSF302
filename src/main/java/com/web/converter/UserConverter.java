@@ -16,4 +16,8 @@ public class UserConverter {
         UserLoginResponse userLoginResponse = modelMap.modelMapper().map(userEntity, UserLoginResponse.class);
         return userLoginResponse;
     }
+    public UserEntity toConverterUserRegister(UserRegisterDTO userRegisterDTO){
+        UserEntity userEntity = modelMap.modelMapper().map(userRegisterDTO, UserEntity.class);
+        return userEntity;
+    }
 }

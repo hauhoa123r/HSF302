@@ -50,15 +50,15 @@
     width: 100%;
     position: relative;
 }
-.inner-form1 .inner-group .inner-control {
+.inner-form1 .inner-group .inner-control{
     width: 100%;
     height: 30px;
     background-color: #F1F4F9;
     border: 1px solid #D8D8D8;
     padding: 0 16px;
     border-radius: 8px;
+    margin-top: 10px;
 }
-
 .inner-control:focus {
     outline: none;
     border-color: #0b1421;
@@ -74,34 +74,36 @@
     display: flex;
     align-items: center;
 }
-.page-form .inner-button {
+.page-form .inner-button{
     width: 100%;
     height: 45px;
     border-radius: 8px;
+    opacity: 0.5;
     font-weight: 700;
     font-size: 20px;
     background-color: #F76A79;
     cursor: pointer;
     color: white;
-    opacity: 1;
-    border: none;
-    transition: all 0.3s ease-in-out;
     margin-bottom: 7px;
 }
 
-.page-form .inner-button:hover {
+.page-form .inner-button:hover{
     color: #F76A79;
     background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
 }
 
-
-.form-account .inner-forget-password:hover{
-    color: #D8D8D8;
-    opacity: 1;
+.inner-group .inner-label{
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.form-account .inner-forget-password{
-    font-size: 15px;
+.inner-link{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.inner-link i {
+    font-size: 30px;
+    color: #F76A79;
 }

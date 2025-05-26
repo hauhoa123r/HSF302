@@ -9,7 +9,7 @@ public class UserController {
 
     @GetMapping("")
     public String hello(Model model) {
-        return "index";
+        return "fragments/layout";
     }
 }
 

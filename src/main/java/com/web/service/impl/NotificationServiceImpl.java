@@ -12,6 +12,7 @@ import com.web.service.NotificationService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,8 @@ public class NotificationServiceImpl implements NotificationService {
             throw new EntityAlreadyExistException(NotificationEntity.class);
         }
         NotificationEntity notificationEntity = notificationConverter.toEntity(notificationDTO);
+        notificationEntity.setRead(false);
+        notificationEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
         notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
         return notificationEntityOptional.map(notificationConverter::toResponse)
                 .orElseThrow(() -> new DataConflictException(NotificationEntity.class));

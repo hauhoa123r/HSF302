@@ -9,18 +9,24 @@ import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class NotificationServiceImpl implements NotificationService {
 
-    private final NotificationRepository notificationRepository;
     private final NotificationConverter notificationConverter;
+    private final NotificationRepository notificationRepository;
+
+    public NotificationServiceImpl(
+            @Qualifier("notificationConverter") NotificationConverter notificationConverter,
+            @Qualifier("notificationRepository") NotificationRepository notificationRepository) {
+        this.notificationConverter = notificationConverter;
+        this.notificationRepository = notificationRepository;
+    }
 
     @Override
     public List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO) {

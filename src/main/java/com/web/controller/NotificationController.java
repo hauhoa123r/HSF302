@@ -3,7 +3,7 @@ package com.web.controller;
 import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.service.NotificationService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,10 +14,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/notification")
-@RequiredArgsConstructor
 public class NotificationController {
 
     private final NotificationService notificationService;
+
+    public NotificationController(
+            @Qualifier("notificationServiceImpl") NotificationService notificationService
+    ) {
+        this.notificationService = notificationService;
+    }
 
     @GetMapping("/getAll")
     public ModelAndView getAllNotifications(@ModelAttribute NotificationDTO notificationDTO) {

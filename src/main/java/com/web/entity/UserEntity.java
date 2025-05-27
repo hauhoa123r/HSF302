@@ -10,8 +10,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
@@ -48,4 +48,10 @@ public class UserEntity {
 
     @Column(name = "address")
     private String address;
+
+    @OneToOne(mappedBy = "userEntity")
+    private MemberEntity memberEntity;
+
+    @OneToOne(mappedBy = "userEntity")
+    private TrainerEntity trainerEntity;
 }

@@ -9,6 +9,7 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
+        //init data for the attributes (if need)
         return new ModelMapper();
     }
 }

@@ -34,7 +34,7 @@ public class NotificationServiceImpl implements NotificationService {
             throw new EntityAlreadyExistException(NotificationEntity.class);
         }
         NotificationEntity notificationEntity = notificationConverter.toEntity(notificationDTO);
-        notificationEntityOptional = Optional.ofNullable(notificationRepository.save(notificationEntity));
+        notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
         return notificationEntityOptional.map(notificationConverter::toResponse)
                 .orElseThrow(() -> new DataConflictException(NotificationEntity.class));
     }
@@ -50,7 +50,7 @@ public class NotificationServiceImpl implements NotificationService {
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationEntity.setRead(true);
-        notificationEntityOptional = Optional.ofNullable(notificationRepository.save(notificationEntity));
+        notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
         notificationEntityOptional.orElseThrow(() -> new DataConflictException(NotificationEntity.class));
     }
 

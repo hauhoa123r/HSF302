@@ -50,8 +50,7 @@ public class NotificationServiceImpl implements NotificationService {
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationEntity.setRead(true);
-        notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
-        notificationEntityOptional.orElseThrow(() -> new DataConflictException(NotificationEntity.class));
+        notificationRepository.save(notificationEntity);
     }
 
     @Override

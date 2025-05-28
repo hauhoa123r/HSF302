@@ -34,4 +34,9 @@ public class NotificationAPI {
     public NotificationResponse sendNotification(@RequestBody NotificationDTO notificationDTO) {
         return notificationService.sendNotification(notificationDTO);
     }
+
+    @PostMapping("/delete")
+    public void deleteNotification(@RequestBody NotificationDTO notificationDTO) {
+        notificationService.deleteNotification(notificationDTO);
+    }
 }

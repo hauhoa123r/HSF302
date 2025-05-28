@@ -36,19 +36,25 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO) {
-        return notificationRepository.findNotificationEntitiesByReceiverId(notificationDTO.getReceiverId()).stream().map(notificationConverter::toResponse).toList();
+        if (notificationDTO.getReceiverId() == null) {
+            throw new EntityNotFoundException(NotificationEntity.class);
+        }
+
+        List<NotificationEntity> notificationEntities = notificationRepository.findNotificationEntitiesByReceiverId(notificationDTO.getReceiverId());
+        return notificationEntities.stream()
+                .map(notificationConverter::toResponse)
+                .toList();
     }
 
     @Override
     public NotificationResponse sendNotification(NotificationDTO notificationDTO) {
-        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
-        if (notificationEntityOptional.isPresent()) {
+        if (notificationDTO.getId() != null && notificationRepository.findById(notificationDTO.getId()).isPresent()) {
             throw new EntityAlreadyExistException(NotificationEntity.class);
         }
         NotificationEntity notificationEntity = notificationConverter.toEntity(notificationDTO);
         notificationEntity.setRead(false);
         notificationEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
-        notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
+        Optional<NotificationEntity> notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
         return notificationEntityOptional.map(notificationConverter::toResponse)
                 .orElseThrow(() -> new DataConflictException(NotificationEntity.class));
     }

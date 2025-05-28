@@ -54,12 +54,6 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public NotificationResponse getNotificationById(NotificationDTO notificationDTO) {
-        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
-        return notificationEntityOptional.map(notificationConverter::toResponse).orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
-    }
-
-    @Override
     public void markAsRead(NotificationDTO notificationDTO) {
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));

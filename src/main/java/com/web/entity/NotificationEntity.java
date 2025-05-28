@@ -33,7 +33,7 @@ public class NotificationEntity {
     @Column(name = "is_read")
     private boolean isRead;
 
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id")
     private UserEntity receiver;
 }

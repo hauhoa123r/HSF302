@@ -11,8 +11,6 @@ public interface NotificationService {
 
     NotificationResponse sendNotification(NotificationDTO notificationDTO);
 
-    NotificationResponse getNotificationById(NotificationDTO notificationDTO);
-
     void markAsRead(NotificationDTO notificationDTO);
 
     void deleteNotification(NotificationDTO notificationDTO);

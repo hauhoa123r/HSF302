@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,7 +15,7 @@ public class NotificationDTO {
     private Long id;
     private String title;
     private String content;
-    private String sentAt;
+    private Timestamp sentAt;
     private boolean isRead;
     private Long receiverId;
 }

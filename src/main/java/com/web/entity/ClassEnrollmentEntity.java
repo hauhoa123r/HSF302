@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClassEnrollmentEntity {
-
+    @Column(name = "enrollment_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

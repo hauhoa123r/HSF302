@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "box_chats")
 @Getter
@@ -22,4 +24,7 @@ public class BoxChatEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
     private ClassEntity classEntity;
+
+    @OneToMany(mappedBy = "boxChatEntity")
+    private Set<MessageEntity> messageEntities;
 }

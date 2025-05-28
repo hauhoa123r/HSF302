@@ -61,7 +61,7 @@ public class MessageServiceImpl implements MessageService {
             throw new ErrorMappingException(MessageDTO.class, MessageEntity.class);
         }
 
-        return messageRepository.findByBoxChatId(messageEntityOptional.get().getBoxChat().getId()).stream().map(messageConverter::toResponse).toList();
+        return messageRepository.findByBoxChatEntityId(messageEntityOptional.get().getBoxChatEntity().getId()).stream().map(messageConverter::toResponse).toList();
     }
 
     @Override

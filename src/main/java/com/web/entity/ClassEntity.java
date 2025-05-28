@@ -33,7 +33,7 @@ public class ClassEntity {
     @JoinColumn(name = "trainer_id")
     private TrainerEntity trainerEntity;
 
-    @OneToMany(mappedBy = "class")
+    @OneToMany(mappedBy = "classEntity")
     private java.util.List<ClassEnrollmentEntity> classEnrollmentEntityList;
 
     @OneToMany(mappedBy = "classEntity")

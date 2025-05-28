@@ -10,7 +10,7 @@ import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -21,13 +21,16 @@ import java.util.Optional;
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
 
-    private final NotificationConverter notificationConverter;
-    private final NotificationRepository notificationRepository;
+    private NotificationConverter notificationConverter;
+    private NotificationRepository notificationRepository;
 
-    public NotificationServiceImpl(
-            @Qualifier("notificationConverter") NotificationConverter notificationConverter,
-            @Qualifier("notificationRepository") NotificationRepository notificationRepository) {
+    @Autowired
+    public void setNotificationConverter(NotificationConverter notificationConverter) {
         this.notificationConverter = notificationConverter;
+    }
+
+    @Autowired
+    public void setNotificationRepository(NotificationRepository notificationRepository) {
         this.notificationRepository = notificationRepository;
     }
 

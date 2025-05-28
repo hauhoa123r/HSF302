@@ -3,7 +3,7 @@ package com.web.controller;
 import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.service.NotificationService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,11 +16,10 @@ import java.util.List;
 @RequestMapping("/notification")
 public class NotificationController {
 
-    private final NotificationService notificationService;
+    private NotificationService notificationService;
 
-    public NotificationController(
-            @Qualifier("notificationServiceImpl") NotificationService notificationService
-    ) {
+    @Autowired
+    public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
 

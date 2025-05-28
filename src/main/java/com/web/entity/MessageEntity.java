@@ -22,11 +22,11 @@ public class MessageEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "box_chat_id", nullable = false)
+    @JoinColumn(name = "box_chat_id")
     private BoxChatEntity boxChat;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @JoinColumn(name = "sender_id")
     private MemberEntity sender;
 
     @Column(name = "content")

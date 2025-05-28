@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -42,7 +43,7 @@ public class UserEntity {
     private Date createdAt;
 
     @Column(name = "date_of_birth")
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
     @Column(name = "gender")
     private String gender;
@@ -50,9 +51,15 @@ public class UserEntity {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @OneToOne(mappedBy = "userEntity")
     private MemberEntity memberEntity;
 
     @OneToOne(mappedBy = "userEntity")
     private TrainerEntity trainerEntity;
+
+    @OneToMany(mappedBy = "receiver")
+    private Set<NotificationEntity> notificationEntities;
 }

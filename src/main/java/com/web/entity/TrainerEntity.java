@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "trainer")
+@Table(name = "trainers")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -20,8 +21,8 @@ public class TrainerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "experience_year")
-    private Integer experienceYear;
+    @Column(name = "experience_years")
+    private Integer experienceYears;
 
     @Column(name = "biography")
     private String biography;
@@ -32,4 +33,7 @@ public class TrainerEntity {
 
     @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
     private List<ClassEntity> classEntityList;
+
+    @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
+    private Set<PersonalBookingEntity> personalBookingEntities;
 }

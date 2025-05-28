@@ -6,20 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Entity
-@Table(name = "box_chats")
+@Table(name = "trainer_schedules")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class BoxChatEntity {
-    @Column(name = "box_chat_id")
+public class TrainerScheduleEntity {
+    @Column(name = "schedule_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "class_id")
-    private ClassEntity classEntity;
+    @JoinColumn(name = "trainer_id")
+    private TrainerEntity trainerEntity;
+
+    @Column(name = "start_time")
+    private Timestamp startTime;
+
+    @Column(name = "end_time")
+    private Timestamp endTime;
 }

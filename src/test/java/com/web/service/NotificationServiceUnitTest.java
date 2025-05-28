@@ -45,8 +45,6 @@ class NotificationServiceUnitTest {
 
     @Test
     void sendNotification() {
-        notificationService.setNotificationRepository(notificationRepositoryMock);
-
         NotificationDTO notificationDTO1 = new NotificationDTO();
         notificationDTO1.setId(1L);
 
@@ -72,8 +70,6 @@ class NotificationServiceUnitTest {
 
     @Test
     void markAsRead() {
-        notificationService.setNotificationRepository(notificationRepositoryMock);
-
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setId(1L);
 
@@ -91,8 +87,6 @@ class NotificationServiceUnitTest {
 
     @Test
     void deleteNotification() {
-        notificationService.setNotificationRepository(notificationRepositoryMock);
-
         NotificationDTO notificationDTO = new NotificationDTO();
         notificationDTO.setId(1L);
 

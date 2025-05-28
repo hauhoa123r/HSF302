@@ -9,6 +9,7 @@ import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class NotificationServiceImpl implements NotificationService {
 
     private final NotificationConverter notificationConverter;

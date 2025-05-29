@@ -34,7 +34,7 @@ public class ClassEntity {
     private TrainerEntity trainerEntity;
 
     @OneToMany(mappedBy = "classEntity")
-    private java.util.List<ClassEnrollmentEntity> classEnrollmentEntityList;
+    private java.util.List<ClassEnrollmentEntity> classEnrollmentEntities;
 
     @OneToMany(mappedBy = "classEntity")
     private Set<ClassScheduleEntity> classScheduleEntity;

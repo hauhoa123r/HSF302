@@ -35,5 +35,5 @@ public class NotificationEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
-    private UserEntity receiver;
+    private UserEntity userEntity;
 }

@@ -32,7 +32,7 @@ public class TrainerEntity {
     private UserEntity userEntity;
 
     @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
-    private List<ClassEntity> classEntityList;
+    private List<ClassEntity> classEntities;
 
     @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
     private Set<PersonalBookingEntity> personalBookingEntities;

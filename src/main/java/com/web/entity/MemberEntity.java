@@ -29,7 +29,7 @@ public class MemberEntity {
     private UserEntity userEntity;
 
     @OneToMany(mappedBy = "memberEntity")
-    private List<ClassEnrollmentEntity> classEnrollmentEntityList;
+    private List<ClassEnrollmentEntity> classEnrollmentEntities;
 
     @OneToMany(mappedBy = "memberEntity")
     private Set<PersonalBookingEntity> personalBookingEntities;

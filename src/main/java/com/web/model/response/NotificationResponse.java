@@ -18,5 +18,5 @@ public class NotificationResponse {
     private String content;
     private Timestamp sentAt;
     private boolean isRead;
-    private Long receiverId;
+    private Long userEntityId;
 }

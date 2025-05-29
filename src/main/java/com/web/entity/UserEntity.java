@@ -60,6 +60,6 @@ public class UserEntity {
     @OneToOne(mappedBy = "userEntity")
     private TrainerEntity trainerEntity;
 
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "userEntity")
     private Set<NotificationEntity> notificationEntities;
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class MessageDTO {
     private Long id;
-    private Long boxChatId;
-    private Long senderId;
+    private Long boxChatEntityId;
+    private Long memberEntityId;
     private String content;
 }

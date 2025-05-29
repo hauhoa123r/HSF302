@@ -12,8 +12,8 @@ import java.sql.Timestamp;
 
 public class MessageResponse {
     private Long id;
-    private Long boxChatId;
-    private Long senderId;
+    private Long boxChatEntityId;
+    private Long memberEntityId;
     private String content;
     private Timestamp sentAt;
     private boolean isRead;

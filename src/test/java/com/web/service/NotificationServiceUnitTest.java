@@ -29,15 +29,15 @@ class NotificationServiceUnitTest {
     @Test
     void getAllNotificationsByReceiverId() {
         NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setReceiverId(1L);
+        notificationDTO.setUserEntityId(1L);
 
         NotificationEntity notificationEntity = new NotificationEntity();
         notificationEntity.setId(1L);
 
-        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByReceiverId((1L))).thenReturn(List.of(notificationEntity));
+        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByUserEntityId((1L))).thenReturn(List.of(notificationEntity));
         List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(notificationDTO);
 
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findNotificationEntitiesByReceiverId((1L));
+        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findNotificationEntitiesByUserEntityId((1L));
 
         Assertions.assertEquals(1, notifications.size());
         Assertions.assertEquals(1, notifications.get(0).getId());
@@ -55,17 +55,16 @@ class NotificationServiceUnitTest {
         NotificationEntity notificationEntity = new NotificationEntity();
         notificationEntity.setId(1L);
 
-        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.empty());
+        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(false);
         Mockito.when(notificationRepositoryMock.save(Mockito.any(NotificationEntity.class))).thenReturn(notificationEntity);
 
         NotificationResponse notificationResponse = notificationService.sendNotification(notificationDTO1);
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findById(1L);
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).save(Mockito.any(NotificationEntity.class));
+        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).existsById(1L);
         Assertions.assertEquals(1L, notificationResponse.getId());
 
-        Mockito.when(notificationRepositoryMock.findById(2L)).thenReturn(Optional.of(new NotificationEntity()));
+        Mockito.when(notificationRepositoryMock.existsById(2L)).thenReturn(true);
         Assertions.assertThrows(EntityAlreadyExistException.class, () -> notificationService.sendNotification(notificationDTO2));
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findById(2L);
+        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).existsById(2L);
     }
 
     @Test
@@ -77,6 +76,7 @@ class NotificationServiceUnitTest {
         notificationEntity.setId(1L);
         notificationEntity.setRead(false);
 
+        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
         Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(notificationEntity));
         notificationService.markAsRead(notificationDTO);
 
@@ -93,6 +93,7 @@ class NotificationServiceUnitTest {
         NotificationEntity notificationEntity = new NotificationEntity();
         notificationEntity.setId(1L);
 
+        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
         Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(notificationEntity));
         notificationService.deleteNotification(notificationDTO);
 

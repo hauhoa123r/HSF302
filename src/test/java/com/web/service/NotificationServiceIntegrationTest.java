@@ -22,7 +22,7 @@ class NotificationServiceIntegrationTest {
     @Test
     void getAllNotificationsByReceiverId() {
         NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setReceiverId(1L);
+        notificationDTO.setUserEntityId(1L);
 
         List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(notificationDTO);
         assertNotNull(notifications);
@@ -34,20 +34,20 @@ class NotificationServiceIntegrationTest {
         assertEquals("Chào mừng bạn đến với phòng gym!", notificationResponse.getContent());
         assertEquals(Timestamp.valueOf("2025-05-01 09:00:00.0"), notificationResponse.getSentAt());
         assertFalse(notificationResponse.isRead());
-        assertEquals(1L, notificationResponse.getReceiverId());
+        assertEquals(1L, notificationResponse.getUserEntityId());
     }
 
     @Test
     void sendNotification() {
         NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setReceiverId(2L);
+        notificationDTO.setUserEntityId(2L);
         notificationDTO.setTitle("Test Notification");
         notificationDTO.setContent("This is a test notification.");
 
         NotificationResponse sentNotification = notificationService.sendNotification(notificationDTO);
 
         assertNotNull(sentNotification);
-        assertEquals(notificationDTO.getReceiverId(), sentNotification.getReceiverId());
+        assertEquals(notificationDTO.getUserEntityId(), sentNotification.getUserEntityId());
         assertEquals(notificationDTO.getTitle(), sentNotification.getTitle());
         assertEquals(notificationDTO.getContent(), sentNotification.getContent());
         assertFalse(sentNotification.isRead());
@@ -61,7 +61,7 @@ class NotificationServiceIntegrationTest {
         notificationService.markAsRead(notificationDTO);
 
         NotificationDTO getNotification = new NotificationDTO();
-        getNotification.setReceiverId(1L);
+        getNotification.setUserEntityId(1L);
         List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(getNotification);
         assertTrue(notifications.get(0).isRead());
     }
@@ -74,7 +74,7 @@ class NotificationServiceIntegrationTest {
         notificationService.deleteNotification(notificationDTO);
 
         NotificationDTO getNotification = new NotificationDTO();
-        getNotification.setReceiverId(1L);
+        getNotification.setUserEntityId(1L);
         List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(getNotification);
         assertEquals(0, notifications.size());
     }

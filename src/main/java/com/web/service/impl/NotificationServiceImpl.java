@@ -2,7 +2,6 @@ package com.web.service.impl;
 
 import com.web.converter.NotificationConverter;
 import com.web.entity.NotificationEntity;
-import com.web.exception.sql.DataConflictException;
 import com.web.exception.sql.EntityAlreadyExistException;
 import com.web.exception.sql.EntityNotFoundException;
 import com.web.model.dto.NotificationDTO;
@@ -20,7 +19,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class NotificationServiceImpl implements NotificationService {
-
     private NotificationConverter notificationConverter;
     private NotificationRepository notificationRepository;
 
@@ -36,31 +34,31 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO) {
-        if (notificationDTO.getReceiverId() == null) {
+        if (notificationDTO.getUserEntityId() == null) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
 
-        List<NotificationEntity> notificationEntities = notificationRepository.findNotificationEntitiesByReceiverId(notificationDTO.getReceiverId());
-        return notificationEntities.stream()
-                .map(notificationConverter::toResponse)
-                .toList();
+        return notificationRepository.findNotificationEntitiesByUserEntityId(notificationDTO.getUserEntityId()).stream().map(notificationConverter::toResponse).toList();
     }
+
 
     @Override
     public NotificationResponse sendNotification(NotificationDTO notificationDTO) {
-        if (notificationDTO.getId() != null && notificationRepository.findById(notificationDTO.getId()).isPresent()) {
+        if (notificationDTO.getId() != null && notificationRepository.existsById(notificationDTO.getId())) {
             throw new EntityAlreadyExistException(NotificationEntity.class);
         }
         NotificationEntity notificationEntity = notificationConverter.toEntity(notificationDTO);
         notificationEntity.setRead(false);
         notificationEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
         Optional<NotificationEntity> notificationEntityOptional = Optional.of(notificationRepository.save(notificationEntity));
-        return notificationEntityOptional.map(notificationConverter::toResponse)
-                .orElseThrow(() -> new DataConflictException(NotificationEntity.class));
+        return notificationConverter.toResponse(notificationEntityOptional.get());
     }
 
     @Override
     public void markAsRead(NotificationDTO notificationDTO) {
+        if (notificationDTO.getId() == null || !notificationRepository.existsById(notificationDTO.getId())) {
+            throw new EntityNotFoundException(NotificationEntity.class);
+        }
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationEntity.setRead(true);
@@ -69,6 +67,9 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void deleteNotification(NotificationDTO notificationDTO) {
+        if (notificationDTO.getId() == null || !notificationRepository.existsById(notificationDTO.getId())) {
+            throw new EntityNotFoundException(NotificationEntity.class);
+        }
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
         notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationRepository.deleteById(notificationDTO.getId());

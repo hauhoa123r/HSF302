@@ -2,7 +2,6 @@ package com.web.service.impl;
 
 import com.web.converter.MessageConverter;
 import com.web.entity.MessageEntity;
-import com.web.exception.mapping.ErrorMappingException;
 import com.web.exception.sql.EntityAlreadyExistException;
 import com.web.exception.sql.EntityNotFoundException;
 import com.web.model.dto.MessageDTO;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,16 +35,11 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public MessageResponse sendMessage(MessageDTO messageDTO) {
 
-        if (messageDTO.getId() != null && messageRepository.findById(messageDTO.getId()).isPresent()) {
+        if (messageDTO.getId() != null && !messageRepository.existsById(messageDTO.getId())) {
             throw new EntityAlreadyExistException(MessageEntity.class);
         }
 
-        Optional<MessageEntity> messageEntityOptional = Optional.ofNullable(messageConverter.toEntity(messageDTO));
-        if (messageEntityOptional.isEmpty()) {
-            throw new ErrorMappingException(MessageDTO.class, MessageEntity.class);
-        }
-
-        MessageEntity messageEntity = messageEntityOptional.get();
+        MessageEntity messageEntity = messageConverter.toEntity(messageDTO);
         messageEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
 
         messageEntity = messageRepository.save(messageEntity);
@@ -56,25 +49,21 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageResponse> getMessagesByBoxChatId(MessageDTO messageDTO) {
-        Optional<MessageEntity> messageEntityOptional = Optional.ofNullable(messageConverter.toEntity(messageDTO));
-        if (messageEntityOptional.isEmpty()) {
-            throw new ErrorMappingException(MessageDTO.class, MessageEntity.class);
+        if (messageDTO.getBoxChatEntityId() == null) {
+            throw new EntityNotFoundException(MessageEntity.class);
         }
 
-        return messageRepository.findByBoxChatEntityId(messageEntityOptional.get().getBoxChatEntity().getId()).stream().map(messageConverter::toResponse).toList();
+        return messageRepository.findByBoxChatEntityId(messageDTO.getBoxChatEntityId()).stream().map(messageConverter::toResponse).toList();
     }
 
     @Override
     public void deleteMessage(MessageDTO messageDTO) {
-        Optional<MessageEntity> messageEntityOptional = Optional.ofNullable(messageConverter.toEntity(messageDTO));
-        if (messageEntityOptional.isEmpty()) {
-            throw new ErrorMappingException(MessageDTO.class, MessageEntity.class);
-        }
 
-        if (!messageRepository.existsById(messageEntityOptional.get().getId())) {
+        if (messageDTO.getId() == null || !messageRepository.existsById(messageDTO.getId())) {
             throw new EntityNotFoundException(MessageEntity.class);
         }
 
-        messageRepository.delete(messageEntityOptional.get());
+        MessageEntity messageEntity = messageConverter.toEntity(messageDTO);
+        messageRepository.delete(messageEntity);
     }
 }

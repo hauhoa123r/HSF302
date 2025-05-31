@@ -71,6 +71,70 @@ class NotificationServiceIntegrationTest {
     }
 
     @Test
+    void markAsRead_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        List<NotificationResponse> list = notificationService.getAllNotificationsByReceiverId(dto);
+        if (!list.isEmpty()) {
+            NotificationDTO markDto = new NotificationDTO();
+            markDto.setId(list.get(0).getId());
+            notificationService.markAsRead(markDto);
+            List<NotificationResponse> updated = notificationService.getAllNotificationsByReceiverId(dto);
+            NotificationResponse res = updated.stream().filter(n -> n.getId().equals(markDto.getId())).findFirst().orElse(null);
+            Assertions.assertNotNull(res);
+            Assertions.assertTrue(res.isRead());
+        }
+    }
+
+    @Test
+    void markAsRead_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999999L);
+        Assertions.assertThrows(Exception.class, () -> notificationService.markAsRead(dto));
+    }
+
+    @Test
+    void markAsUnread_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        List<NotificationResponse> list = notificationService.getAllNotificationsByReceiverId(dto);
+        if (!list.isEmpty()) {
+            NotificationDTO markDto = new NotificationDTO();
+            markDto.setId(list.get(0).getId());
+            notificationService.markAsUnread(markDto);
+            List<NotificationResponse> updated = notificationService.getAllNotificationsByReceiverId(dto);
+            NotificationResponse res = updated.stream().filter(n -> n.getId().equals(markDto.getId())).findFirst().orElse(null);
+            Assertions.assertNotNull(res);
+            Assertions.assertFalse(res.isRead());
+        }
+    }
+
+    @Test
+    void markAsUnread_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999999L);
+        Assertions.assertThrows(Exception.class, () -> notificationService.markAsUnread(dto));
+    }
+
+    @Test
+    void markAllAsRead_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        notificationService.markAllAsRead(dto);
+        List<NotificationResponse> list = notificationService.getAllNotificationsByReceiverId(dto);
+        for (NotificationResponse res : list) {
+            Assertions.assertTrue(res.isRead());
+        }
+    }
+
+    @Test
+    void markAllAsRead_nullUserEntityId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(null);
+        Assertions.assertThrows(Exception.class, () -> notificationService.markAllAsRead(dto));
+    }
+
+    @Test
     void deleteNotification_notFound() {
         NotificationDTO dto = new NotificationDTO();
         dto.setId(999999L);

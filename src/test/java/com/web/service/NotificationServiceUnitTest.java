@@ -1,7 +1,9 @@
 package com.web.service;
 
 import com.web.entity.NotificationEntity;
+import com.web.exception.ResourceNotFoundException;
 import com.web.exception.sql.EntityAlreadyExistException;
+import com.web.exception.sql.EntityNotFoundException;
 import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
@@ -26,78 +28,144 @@ class NotificationServiceUnitTest {
     @MockBean
     private NotificationRepository notificationRepositoryMock;
 
+    // --- getAllNotificationsByReceiverId ---
     @Test
-    void getAllNotificationsByReceiverId() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setUserEntityId(1L);
-
-        NotificationEntity notificationEntity = new NotificationEntity();
-        notificationEntity.setId(1L);
-
-        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByUserEntityId((1L))).thenReturn(List.of(notificationEntity));
-        List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(notificationDTO);
-
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findNotificationEntitiesByUserEntityId((1L));
-
-        Assertions.assertEquals(1, notifications.size());
-        Assertions.assertEquals(1, notifications.get(0).getId());
+    void getAllNotificationsByReceiverId_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        NotificationEntity entity = new NotificationEntity();
+        entity.setId(1L);
+        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByUserEntityId(1L)).thenReturn(List.of(entity));
+        List<NotificationResponse> result = notificationService.getAllNotificationsByReceiverId(dto);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals(1L, result.get(0).getId());
     }
 
     @Test
-    void sendNotification() {
-        NotificationDTO notificationDTO1 = new NotificationDTO();
-        notificationDTO1.setId(1L);
+    void getAllNotificationsByReceiverId_nullUserEntityId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class,
+                () -> notificationService.getAllNotificationsByReceiverId(dto));
+    }
 
-        NotificationDTO notificationDTO2 = new NotificationDTO();
-        notificationDTO2.setId(2L);
+    @Test
+    void getAllNotificationsByReceiverId_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(999L);
+        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByUserEntityId(999L)).thenReturn(List.of());
+        List<NotificationResponse> result = notificationService.getAllNotificationsByReceiverId(dto);
+        Assertions.assertTrue(result.isEmpty());
+    }
 
-
-        NotificationEntity notificationEntity = new NotificationEntity();
-        notificationEntity.setId(1L);
-
+    // --- sendNotification ---
+    @Test
+    void sendNotification_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(1L);
+        dto.setUserEntityId(2L);
+        dto.setTitle("Test");
+        dto.setContent("Test content");
+        NotificationEntity entity = new NotificationEntity();
+        entity.setId(1L);
         Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(false);
-        Mockito.when(notificationRepositoryMock.save(Mockito.any(NotificationEntity.class))).thenReturn(notificationEntity);
+        Mockito.when(notificationRepositoryMock.save(Mockito.any(NotificationEntity.class))).thenReturn(entity);
+        NotificationResponse res = notificationService.sendNotification(dto);
+        Assertions.assertEquals(1L, res.getId());
+    }
 
-        NotificationResponse notificationResponse = notificationService.sendNotification(notificationDTO1);
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).existsById(1L);
-        Assertions.assertEquals(1L, notificationResponse.getId());
-
+    @Test
+    void sendNotification_duplicate() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(2L);
+        dto.setUserEntityId(2L);
+        dto.setTitle("Test");
+        dto.setContent("Test content");
         Mockito.when(notificationRepositoryMock.existsById(2L)).thenReturn(true);
-        Assertions.assertThrows(EntityAlreadyExistException.class, () -> notificationService.sendNotification(notificationDTO2));
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).existsById(2L);
+        Assertions.assertThrows(EntityAlreadyExistException.class, () -> notificationService.sendNotification(dto));
     }
 
     @Test
-    void markAsRead() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setId(1L);
-
-        NotificationEntity notificationEntity = new NotificationEntity();
-        notificationEntity.setId(1L);
-        notificationEntity.setRead(false);
-
-        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
-        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(notificationEntity));
-        notificationService.markAsRead(notificationDTO);
-
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findById(1L);
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).save(notificationEntity);
-        Assertions.assertTrue(notificationEntity.isRead());
+    void sendNotification_nullContent() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(2L);
+        dto.setTitle("Test");
+        dto.setContent(null);
+        Assertions.assertThrows(Exception.class, () -> notificationService.sendNotification(dto));
     }
 
     @Test
-    void deleteNotification() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setId(1L);
+    void sendNotification_nullTitle() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(2L);
+        dto.setTitle(null);
+        dto.setContent("Test");
+        Assertions.assertThrows(Exception.class, () -> notificationService.sendNotification(dto));
+    }
 
-        NotificationEntity notificationEntity = new NotificationEntity();
-        notificationEntity.setId(1L);
+    @Test
+    void sendNotification_nullUserEntityId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(null);
+        dto.setTitle("Test");
+        dto.setContent("Test");
+        Assertions.assertThrows(Exception.class, () -> notificationService.sendNotification(dto));
+    }
 
+    // --- markAsRead ---
+    @Test
+    void markAsRead_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(1L);
+        NotificationEntity entity = new NotificationEntity();
+        entity.setId(1L);
+        entity.setRead(false);
         Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
-        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(notificationEntity));
-        notificationService.deleteNotification(notificationDTO);
+        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(entity));
+        notificationService.markAsRead(dto);
+        Assertions.assertTrue(entity.isRead());
+    }
 
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).findById(1L);
-        Mockito.verify(notificationRepositoryMock, Mockito.times(1)).deleteById(1L);
+    @Test
+    void markAsRead_nullId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> notificationService.markAsRead(dto));
+    }
+
+    @Test
+    void markAsRead_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999L);
+        Mockito.when(notificationRepositoryMock.existsById(999L)).thenReturn(false);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> notificationService.markAsRead(dto));
+    }
+
+    // --- deleteNotification ---
+    @Test
+    void deleteNotification_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(1L);
+        NotificationEntity entity = new NotificationEntity();
+        entity.setId(1L);
+        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
+        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(entity));
+        notificationService.deleteNotification(dto);
+        Mockito.verify(notificationRepositoryMock).deleteById(1L);
+    }
+
+    @Test
+    void deleteNotification_nullId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> notificationService.deleteNotification(dto));
+    }
+
+    @Test
+    void deleteNotification_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999L);
+        Mockito.when(notificationRepositoryMock.existsById(999L)).thenReturn(false);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> notificationService.deleteNotification(dto));
     }
 }

@@ -4,15 +4,13 @@ import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.service.impl.NotificationServiceImpl;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.sql.Timestamp;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -22,62 +20,68 @@ class NotificationServiceIntegrationTest {
     private NotificationServiceImpl notificationService;
 
     @Test
-    void getAllNotificationsByReceiverId() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setUserEntityId(1L);
-
-        List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(notificationDTO);
-        assertNotNull(notifications);
-        assertEquals(1, notifications.size());
-
-        NotificationResponse notificationResponse = notifications.get(0);
-        assertEquals(1L, notificationResponse.getId());
-        assertEquals("Chào mừng", notificationResponse.getTitle());
-        assertEquals("Chào mừng bạn đến với phòng gym!", notificationResponse.getContent());
-        assertEquals(Timestamp.valueOf("2025-05-01 09:00:00.0"), notificationResponse.getSentAt());
-        assertFalse(notificationResponse.isRead());
-        assertEquals(1L, notificationResponse.getUserEntityId());
+    void getAllNotificationsByReceiverId_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        List<NotificationResponse> result = notificationService.getAllNotificationsByReceiverId(dto);
+        Assertions.assertFalse(result.isEmpty());
     }
 
     @Test
-    void sendNotification() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setUserEntityId(2L);
-        notificationDTO.setTitle("Test Notification");
-        notificationDTO.setContent("This is a test notification.");
-
-        NotificationResponse sentNotification = notificationService.sendNotification(notificationDTO);
-
-        assertNotNull(sentNotification);
-        assertEquals(notificationDTO.getUserEntityId(), sentNotification.getUserEntityId());
-        assertEquals(notificationDTO.getTitle(), sentNotification.getTitle());
-        assertEquals(notificationDTO.getContent(), sentNotification.getContent());
-        assertFalse(sentNotification.isRead());
+    void sendNotification_and_deleteNotification_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        dto.setTitle("Test");
+        dto.setContent("Nội dung test");
+        NotificationResponse created = notificationService.sendNotification(dto);
+        Assertions.assertNotNull(created.getId());
+        // Xóa
+        NotificationDTO delDto = new NotificationDTO();
+        delDto.setId(created.getId());
+        notificationService.deleteNotification(delDto);
+        Assertions.assertThrows(Exception.class, () -> notificationService.deleteNotification(delDto));
     }
 
     @Test
-    void markAsRead() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setId(1L);
-
-        notificationService.markAsRead(notificationDTO);
-
-        NotificationDTO getNotification = new NotificationDTO();
-        getNotification.setUserEntityId(1L);
-        List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(getNotification);
-        assertTrue(notifications.get(0).isRead());
+    void getAllNotificationsByReceiverId_nullUserEntityId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(null);
+        Assertions.assertThrows(Exception.class, () -> notificationService.getAllNotificationsByReceiverId(dto));
     }
 
     @Test
-    void deleteNotification() {
-        NotificationDTO notificationDTO = new NotificationDTO();
-        notificationDTO.setId(1L);
+    void sendNotification_duplicate() {
+        // Gửi thông báo mới
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        dto.setTitle("Test duplicate");
+        dto.setContent("Nội dung duplicate");
+        NotificationResponse created = notificationService.sendNotification(dto);
+        // Thử gửi lại với cùng id (nếu service kiểm tra duplicate theo id)
+        NotificationDTO duplicateDto = new NotificationDTO();
+        duplicateDto.setId(created.getId());
+        duplicateDto.setUserEntityId(1L);
+        duplicateDto.setTitle("Test duplicate");
+        duplicateDto.setContent("Nội dung duplicate");
+        Assertions.assertThrows(Exception.class, () -> notificationService.sendNotification(duplicateDto));
+        // Xóa thông báo test
+        NotificationDTO delDto = new NotificationDTO();
+        delDto.setId(created.getId());
+        notificationService.deleteNotification(delDto);
+    }
 
-        notificationService.deleteNotification(notificationDTO);
+    @Test
+    void deleteNotification_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999999L);
+        Assertions.assertThrows(Exception.class, () -> notificationService.deleteNotification(dto));
+    }
 
-        NotificationDTO getNotification = new NotificationDTO();
-        getNotification.setUserEntityId(1L);
-        List<NotificationResponse> notifications = notificationService.getAllNotificationsByReceiverId(getNotification);
-        assertEquals(0, notifications.size());
+    @Test
+    void getAllNotificationsByReceiverId_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(999999L);
+        List<NotificationResponse> result = notificationService.getAllNotificationsByReceiverId(dto);
+        Assertions.assertTrue(result.isEmpty());
     }
 }

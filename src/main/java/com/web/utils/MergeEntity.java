@@ -31,6 +31,6 @@ public class MergeEntity<T> {
 
     public T merge(T source, T target) {
         BeanUtils.copyProperties(source, target, getNullFields(source));
-        return source;
+        return target;
     }
 }

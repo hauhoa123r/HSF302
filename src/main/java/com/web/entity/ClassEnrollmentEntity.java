@@ -14,8 +14,8 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassEnrollment {
-
+public class ClassEnrollmentEntity {
+    @Column(name = "enrollment_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,10 +24,10 @@ public class ClassEnrollment {
     private Timestamp enrollmentDate;
 
     @ManyToOne
-    @JoinColumn(name = "class_id", nullable = false)
+    @JoinColumn(name = "class_id")
     private ClassEntity classEntity;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
+    @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
 }

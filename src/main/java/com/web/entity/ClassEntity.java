@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "classes")
 @Getter
@@ -28,10 +30,16 @@ public class ClassEntity {
     private int capacity;
 
     @ManyToOne
-    @JoinColumn(name = "trainer_id", nullable = false)
+    @JoinColumn(name = "trainer_id")
     private TrainerEntity trainerEntity;
 
     @OneToMany(mappedBy = "classEntity")
-    private java.util.List<ClassEnrollment> classEnrollmentList;
+    private java.util.List<ClassEnrollmentEntity> classEnrollmentEntities;
+
+    @OneToMany(mappedBy = "classEntity")
+    private Set<ClassScheduleEntity> classScheduleEntity;
+
+    @OneToMany(mappedBy = "classEntity")
+    private Set<BoxChatEntity> boxChatEntity;
 
 }

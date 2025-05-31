@@ -8,6 +8,7 @@ import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
+import com.web.utils.CheckFieldObject;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class NotificationServiceImpl implements NotificationService {
     private NotificationConverter notificationConverter;
     private NotificationRepository notificationRepository;
+    private CheckFieldObject checkFieldObject;
 
     @Autowired
     public void setNotificationConverter(NotificationConverter notificationConverter) {
@@ -32,11 +34,14 @@ public class NotificationServiceImpl implements NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
+    @Autowired
+    public void setCheckFieldObject(CheckFieldObject checkFieldObject) {
+        this.checkFieldObject = checkFieldObject;
+    }
+
     @Override
     public List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO) {
-        if (notificationDTO.getUserEntityId() == null) {
-            throw new EntityNotFoundException(NotificationEntity.class);
-        }
+        checkFieldObject.check(NotificationDTO.class, notificationDTO, "userEntityId");
 
         return notificationRepository.findNotificationEntitiesByUserEntityId(notificationDTO.getUserEntityId()).stream().map(notificationConverter::toResponse).toList();
     }
@@ -44,9 +49,12 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public NotificationResponse sendNotification(NotificationDTO notificationDTO) {
+        checkFieldObject.check(NotificationDTO.class, notificationDTO);
+
         if (notificationDTO.getId() != null && notificationRepository.existsById(notificationDTO.getId())) {
             throw new EntityAlreadyExistException(NotificationEntity.class);
         }
+
         NotificationEntity notificationEntity = notificationConverter.toEntity(notificationDTO);
         notificationEntity.setRead(false);
         notificationEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
@@ -56,7 +64,9 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void markAsRead(NotificationDTO notificationDTO) {
-        if (notificationDTO.getId() == null || !notificationRepository.existsById(notificationDTO.getId())) {
+        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
+
+        if (!notificationRepository.existsById(notificationDTO.getId())) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
@@ -67,7 +77,9 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void deleteNotification(NotificationDTO notificationDTO) {
-        if (notificationDTO.getId() == null || !notificationRepository.existsById(notificationDTO.getId())) {
+        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
+
+        if (!notificationRepository.existsById(notificationDTO.getId())) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
         Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());

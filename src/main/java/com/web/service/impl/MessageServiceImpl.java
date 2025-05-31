@@ -8,6 +8,7 @@ import com.web.model.dto.MessageDTO;
 import com.web.model.response.MessageResponse;
 import com.web.repository.MessageRepository;
 import com.web.service.MessageService;
+import com.web.utils.CheckFieldObject;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class MessageServiceImpl implements MessageService {
 
     private MessageRepository messageRepository;
     private MessageConverter messageConverter;
+    private CheckFieldObject checkFieldObject;
 
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository) {
@@ -32,10 +34,16 @@ public class MessageServiceImpl implements MessageService {
         this.messageConverter = messageConverter;
     }
 
+    @Autowired
+    public void setCheckFieldObject(CheckFieldObject checkFieldObject) {
+        this.checkFieldObject = checkFieldObject;
+    }
+
     @Override
     public MessageResponse sendMessage(MessageDTO messageDTO) {
+        checkFieldObject.check(MessageDTO.class, messageDTO);
 
-        if (messageDTO.getId() != null && !messageRepository.existsById(messageDTO.getId())) {
+        if (messageDTO.getId() != null && messageRepository.existsById(messageDTO.getId())) {
             throw new EntityAlreadyExistException(MessageEntity.class);
         }
 
@@ -49,17 +57,16 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageResponse> getMessagesByBoxChatId(MessageDTO messageDTO) {
-        if (messageDTO.getBoxChatEntityId() == null) {
-            throw new EntityNotFoundException(MessageEntity.class);
-        }
+        checkFieldObject.check(MessageDTO.class, messageDTO, "boxChatEntityId");
 
         return messageRepository.findByBoxChatEntityId(messageDTO.getBoxChatEntityId()).stream().map(messageConverter::toResponse).toList();
     }
 
     @Override
     public void deleteMessage(MessageDTO messageDTO) {
+        checkFieldObject.check(MessageDTO.class, messageDTO, "id");
 
-        if (messageDTO.getId() == null || !messageRepository.existsById(messageDTO.getId())) {
+        if (!messageRepository.existsById(messageDTO.getId())) {
             throw new EntityNotFoundException(MessageEntity.class);
         }
 

@@ -76,6 +76,31 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public void markAsUnread(NotificationDTO notificationDTO) {
+        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
+
+        if (!notificationRepository.existsById(notificationDTO.getId())) {
+            throw new EntityNotFoundException(NotificationEntity.class);
+        }
+        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
+        NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
+        notificationEntity.setRead(false);
+        notificationRepository.save(notificationEntity);
+    }
+
+    @Override
+    public void markAllAsRead(NotificationDTO notificationDTO) {
+        checkFieldObject.check(NotificationDTO.class, notificationDTO, "userEntityId");
+
+        List<NotificationEntity> notificationEntities = notificationRepository.findNotificationEntitiesByUserEntityId(notificationDTO.getUserEntityId());
+
+        for (NotificationEntity notificationEntity : notificationEntities) {
+            notificationEntity.setRead(true);
+            notificationRepository.save(notificationEntity);
+        }
+    }
+
+    @Override
     public void deleteNotification(NotificationDTO notificationDTO) {
         checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
 

@@ -1,13 +1,12 @@
 package com.web.service.impl;
 
+import com.web.entity.ClassEnrollmentEntity;
 import com.web.entity.ClassEntity;
 import com.web.entity.MemberEntity;
-import com.web.repository.ClassEnrollmentRepository;
 import com.web.repository.ClassRepository;
 import com.web.repository.MemberRepository;
 import com.web.service.ClassEnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
@@ -29,12 +28,16 @@ public class ClassEnrollmentServiceImpl implements ClassEnrollmentService {
 
         Timestamp enrollAt = new Timestamp(System.currentTimeMillis());
 
+        ClassEnrollmentEntity classEnrollmentEntity = new ClassEnrollmentEntity();
+        classEnrollmentEntity.setClassEntity(classEntity);
+        classEnrollmentEntity.setMemberEntity(memberEntity);
+        classEnrollmentEntity.setEnrollmentDate(enrollAt);
 
-
+        classEnrollmentRepositoryImpl.save(classEnrollmentEntity);
     }
 
     @Override
     public void unenrollClass(Long classId, Long memberId) {
-
+        ClassEnrollmentEntity classEnrollmentEntity = classEnrollmentRepositoryImpl.findByClassEntityIdAndMemberEntityId(classId, memberId);
     }
 }

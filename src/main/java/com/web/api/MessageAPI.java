@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/message")
-public class MessageAPI {
+public class  MessageAPI {
 
     private MessageService messageService;
 

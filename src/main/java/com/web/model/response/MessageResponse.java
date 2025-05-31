@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 
 public class MessageResponse {
     private Long id;

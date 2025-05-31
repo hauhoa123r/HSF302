@@ -3,10 +3,12 @@ package com.web.utils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.stereotype.Component;
 
 import java.beans.PropertyDescriptor;
 import java.util.Set;
 
+@Component
 public class MergeEntity<T> {
 
     private String[] getNullFields(Object source) {

@@ -1,178 +1,130 @@
 package com.web.service;
 
-import com.web.converter.MessageConverter;
-import com.web.entity.BoxChatEntity;
 import com.web.entity.MessageEntity;
+import com.web.exception.ResourceNotFoundException;
 import com.web.exception.sql.EntityAlreadyExistException;
 import com.web.exception.sql.EntityNotFoundException;
 import com.web.model.dto.MessageDTO;
 import com.web.model.response.MessageResponse;
 import com.web.repository.MessageRepository;
 import com.web.service.impl.MessageServiceImpl;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
-@Transactional
 class MessageServiceUnitTest {
     @Autowired
     private MessageServiceImpl messageService;
-
     @MockBean
     private MessageRepository messageRepositoryMock;
 
-    @MockBean
-    private MessageConverter messageConverterMock;
-
-    private MessageDTO messageDTO;
-    private MessageEntity messageEntity;
-    private MessageResponse messageResponse;
-    private BoxChatEntity boxChatEntity;
-
-    @BeforeEach
-    void setUp() {
-        // Initialize test objects
-        boxChatEntity = new BoxChatEntity();
-        boxChatEntity.setId(1L);
-
-        messageEntity = new MessageEntity();
-        messageEntity.setId(1L);
-        messageEntity.setContent("Test message");
-        messageEntity.setSentAt(new Timestamp(System.currentTimeMillis()));
-        messageEntity.setBoxChatEntity(boxChatEntity);
-
-        messageDTO = new MessageDTO();
-        messageDTO.setId(1L);
-        messageDTO.setContent("Test message");
-        messageDTO.setBoxChatEntityId(1L);
-
-        messageResponse = new MessageResponse();
-        messageResponse.setId(1L);
-        messageResponse.setContent("Test message");
-        messageResponse.setSentAt(new Timestamp(System.currentTimeMillis()));
-        messageResponse.setBoxChatEntityId(1L);
+    // --- getMessagesByBoxChatId ---
+    @Test
+    void getMessagesByBoxChatId_success() {
+        MessageDTO dto = new MessageDTO();
+        dto.setBoxChatEntityId(1L);
+        MessageEntity entity = new MessageEntity();
+        entity.setId(1L);
+        Mockito.when(messageRepositoryMock.findByBoxChatEntityId(1L)).thenReturn(List.of(entity));
+        List<MessageResponse> result = messageService.getMessagesByBoxChatId(dto);
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertEquals(1L, result.get(0).getId());
     }
 
     @Test
-    void sendMessage_Success() {
-        // Setup - message with no ID should work
-        messageDTO.setId(null);
-        Mockito.when(messageConverterMock.toEntity(messageDTO)).thenReturn(messageEntity);
-        Mockito.when(messageRepositoryMock.save(messageEntity)).thenReturn(messageEntity);
-        Mockito.when(messageConverterMock.toResponse(messageEntity)).thenReturn(messageResponse);
-
-        // Execute
-        MessageResponse response = messageService.sendMessage(messageDTO);
-
-        // Verify
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toEntity(messageDTO);
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).save(messageEntity);
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toResponse(messageEntity);
-
-        Assertions.assertEquals(1L, response.getId());
-        Assertions.assertEquals("Test message", response.getContent());
-        Assertions.assertEquals(1L, response.getBoxChatEntityId());
+    void getMessagesByBoxChatId_nullBoxChatEntityId() {
+        MessageDTO dto = new MessageDTO();
+        dto.setBoxChatEntityId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> messageService.getMessagesByBoxChatId(dto));
     }
 
     @Test
-    void sendMessage_EntityAlreadyExists() {
-        // Setup - ID exists in repository
-        Mockito.when(messageRepositoryMock.existsById(1L)).thenReturn(false);
+    void getMessagesByBoxChatId_notFound() {
+        MessageDTO dto = new MessageDTO();
+        dto.setBoxChatEntityId(999L);
+        Mockito.when(messageRepositoryMock.findByBoxChatEntityId(999L)).thenReturn(List.of());
+        List<MessageResponse> result = messageService.getMessagesByBoxChatId(dto);
+        Assertions.assertTrue(result.isEmpty());
+    }
 
-        // Execute & Verify - the logic is wrong in implementation, it throws exception
-        // when NOT exists
-        Assertions.assertThrows(EntityAlreadyExistException.class, () -> messageService.sendMessage(messageDTO));
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).existsById(1L);
+    // --- sendMessage ---
+    @Test
+    void sendMessage_success() {
+        MessageDTO dto = new MessageDTO();
+        dto.setId(1L);
+        dto.setBoxChatEntityId(1L);
+        dto.setMemberEntityId(1L);
+        dto.setContent("Hello");
+        MessageEntity entity = new MessageEntity();
+        entity.setId(1L);
+        Mockito.when(messageRepositoryMock.findById(1L)).thenReturn(Optional.of(entity));
+        Mockito.when(messageRepositoryMock.save(Mockito.any(MessageEntity.class))).thenReturn(entity);
+        MessageResponse res = messageService.sendMessage(dto);
+        Assertions.assertEquals(1L, res.getId());
     }
 
     @Test
-    void sendMessage_WithExistingId() {
-        // Setup - ID exists in repository, should succeed
+    void sendMessage_duplicate() {
+        MessageDTO dto = new MessageDTO();
+        dto.setId(2L);
+        dto.setBoxChatEntityId(1L);
+        dto.setMemberEntityId(1L);
+        dto.setContent("Hello");
+        Mockito.when(messageRepositoryMock.existsById(2L)).thenReturn(true);
+        Assertions.assertThrows(EntityAlreadyExistException.class, () -> messageService.sendMessage(dto));
+    }
+
+    @Test
+    void sendMessage_nullContent() {
+        MessageDTO dto = new MessageDTO();
+        dto.setBoxChatEntityId(1L);
+        dto.setMemberEntityId(1L);
+        dto.setContent(null);
+        Assertions.assertThrows(Exception.class, () -> messageService.sendMessage(dto));
+    }
+
+    @Test
+    void sendMessage_nullBoxChatEntityId() {
+        MessageDTO dto = new MessageDTO();
+        dto.setBoxChatEntityId(null);
+        dto.setMemberEntityId(1L);
+        dto.setContent("Hello");
+        Assertions.assertThrows(Exception.class, () -> messageService.sendMessage(dto));
+    }
+
+    // --- deleteMessage ---
+    @Test
+    void deleteMessage_success() {
+        MessageDTO dto = new MessageDTO();
+        dto.setId(1L);
+        MessageEntity entity = new MessageEntity();
+        entity.setId(1L);
         Mockito.when(messageRepositoryMock.existsById(1L)).thenReturn(true);
-        Mockito.when(messageConverterMock.toEntity(messageDTO)).thenReturn(messageEntity);
-        Mockito.when(messageRepositoryMock.save(messageEntity)).thenReturn(messageEntity);
-        Mockito.when(messageConverterMock.toResponse(messageEntity)).thenReturn(messageResponse);
-
-        // Execute
-        MessageResponse response = messageService.sendMessage(messageDTO);
-
-        // Verify
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).existsById(1L);
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toEntity(messageDTO);
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).save(messageEntity);
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toResponse(messageEntity);
-
-        Assertions.assertEquals(1L, response.getId());
-        Assertions.assertEquals("Test message", response.getContent());
+        Mockito.when(messageRepositoryMock.findById(1L)).thenReturn(Optional.of(entity));
+        Mockito.doNothing().when(messageRepositoryMock).deleteById(1L);
+        messageService.deleteMessage(dto);
+        Mockito.verify(messageRepositoryMock).delete(Mockito.any(MessageEntity.class));
     }
 
     @Test
-    void getMessagesByBoxChatId_Success() {
-        // Setup
-        Mockito.when(messageRepositoryMock.findByBoxChatEntityId(1L)).thenReturn(List.of(messageEntity));
-        Mockito.when(messageConverterMock.toResponse(messageEntity)).thenReturn(messageResponse);
-
-        // Execute
-        List<MessageResponse> messages = messageService.getMessagesByBoxChatId(messageDTO);
-
-        // Verify
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).findByBoxChatEntityId(1L);
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toResponse(messageEntity);
-
-        Assertions.assertEquals(1, messages.size());
-        Assertions.assertEquals(1L, messages.get(0).getId());
-        Assertions.assertEquals("Test message", messages.get(0).getContent());
+    void deleteMessage_nullId() {
+        MessageDTO dto = new MessageDTO();
+        dto.setId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> messageService.deleteMessage(dto));
     }
 
     @Test
-    void getMessagesByBoxChatId_NullBoxChatId() {
-        // Setup - null boxChatEntityId should throw EntityNotFoundException
-        messageDTO.setBoxChatEntityId(null);
-
-        // Execute & Verify
-        Assertions.assertThrows(EntityNotFoundException.class, () -> messageService.getMessagesByBoxChatId(messageDTO));
-    }
-
-    @Test
-    void deleteMessage_Success() {
-        // Setup
-        Mockito.when(messageRepositoryMock.existsById(1L)).thenReturn(true);
-        Mockito.when(messageConverterMock.toEntity(messageDTO)).thenReturn(messageEntity);
-
-        // Execute
-        messageService.deleteMessage(messageDTO);
-
-        // Verify
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).existsById(1L);
-        Mockito.verify(messageConverterMock, Mockito.times(1)).toEntity(messageDTO);
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).delete(messageEntity);
-    }
-
-    @Test
-    void deleteMessage_NullId() {
-        // Setup - null ID should throw EntityNotFoundException
-        messageDTO.setId(null);
-
-        // Execute & Verify
-        Assertions.assertThrows(EntityNotFoundException.class, () -> messageService.deleteMessage(messageDTO));
-    }
-
-    @Test
-    void deleteMessage_EntityNotFound() {
-        // Setup
-        Mockito.when(messageRepositoryMock.existsById(1L)).thenReturn(false);
-
-        // Execute & Verify
-        Assertions.assertThrows(EntityNotFoundException.class, () -> messageService.deleteMessage(messageDTO));
-        Mockito.verify(messageRepositoryMock, Mockito.times(1)).existsById(1L);
+    void deleteMessage_notFound() {
+        MessageDTO dto = new MessageDTO();
+        dto.setId(999L);
+        Mockito.when(messageRepositoryMock.existsById(999L)).thenReturn(false);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> messageService.deleteMessage(dto));
     }
 }

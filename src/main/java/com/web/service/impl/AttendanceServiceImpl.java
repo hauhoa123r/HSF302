@@ -70,6 +70,19 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
+    public List<AttendanceResponse> getAttendanceByWeek(AttendanceDTO attendanceDTO) {
+        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
+
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+
+        List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByCheckInTimeBetween(
+                calculatorTimestamp.getStartOfWeek(),
+                calculatorTimestamp.getEndOfWeek());
+
+        return attendanceEntities.stream().map(attendanceConverter::toResponse).toList();
+    }
+
+    @Override
     public List<AttendanceResponse> getAttendanceByMonth(AttendanceDTO attendanceDTO) {
         checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
 
@@ -109,6 +122,17 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceRepository.countAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfDay(),
                 calculatorTimestamp.getEndOfDay());
+    }
+
+    @Override
+    public Long countAttendanceByWeek(AttendanceDTO attendanceDTO) {
+        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
+
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+
+        return attendanceRepository.countAllByCheckInTimeBetween(
+                calculatorTimestamp.getStartOfWeek(),
+                calculatorTimestamp.getEndOfWeek());
     }
 
     @Override

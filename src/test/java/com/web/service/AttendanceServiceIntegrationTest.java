@@ -196,4 +196,57 @@ class AttendanceServiceIntegrationTest {
         AttendanceDTO query = new AttendanceDTO();
         assertThrows(Exception.class, () -> attendanceService.countAttendanceByMonth(query));
     }
+
+    @Test
+    @DisplayName("getAttendanceByWeek: has data")
+    void testGetAttendanceByWeek_HasData() {
+        // Dữ liệu mẫu: ngày 2025-05-28 có attendance, tuần này chắc chắn có dữ liệu
+        AttendanceDTO dto = new AttendanceDTO();
+        dto.setDate(Date.valueOf("2025-05-28"));
+        List<AttendanceResponse> result = attendanceService.getAttendanceByWeek(dto);
+        assertThat(result).isNotEmpty();
+    }
+
+    @Test
+    @DisplayName("getAttendanceByWeek: no data")
+    void testGetAttendanceByWeek_NoData() {
+        // Tuần của ngày 2020-01-01 chắc chắn không có dữ liệu
+        AttendanceDTO dto = new AttendanceDTO();
+        dto.setDate(Date.valueOf("2020-01-01"));
+        List<AttendanceResponse> result = attendanceService.getAttendanceByWeek(dto);
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    @DisplayName("getAttendanceByWeek: missing date")
+    void testGetAttendanceByWeek_MissingDate() {
+        AttendanceDTO dto = new AttendanceDTO();
+        assertThrows(Exception.class, () -> attendanceService.getAttendanceByWeek(dto));
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: has data")
+    void testCountAttendanceByWeek_HasData() {
+        // Dữ liệu mẫu: ngày 2025-05-28 có attendance, tuần này chắc chắn có dữ liệu
+        AttendanceDTO dto = new AttendanceDTO();
+        dto.setDate(Date.valueOf("2025-05-28"));
+        Long count = attendanceService.countAttendanceByWeek(dto);
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: no data")
+    void testCountAttendanceByWeek_NoData() {
+        AttendanceDTO dto = new AttendanceDTO();
+        dto.setDate(Date.valueOf("2020-01-01"));
+        Long count = attendanceService.countAttendanceByWeek(dto);
+        assertThat(count).isZero();
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: missing date")
+    void testCountAttendanceByWeek_MissingDate() {
+        AttendanceDTO dto = new AttendanceDTO();
+        assertThrows(Exception.class, () -> attendanceService.countAttendanceByWeek(dto));
+    }
 }

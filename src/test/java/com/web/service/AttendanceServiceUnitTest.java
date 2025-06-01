@@ -98,6 +98,61 @@ class AttendanceServiceUnitTest {
         assertThrows(RuntimeException.class, () -> attendanceService.getAttendanceByDate(dto));
     }
 
+    @Test
+    @DisplayName("getAttendanceByWeek: has data")
+    void testGetAttendanceByWeek_HasData() {
+        AttendanceDTO dto = new AttendanceDTO(null, null, null, null, Date.valueOf(LocalDate.now()));
+        AttendanceEntity entity = new AttendanceEntity();
+        AttendanceResponse response = new AttendanceResponse();
+        when(attendanceRepository.findAllByCheckInTimeBetween(any(), any())).thenReturn(List.of(entity));
+        when(attendanceConverter.toResponse(any())).thenReturn(response);
+        List<AttendanceResponse> result = attendanceService.getAttendanceByWeek(dto);
+        assertThat(result).isNotEmpty();
+    }
+
+    @Test
+    @DisplayName("getAttendanceByWeek: no data")
+    void testGetAttendanceByWeek_NoData() {
+        AttendanceDTO dto = new AttendanceDTO(null, null, null, null, Date.valueOf(LocalDate.now()));
+        when(attendanceRepository.findAllByCheckInTimeBetween(any(), any())).thenReturn(Collections.emptyList());
+        List<AttendanceResponse> result = attendanceService.getAttendanceByWeek(dto);
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    @DisplayName("getAttendanceByWeek: missing date")
+    void testGetAttendanceByWeek_MissingDate() {
+        AttendanceDTO dto = new AttendanceDTO();
+        doThrow(new RuntimeException("Missing date")).when(checkFieldObject).check(any(), any(), any());
+        assertThrows(RuntimeException.class, () -> attendanceService.getAttendanceByWeek(dto));
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: has data")
+    void testCountAttendanceByWeek_HasData() {
+        AttendanceDTO dto = new AttendanceDTO(null, null, null, null, Date.valueOf(LocalDate.now()));
+        when(attendanceRepository.countAllByCheckInTimeBetween(any(), any())).thenReturn(5L);
+        Long count = attendanceService.countAttendanceByWeek(dto);
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: no data")
+    void testCountAttendanceByWeek_NoData() {
+        AttendanceDTO dto = new AttendanceDTO(null, null, null, null, Date.valueOf(LocalDate.now()));
+        when(attendanceRepository.countAllByCheckInTimeBetween(any(), any())).thenReturn(0L);
+        Long count = attendanceService.countAttendanceByWeek(dto);
+        assertThat(count).isZero();
+    }
+
+    @Test
+    @DisplayName("countAttendanceByWeek: missing date")
+    void testCountAttendanceByWeek_MissingDate() {
+        AttendanceDTO dto = new AttendanceDTO();
+        doThrow(new RuntimeException("Missing date")).when(checkFieldObject).check(any(), any(), any());
+        assertThrows(RuntimeException.class, () -> attendanceService.countAttendanceByWeek(dto));
+    }
+
     // Có thể bổ sung thêm các test cho getAttendanceByMonth, getAttendanceHistoryByMemberId, countAttendanceByMemberId, countAttendanceByDate, countAttendanceByMonth tương tự
 }
 

@@ -141,6 +141,59 @@ class NotificationServiceUnitTest {
         Assertions.assertThrows(EntityNotFoundException.class, () -> notificationService.markAsRead(dto));
     }
 
+    // --- markAsUnread ---
+    @Test
+    void markAsUnread_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(1L);
+        NotificationEntity entity = new NotificationEntity();
+        entity.setId(1L);
+        entity.setRead(true);
+        Mockito.when(notificationRepositoryMock.existsById(1L)).thenReturn(true);
+        Mockito.when(notificationRepositoryMock.findById(1L)).thenReturn(Optional.of(entity));
+        notificationService.markAsUnread(dto);
+        Assertions.assertFalse(entity.isRead());
+    }
+
+    @Test
+    void markAsUnread_nullId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> notificationService.markAsUnread(dto));
+    }
+
+    @Test
+    void markAsUnread_notFound() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setId(999L);
+        Mockito.when(notificationRepositoryMock.existsById(999L)).thenReturn(false);
+        Assertions.assertThrows(EntityNotFoundException.class, () -> notificationService.markAsUnread(dto));
+    }
+
+    // --- markAllAsRead ---
+    @Test
+    void markAllAsRead_success() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(1L);
+        NotificationEntity entity1 = new NotificationEntity();
+        entity1.setId(1L);
+        entity1.setRead(false);
+        NotificationEntity entity2 = new NotificationEntity();
+        entity2.setId(2L);
+        entity2.setRead(false);
+        Mockito.when(notificationRepositoryMock.findNotificationEntitiesByUserEntityId(1L)).thenReturn(List.of(entity1, entity2));
+        notificationService.markAllAsRead(dto);
+        Assertions.assertTrue(entity1.isRead());
+        Assertions.assertTrue(entity2.isRead());
+    }
+
+    @Test
+    void markAllAsRead_nullUserEntityId() {
+        NotificationDTO dto = new NotificationDTO();
+        dto.setUserEntityId(null);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> notificationService.markAllAsRead(dto));
+    }
+
     // --- deleteNotification ---
     @Test
     void deleteNotification_success() {

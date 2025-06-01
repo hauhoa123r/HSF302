@@ -13,5 +13,9 @@ public interface NotificationService {
 
     void markAsRead(NotificationDTO notificationDTO);
 
+    void markAsUnread(NotificationDTO notificationDTO);
+
+    void markAllAsRead(NotificationDTO notificationDTO);
+
     void deleteNotification(NotificationDTO notificationDTO);
 }

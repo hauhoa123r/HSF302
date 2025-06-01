@@ -12,11 +12,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class NotificationResponse {
+public class AttendanceResponse {
+
     private Long id;
-    private String title;
-    private String content;
-    private Timestamp sentAt;
-    private boolean isRead;
-    private Long userEntityId;
+    private Timestamp checkInTime;
+    private String method;
+    private Long memberEntityId;
 }

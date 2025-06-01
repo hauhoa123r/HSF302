@@ -1,5 +1,6 @@
-package com.web.model.response;
+package com.web.model.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -12,11 +13,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class NotificationResponse {
+public class AttendanceDTO {
+
     private Long id;
-    private String title;
-    private String content;
-    private Timestamp sentAt;
-    private boolean isRead;
-    private Long userEntityId;
+    private Timestamp checkInTime;
+    private String method;
+    private Long memberEntityId;
+    private Date date;
 }

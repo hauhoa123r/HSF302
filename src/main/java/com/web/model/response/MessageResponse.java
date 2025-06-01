@@ -1,15 +1,18 @@
 package com.web.model.response;
 
-import lombok.*;
-
 import java.sql.Timestamp;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Builder
 
 public class MessageResponse {
     private Long id;

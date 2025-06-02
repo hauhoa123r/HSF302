@@ -18,6 +18,7 @@ import java.util.Set;
 public class UserEntity {
     @Column(name = "user_id")
     @Id
+    
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

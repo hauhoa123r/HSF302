@@ -19,8 +19,8 @@ class NotificationRepositoryTest {
     private NotificationRepository notificationRepository;
 
     @Test
-    void findNotificationEntitiesByUserEntityId() {
-        List<NotificationEntity> notificationEntities = notificationRepository.findNotificationEntitiesByUserEntityId(1L);
+    void findAllByUserEntityId() {
+        List<NotificationEntity> notificationEntities = notificationRepository.findAllByUserEntityId(1L);
         Assertions.assertNotNull(notificationEntities);
         Assertions.assertEquals(1, notificationEntities.size(), "Expected 3 notifications for receiver with ID 1");
     }

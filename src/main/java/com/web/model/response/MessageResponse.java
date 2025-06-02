@@ -1,12 +1,8 @@
 package com.web.model.response;
 
-import java.sql.Timestamp;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.sql.Timestamp;
 
 @Getter
 @Setter

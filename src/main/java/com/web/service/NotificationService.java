@@ -1,21 +1,21 @@
 package com.web.service;
 
+import java.util.List;
+
 import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 
-import java.util.List;
-
 public interface NotificationService {
 
-    List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO);
+    List<NotificationResponse> getAllNotificationsByReceiverId(Long receiverId);
 
     NotificationResponse sendNotification(NotificationDTO notificationDTO);
 
-    void markAsRead(NotificationDTO notificationDTO);
+    void markAsRead(Long id);
 
-    void markAsUnread(NotificationDTO notificationDTO);
+    void markAsUnread(Long id);
 
-    void markAllAsRead(NotificationDTO notificationDTO);
+    void markAllAsRead(Long receiverId);
 
-    void deleteNotification(NotificationDTO notificationDTO);
+    void deleteNotification(Long id);
 }

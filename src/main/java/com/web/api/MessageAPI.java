@@ -19,18 +19,18 @@ public class MessageAPI {
         this.messageService = messageService;
     }
 
-    @GetMapping("/getAll")
-    public List<MessageResponse> getAllMessages(@RequestBody MessageDTO messageDTO) {
-        return messageService.getMessagesByBoxChatId(messageDTO);
+    @GetMapping("/box-chat/{boxChatId}")
+    public List<MessageResponse> getAllMessages(@PathVariable Long boxChatId) {
+        return messageService.getMessagesByBoxChatId(boxChatId);
     }
 
-    @PostMapping("/send")
+    @PostMapping()
     public MessageResponse sendMessage(@RequestBody MessageDTO messageDTO) {
         return messageService.sendMessage(messageDTO);
     }
 
-    @PostMapping("/delete")
-    public void deleteMessage(@RequestBody MessageDTO messageDTO) {
-        messageService.deleteMessage(messageDTO);
+    @DeleteMapping("/{id}")
+    public void deleteMessage(@PathVariable Long id) {
+        messageService.deleteMessage(id);
     }
 }

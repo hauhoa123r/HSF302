@@ -1,27 +1,28 @@
 package com.web.service;
 
+import java.sql.Date;
+import java.util.List;
+
 import com.web.model.dto.AttendanceDTO;
 import com.web.model.response.AttendanceResponse;
-
-import java.util.List;
 
 public interface AttendanceService {
 
     AttendanceResponse checkAttendance(AttendanceDTO attendanceDTO);
 
-    List<AttendanceResponse> getAttendanceByDate(AttendanceDTO attendanceDTO);
+    List<AttendanceResponse> getAttendanceByDate(Date date);
 
-    List<AttendanceResponse> getAttendanceByWeek(AttendanceDTO attendanceDTO);
+    List<AttendanceResponse> getAttendanceByWeek(Date date);
 
-    List<AttendanceResponse> getAttendanceByMonth(AttendanceDTO attendanceDTO);
+    List<AttendanceResponse> getAttendanceByMonth(Date date);
 
-    List<AttendanceResponse> getAttendanceHistoryByMemberId(AttendanceDTO attendanceDTO);
+    List<AttendanceResponse> getAttendanceByMemberId(Long memberId);
 
-    Long countAttendanceByMemberId(AttendanceDTO attendanceDTO);
+    Long countAttendanceByMemberId(Long memberId);
 
-    Long countAttendanceByDate(AttendanceDTO attendanceDTO);
+    Long countAttendanceByDate(Date date);
 
-    Long countAttendanceByWeek(AttendanceDTO attendanceDTO);
+    Long countAttendanceByWeek(Date date);
 
-    Long countAttendanceByMonth(AttendanceDTO attendanceDTO);
+    Long countAttendanceByMonth(Date date);
 }

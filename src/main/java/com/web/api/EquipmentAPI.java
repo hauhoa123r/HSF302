@@ -19,33 +19,33 @@ public class EquipmentAPI {
         this.equipmentService = equipmentService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping()
     public List<EquipmentResponse> getAllEquipments() {
         return equipmentService.getAllEquipments();
     }
 
-    @GetMapping("/getById")
-    public EquipmentResponse getEquipmentById(@RequestBody EquipmentDTO equipmentDTO) {
-        return equipmentService.getEquipmentById(equipmentDTO);
+    @GetMapping("/{id}")
+    public EquipmentResponse getEquipmentById(@PathVariable Long id) {
+        return equipmentService.getEquipmentById(id);
     }
 
-    @GetMapping("/getByName")
-    public List<EquipmentResponse> getEquipmentsByName(@RequestBody EquipmentDTO equipmentDTO) {
-        return equipmentService.getEquipmentsByName(equipmentDTO);
+    @GetMapping("/name/{name}")
+    public List<EquipmentResponse> getEquipmentsByName(@PathVariable String name) {
+        return equipmentService.getEquipmentsByName(name);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public EquipmentResponse createEquipment(@RequestBody EquipmentDTO equipmentDTO) {
         return equipmentService.createEquipment(equipmentDTO);
     }
 
-    @PostMapping("/update")
-    public EquipmentResponse updateEquipment(@RequestBody EquipmentDTO equipmentDTO) {
-        return equipmentService.updateEquipment(equipmentDTO);
+    @PutMapping("/{id}")
+    public EquipmentResponse updateEquipment(@PathVariable Long id, @RequestBody EquipmentDTO equipmentDTO) {
+        return equipmentService.updateEquipment(id, equipmentDTO);
     }
 
-    @PostMapping("/delete")
-    public void deleteEquipment(@RequestBody EquipmentDTO equipmentDTO) {
-        equipmentService.deleteEquipment(equipmentDTO);
+    @DeleteMapping("/{id}")
+    public void deleteEquipment(@PathVariable Long id) {
+        equipmentService.deleteEquipment(id);
     }
 }

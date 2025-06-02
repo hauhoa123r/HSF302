@@ -1,5 +1,14 @@
 package com.web.service.impl;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.converter.NotificationConverter;
 import com.web.entity.NotificationEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -9,13 +18,6 @@ import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
 import com.web.utils.CheckFieldObject;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,10 +42,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<NotificationResponse> getAllNotificationsByReceiverId(NotificationDTO notificationDTO) {
-        checkFieldObject.check(NotificationDTO.class, notificationDTO, "userEntityId");
-
-        return notificationRepository.findNotificationEntitiesByUserEntityId(notificationDTO.getUserEntityId()).stream().map(notificationConverter::toResponse).toList();
+    public List<NotificationResponse> getAllNotificationsByReceiverId(Long receiverId) {
+        return notificationRepository.findAllByUserEntityId(receiverId).stream().map(notificationConverter::toResponse).toList();
     }
 
 
@@ -63,36 +63,30 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void markAsRead(NotificationDTO notificationDTO) {
-        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
-
-        if (!notificationRepository.existsById(notificationDTO.getId())) {
+    public void markAsRead(Long id) {
+        if (!notificationRepository.existsById(id)) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
-        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
+        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(id);
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationEntity.setRead(true);
         notificationRepository.save(notificationEntity);
     }
 
     @Override
-    public void markAsUnread(NotificationDTO notificationDTO) {
-        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
-
-        if (!notificationRepository.existsById(notificationDTO.getId())) {
+    public void markAsUnread(Long id) {
+        if (!notificationRepository.existsById(id)) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
-        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
+        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(id);
         NotificationEntity notificationEntity = notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
         notificationEntity.setRead(false);
         notificationRepository.save(notificationEntity);
     }
 
     @Override
-    public void markAllAsRead(NotificationDTO notificationDTO) {
-        checkFieldObject.check(NotificationDTO.class, notificationDTO, "userEntityId");
-
-        List<NotificationEntity> notificationEntities = notificationRepository.findNotificationEntitiesByUserEntityId(notificationDTO.getUserEntityId());
+    public void markAllAsRead(Long receiverId) {
+        List<NotificationEntity> notificationEntities = notificationRepository.findAllByUserEntityId(receiverId);
 
         for (NotificationEntity notificationEntity : notificationEntities) {
             notificationEntity.setRead(true);
@@ -101,14 +95,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void deleteNotification(NotificationDTO notificationDTO) {
-        checkFieldObject.check(NotificationDTO.class, notificationDTO, "id");
-
-        if (!notificationRepository.existsById(notificationDTO.getId())) {
+    public void deleteNotification(Long id) {
+        if (!notificationRepository.existsById(id)) {
             throw new EntityNotFoundException(NotificationEntity.class);
         }
-        Optional<NotificationEntity> notificationEntityOptional = notificationRepository.findById(notificationDTO.getId());
-        notificationEntityOptional.orElseThrow(() -> new EntityNotFoundException(NotificationEntity.class));
-        notificationRepository.deleteById(notificationDTO.getId());
+
+        notificationRepository.deleteById(id);
     }
 }

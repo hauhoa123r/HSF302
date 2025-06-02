@@ -16,5 +16,4 @@ public class EquipmentResponse {
     private String type;
     private String status;
     private String lastMaintenance;
-
 }

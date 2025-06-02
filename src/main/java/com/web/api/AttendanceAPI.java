@@ -4,10 +4,9 @@ import com.web.model.dto.AttendanceDTO;
 import com.web.model.response.AttendanceResponse;
 import com.web.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -21,39 +20,48 @@ public class AttendanceAPI {
         this.attendanceService = attendanceService;
     }
 
+    @PostMapping()
     public AttendanceResponse checkAttendance(@RequestBody AttendanceDTO attendanceDTO) {
         return attendanceService.checkAttendance(attendanceDTO);
     }
 
-    public List<AttendanceResponse> getAttendanceByDate(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.getAttendanceByDate(attendanceDTO);
+    @GetMapping("/date/{date}")
+    public List<AttendanceResponse> getAttendanceByDate(@PathVariable Date date) {
+        return attendanceService.getAttendanceByDate(date);
     }
 
-    public List<AttendanceResponse> getAttendanceByWeek(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.getAttendanceByWeek(attendanceDTO);
+    @GetMapping("/week/{date}")
+    public List<AttendanceResponse> getAttendanceByWeek(@PathVariable Date date) {
+        return attendanceService.getAttendanceByWeek(date);
     }
 
-    public List<AttendanceResponse> getAttendanceByMonth(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.getAttendanceByMonth(attendanceDTO);
+    @GetMapping("/month/{date}")
+    public List<AttendanceResponse> getAttendanceByMonth(@PathVariable Date date) {
+        return attendanceService.getAttendanceByMonth(date);
     }
 
-    public List<AttendanceResponse> getAttendanceByMemberId(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.getAttendanceHistoryByMemberId(attendanceDTO);
+    @GetMapping("/member/{memberId}")
+    public List<AttendanceResponse> getAttendanceByMemberId(@PathVariable Long memberId) {
+        return attendanceService.getAttendanceByMemberId(memberId);
     }
 
-    public Long countAttendanceByMemberId(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.countAttendanceByMemberId(attendanceDTO);
+    @GetMapping("/count/member/{memberId}")
+    public Long countAttendanceByMemberId(@PathVariable Long memberId) {
+        return attendanceService.countAttendanceByMemberId(memberId);
     }
 
-    public Long countAttendanceByDate(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.countAttendanceByDate(attendanceDTO);
+    @GetMapping("/count/date/{date}")
+    public Long countAttendanceByDate(@PathVariable Date date) {
+        return attendanceService.countAttendanceByDate(date);
     }
 
-    public Long countAttendanceByWeek(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.countAttendanceByWeek(attendanceDTO);
+    @GetMapping("/count/week/{date}")
+    public Long countAttendanceByWeek(@PathVariable Date date) {
+        return attendanceService.countAttendanceByWeek(date);
     }
 
-    public Long countAttendanceByMonth(@RequestBody AttendanceDTO attendanceDTO) {
-        return attendanceService.countAttendanceByMonth(attendanceDTO);
+    @GetMapping("/count/month/{date}")
+    public Long countAttendanceByMonth(@PathVariable Date date) {
+        return attendanceService.countAttendanceByMonth(date);
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 public interface MessageService {
     MessageResponse sendMessage(MessageDTO messageDTO);
 
-    List<MessageResponse> getMessagesByBoxChatId(MessageDTO messageDTO);
+    List<MessageResponse> getMessagesByBoxChatId(Long boxChatId);
 
-    void deleteMessage(MessageDTO messageDTO);
+    void deleteMessage(Long id);
 
 }

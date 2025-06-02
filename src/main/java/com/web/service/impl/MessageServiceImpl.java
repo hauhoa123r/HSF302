@@ -1,5 +1,13 @@
 package com.web.service.impl;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.converter.MessageConverter;
 import com.web.entity.MessageEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -9,12 +17,6 @@ import com.web.model.response.MessageResponse;
 import com.web.repository.MessageRepository;
 import com.web.service.MessageService;
 import com.web.utils.CheckFieldObject;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 @Service
 @Transactional
@@ -56,21 +58,16 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageResponse> getMessagesByBoxChatId(MessageDTO messageDTO) {
-        checkFieldObject.check(MessageDTO.class, messageDTO, "boxChatEntityId");
-
-        return messageRepository.findByBoxChatEntityId(messageDTO.getBoxChatEntityId()).stream().map(messageConverter::toResponse).toList();
+    public List<MessageResponse> getMessagesByBoxChatId(Long boxChatId) {
+        return messageRepository.findByBoxChatEntityId(boxChatId).stream().map(messageConverter::toResponse).toList();
     }
 
     @Override
-    public void deleteMessage(MessageDTO messageDTO) {
-        checkFieldObject.check(MessageDTO.class, messageDTO, "id");
-
-        if (!messageRepository.existsById(messageDTO.getId())) {
+    public void deleteMessage(Long id) {
+        if (!messageRepository.existsById(id)) {
             throw new EntityNotFoundException(MessageEntity.class);
         }
 
-        MessageEntity messageEntity = messageConverter.toEntity(messageDTO);
-        messageRepository.delete(messageEntity);
+        messageRepository.deleteById(id);
     }
 }

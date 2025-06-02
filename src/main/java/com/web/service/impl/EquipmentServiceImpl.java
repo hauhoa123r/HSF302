@@ -1,5 +1,13 @@
 package com.web.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.converter.EquipmentConverter;
 import com.web.entity.EquipmentEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -10,12 +18,6 @@ import com.web.repository.EquipmentRepository;
 import com.web.service.EquipmentService;
 import com.web.utils.CheckFieldObject;
 import com.web.utils.MergeEntity;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -47,10 +49,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public EquipmentResponse getEquipmentById(EquipmentDTO equipmentDTO) {
-        checkFieldObject.check(EquipmentDTO.class, equipmentDTO, "id");
-
-        Optional<EquipmentEntity> equipmentEntityOptional = equipmentRepository.findById(equipmentDTO.getId());
+    public EquipmentResponse getEquipmentById(Long id) {
+        Optional<EquipmentEntity> equipmentEntityOptional = equipmentRepository.findById(id);
 
         return equipmentConverter.toResponse(
                 equipmentEntityOptional.orElseThrow(() -> new EntityNotFoundException(EquipmentEntity.class)));
@@ -64,11 +64,9 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public List<EquipmentResponse> getEquipmentsByName(EquipmentDTO equipmentDTO) {
-        checkFieldObject.check(EquipmentDTO.class, equipmentDTO, "name");
-
+    public List<EquipmentResponse> getEquipmentsByName(String name) {
         List<EquipmentEntity> equipmentEntities = equipmentRepository
-                .findByNameContainingIgnoreCase(equipmentDTO.getName());
+                .findByNameContainingIgnoreCase(name);
 
         if (equipmentEntities.isEmpty()) {
             throw new EntityNotFoundException(EquipmentEntity.class);
@@ -92,10 +90,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public EquipmentResponse updateEquipment(EquipmentDTO equipmentDTO) {
-        checkFieldObject.check(EquipmentDTO.class, equipmentDTO, "id");
-
-        EquipmentEntity oldEquipmentEntity = equipmentRepository.findById(equipmentDTO.getId())
+    public EquipmentResponse updateEquipment(Long id, EquipmentDTO equipmentDTO) {
+        EquipmentEntity oldEquipmentEntity = equipmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(EquipmentEntity.class));
         EquipmentEntity newEquipmentEntity = equipmentConverter.toEntity(equipmentDTO);
         EquipmentEntity mergedEquipmentEntity = mergeEntity.merge(newEquipmentEntity, oldEquipmentEntity);
@@ -105,13 +101,11 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void deleteEquipment(EquipmentDTO equipmentDTO) {
-        checkFieldObject.check(EquipmentDTO.class, equipmentDTO, "id");
-
-        if (!equipmentRepository.existsById(equipmentDTO.getId())) {
+    public void deleteEquipment(Long id) {
+        if (!equipmentRepository.existsById(id)) {
             throw new EntityNotFoundException(EquipmentEntity.class);
         }
 
-        equipmentRepository.deleteById(equipmentDTO.getId());
+        equipmentRepository.deleteById(id);
     }
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +17,6 @@ public class EquipmentDTO {
     private String name;
     private String type;
     private String status;
-    private String lastMaintenance;
+    private Date lastMaintenance;
 
 }

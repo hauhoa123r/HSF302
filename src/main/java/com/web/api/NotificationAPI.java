@@ -19,24 +19,36 @@ public class NotificationAPI {
         this.notificationService = notificationService;
     }
 
-    @GetMapping("/getAll")
-    public List<NotificationResponse> getAllNotifications(@RequestBody NotificationDTO notificationDTO) {
-        return notificationService.getAllNotificationsByReceiverId(notificationDTO);
+    @GetMapping("/member/{receiverId}")
+    public List<NotificationResponse> getAllNotifications(@PathVariable Long receiverId) {
+        return notificationService.getAllNotificationsByReceiverId(receiverId);
     }
 
-    @GetMapping("/read")
-    public boolean markAsRead(@RequestBody NotificationDTO notificationDTO) {
-        notificationService.markAsRead(notificationDTO);
+    @PutMapping("/read/{id}")
+    public boolean markAsRead(@PathVariable Long id) {
+        notificationService.markAsRead(id);
         return true;
     }
 
-    @PostMapping("/send")
+    @PutMapping("/unread/{id}")
+    public boolean markAsUnread(@PathVariable Long id) {
+        notificationService.markAsUnread(id);
+        return true;
+    }
+
+    @PutMapping("/read-all/member/{receiverId}")
+    public boolean markAllAsRead(@PathVariable Long receiverId) {
+        notificationService.markAllAsRead(receiverId);
+        return true;
+    }
+
+    @PostMapping()
     public NotificationResponse sendNotification(@RequestBody NotificationDTO notificationDTO) {
         return notificationService.sendNotification(notificationDTO);
     }
 
-    @PostMapping("/delete")
-    public void deleteNotification(@RequestBody NotificationDTO notificationDTO) {
-        notificationService.deleteNotification(notificationDTO);
+    @PostMapping("/{id}")
+    public void deleteNotification(@PathVariable Long id) {
+        notificationService.deleteNotification(id);
     }
 }

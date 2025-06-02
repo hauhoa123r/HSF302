@@ -1,5 +1,14 @@
 package com.web.service.impl;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.List;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.converter.AttendanceConverter;
 import com.web.entity.AttendanceEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -9,12 +18,6 @@ import com.web.repository.AttendanceRepository;
 import com.web.service.AttendanceService;
 import com.web.utils.CalculatorTimestamp;
 import com.web.utils.CheckFieldObject;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 @Service
 @Transactional
@@ -57,10 +60,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<AttendanceResponse> getAttendanceByDate(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public List<AttendanceResponse> getAttendanceByDate(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfDay(),
@@ -70,10 +71,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<AttendanceResponse> getAttendanceByWeek(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public List<AttendanceResponse> getAttendanceByWeek(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfWeek(),
@@ -83,10 +82,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<AttendanceResponse> getAttendanceByMonth(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public List<AttendanceResponse> getAttendanceByMonth(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfMonth(),
@@ -96,10 +93,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<AttendanceResponse> getAttendanceHistoryByMemberId(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "memberEntityId");
-
-        List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByMemberEntityId(attendanceDTO.getMemberEntityId());
+    public List<AttendanceResponse> getAttendanceByMemberId(Long memberId) {
+        List<AttendanceEntity> attendanceEntities = attendanceRepository.findAllByMemberEntityId(memberId);
 
         return attendanceEntities.stream()
                 .map(attendanceConverter::toResponse)
@@ -107,17 +102,13 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public Long countAttendanceByMemberId(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "memberEntityId");
-
-        return attendanceRepository.countAllByMemberEntityId(attendanceDTO.getMemberEntityId());
+    public Long countAttendanceByMemberId(Long memberId) {
+        return attendanceRepository.countAllByMemberEntityId(memberId);
     }
 
     @Override
-    public Long countAttendanceByDate(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public Long countAttendanceByDate(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         return attendanceRepository.countAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfDay(),
@@ -125,10 +116,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public Long countAttendanceByWeek(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public Long countAttendanceByWeek(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         return attendanceRepository.countAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfWeek(),
@@ -136,10 +125,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public Long countAttendanceByMonth(AttendanceDTO attendanceDTO) {
-        checkFieldObject.check(AttendanceDTO.class, attendanceDTO, "date");
-
-        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(attendanceDTO.getDate());
+    public Long countAttendanceByMonth(Date date) {
+        CalculatorTimestamp calculatorTimestamp = new CalculatorTimestamp(date);
 
         return attendanceRepository.countAllByCheckInTimeBetween(
                 calculatorTimestamp.getStartOfMonth(),

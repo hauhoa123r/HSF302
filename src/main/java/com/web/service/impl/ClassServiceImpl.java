@@ -3,7 +3,10 @@ package com.web.service.impl;
 import com.web.converter.ClassConverter;
 import com.web.entity.ClassEntity;
 import com.web.entity.TrainerEntity;
+import com.web.entity.UserEntity;
 import com.web.model.dto.ClassDTO;
+import com.web.model.response.ClassResponse;
+import com.web.repository.ClassEnrollmentRepository;
 import com.web.repository.ClassRepository;
 import com.web.repository.TrainerRepository;
 import com.web.service.ClassService;
@@ -11,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ClassServiceImpl implements ClassService {
@@ -25,6 +30,9 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     private ClassConverter classConverter;
+
+    @Autowired
+    private ClassEnrollmentRepository classEnrollmentRepositoryImpl;
 
     @Override
     public ClassEntity getClassById(Long id) {
@@ -58,29 +66,33 @@ public class ClassServiceImpl implements ClassService {
         classRepositoryImpl.deleteById(id);
     }
 
-    public String classReflection(ClassDTO classDTO) {
-        StringBuilder result = new StringBuilder();
-        Field[] fields = ClassDTO.class.getDeclaredFields();
+    @Override
+    public List<ClassResponse> getAllClasses() {
+        List<ClassResponse> classResponses = new ArrayList<>();
+        List<ClassEntity> classEntities = classRepositoryImpl.findAll();
 
-        for (Field field : fields) {
-            try {
-                field.setAccessible(true);
-                Object value = field.get(classDTO);
-                if (value != null) {
-                    String key = field.getName();
-                    result.append(key).append("=").append(value.toString()).append("&");
-                }
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+        for (ClassEntity classEntity : classEntities) {
+            ClassResponse classResponse = new ClassResponse();
+            TrainerEntity trainerEntity = trainerRepository.findById(classEntity.getTrainerEntity().getId()).orElseThrow(() -> new RuntimeException("Trainer not found with id: " + classEntity.getTrainerEntity().getId()));
+            UserEntity userEntity = trainerEntity.getUserEntity();
+            int memberCount = classEnrollmentRepositoryImpl.countByClassEntity(classEntity);
+            classResponse.setId(classEntity.getId());
+            classResponse.setClassName(classEntity.getClassName());
+            classResponse.setCapacity(classEntity.getCapacity());
+            classResponse.setLocation(classEntity.getLocation());
+            classResponse.setTrainerName(userEntity.getFullName());
+            classResponse.setMemberCount(memberCount);
+            if (memberCount < classEntity.getCapacity()) {
+                classResponse.setStatus("Available");
+            } else {
+                classResponse.setStatus("Full");
             }
-        }
+            classResponses.add(classResponse);
 
-        if (result.length() > 0 && result.charAt(result.length() - 1) == '&') {
-            result.setLength(result.length() - 1);
         }
-
-        return result.toString();
+        return classResponses;
     }
+
 }
 
 

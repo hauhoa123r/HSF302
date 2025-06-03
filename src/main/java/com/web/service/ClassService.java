@@ -2,6 +2,9 @@ package com.web.service;
 
 import com.web.entity.ClassEntity;
 import com.web.model.dto.ClassDTO;
+import com.web.model.response.ClassResponse;
+
+import java.util.List;
 
 public interface ClassService {
     ClassEntity getClassById(Long id);
@@ -13,5 +16,8 @@ public interface ClassService {
     void updateClass(ClassEntity classEntity);
 
     void deleteClass(Long id);
+
+    List<ClassResponse> getAllClasses();
+
 
 }

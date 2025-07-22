@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Quản lý lịch tập thành viên GymFitness" name="description">
+    <title>Quản lý lịch tập - GymFitness</title>
+    <link href="../../shared/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="../../shared/assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/member-style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-dumbbell"></i> GymFitness</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="../index.html">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="../schedule/view.html">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Lịch tập</span>
+                </a>
+            </li>
+            <li>
+                <a href="../classes/list.html">
+                    <i class="fas fa-users"></i>
+                    <span>Lớp học</span>
+                </a>
+            </li>
+            <li>
+                <a href="../progress/view.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tiến độ</span>
+                </a>
+            </li>
+            <li>
+                <a href="../profile/view.html">
+                    <i class="fas fa-user"></i>
+                    <span>Hồ sơ</span>
+                </a>
+            </li>
+            <li>
+                <a href="../settings/general.html">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài đặt</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content -->
+    <div id="content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="btn btn-info" id="sidebar-collapse" type="button">
+                    <i class="fas fa-bars"></i>
+                    <span>Thu gọn</span>
+                </button>
+                <div class="ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown" id="userDropdown"
+                                type="button">
+                            <i class="fas fa-user-circle"></i>
+                            <span th:text="${userInfo.getName()}"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../profile/view.html"><i class="fas fa-user"></i> Hồ
+                                sơ</a></li>
+                            <li><a class="dropdown-item" href="../settings/general.html"><i class="fas fa-cog"></i> Cài
+                                đặt</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Đăng ký lịch tập</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h5 class="mb-0">Lớp học đề xuất</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-3" th:each="item : ${classes}">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title" th:text="${item.getName()}"></h6>
+                                            <p class="card-text"
+                                               th:text="${item.getDate()}">
+                                            </p>
+                                            <p class="card-text">
+                                                <small class="text-muted"
+                                                       th:text="'Tên HLV: ' + ${item.getNameCoach()}"></small>
+                                            </p>
+                                            <button class="btn btn-primary btn-sm" th:data-id="${item.getId()}">Đăng
+                                                ký
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Schedule Modal -->
+<div class="modal fade" id="addScheduleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm lịch tập</h5>
+                <button class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addScheduleForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="classSelect">Chọn lớp học</label>
+                        <select class="form-select" id="classSelect" required>
+                            <option value="">Chọn lớp...</option>
+                            <option value="1">Yoga cơ bản</option>
+                            <option value="2">Cardio</option>
+                            <option value="3">Pilates</option>
+                            <option value="4">Zumba</option>
+                            <option value="5">Body Pump</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="scheduleDate">Ngày</label>
+                        <input class="form-control" id="scheduleDate" required type="date">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="scheduleTime">Thời gian</label>
+                        <select class="form-select" id="scheduleTime" required>
+                            <option value="">Chọn thời gian...</option>
+                            <option value="06:00">06:00 - 07:00</option>
+                            <option value="07:00">07:00 - 08:00</option>
+                            <option value="18:00">18:00 - 19:00</option>
+                            <option value="19:00">19:00 - 20:00</option>
+                            <option value="20:00">20:00 - 21:00</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="scheduleNotes">Ghi chú</label>
+                        <textarea class="form-control" id="scheduleNotes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
+                <button class="btn btn-primary" onclick="addSchedule()" type="button">Thêm lịch</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Files -->
+<script src="../../shared/js/bootstrap.bundle.min.js"></script>
+<script src="../../shared/js/main.js"></script>
+<script src="../assets/js/member.js"></script>
+<script>
+    function cancelClass(classId) {
+        if (confirm('Bạn có chắc chắn muốn hủy lớp học này?')) {
+            alert('Đã hủy lớp học thành công!');
+        }
+    }
+
+    function generateAutoSchedule() {
+        alert('Đã tạo lịch tự động dựa trên tùy chọn của bạn!');
+    }
+
+    function addSchedule() {
+        alert('Đã thêm lịch tập thành công!');
+        $('#addScheduleModal').modal('hide');
+    }
+
+    // Handle form submission
+    document.getElementById('schedulePreferencesForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Đã lưu tùy chọn lịch tập!');
+    });
+</script>
+</body>
+
+</html> 

@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService {
     UserConverter userConverter;
 
     @Override
-    public Boolean isLogin(UserLoginDTO userLoginDTO) {
+    public UserEntity isLogin(UserLoginDTO userLoginDTO) {
         UserEntity userEntity = userRepositoryImpl.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
-        return userEntity != null;
+        return userEntity;
     }
 
     @Override

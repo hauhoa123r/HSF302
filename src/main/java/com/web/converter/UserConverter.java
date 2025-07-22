@@ -77,15 +77,17 @@ public class UserConverter {
         userEntity.setUsername(userRegisterDTO.getUsername());
         userEntity.setPassword(userRegisterDTO.getPassword());
         userEntity.setGender(userRegisterDTO.getGender());
+        userEntity.setRole("MEMBER");
         userRepository.save(userEntity);
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setUserEntity(userEntity);
-        memberEntity.setIsActive(false);
+        memberEntity.setIsActive(true);
         memberEntity.setMemberPackageEntities(new HashSet<>());
         PackageEntity packageEntity = packageRepository.findById(userRegisterDTO.getPackageId()).orElseThrow(() -> new ErrorMappingException(UserRegisterDTO.class, PackageEntity.class));
         MemberPackageEntity memberPackageEntity = new MemberPackageEntity();
         memberPackageEntity.setMemberEntity(memberEntity);
         memberPackageEntity.setPackageEntity(packageEntity);
+        memberPackageEntity.setIsActive(true);
         Date now = Date.from(Instant.now());
         memberPackageEntity.setStartDate(new java.sql.Date(now.getTime()));
         DateTimeFormatter endDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");

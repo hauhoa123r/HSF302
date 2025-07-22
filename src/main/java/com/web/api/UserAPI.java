@@ -1,9 +1,13 @@
 package com.web.api;
 
 import com.web.converter.OtpStorage;
+import com.web.entity.UserEntity;
 import com.web.model.dto.*;
+import com.web.model.response.LoginResponse;
 import com.web.service.EmailService;
 import com.web.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +29,17 @@ public class UserAPI {
     private OtpStorage otpStorage;
 
     @PostMapping("/login")
-    public ResponseEntity<?> isLogin(@RequestBody UserLoginDTO userLoginDTO) {
-        Boolean userLoginResponse = userSericeImpl.isLogin(userLoginDTO);
-        if (userLoginResponse) {
-            return ResponseEntity.ok(userLoginResponse);
+    public ResponseEntity<?> isLogin(@RequestBody UserLoginDTO userLoginDTO, HttpServletRequest request) {
+        UserEntity userLoginResponse = userSericeImpl.isLogin(userLoginDTO);
+        LoginResponse loginResponse = new LoginResponse();
+        if (userLoginResponse != null) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userId", userLoginResponse.getId());
+            session.setAttribute("role", userLoginResponse.getRole());
+
+            loginResponse.setId(userLoginResponse.getId());
+            loginResponse.setRole(userLoginResponse.getRole());
+            return ResponseEntity.ok(loginResponse);
         }
         return ResponseEntity.badRequest().body(userLoginResponse);
     }

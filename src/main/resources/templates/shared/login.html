@@ -233,10 +233,14 @@
         });
 
         const result = await response.json();
-        if (result === true) {
+        if (result.role === "ADMIN") {
             window.location.href = "/admin";
+        } else if (result.role === "MEMBER") {
+            window.location.href = "/member/homepage";
+        } else if (result.role === "TRAINER") {
+            window.location.href = "/trainer";
         } else {
-            alert("sai")
+            alert("sai");
         }
     });
 </script>

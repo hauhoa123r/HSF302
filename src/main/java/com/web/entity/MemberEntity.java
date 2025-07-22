@@ -99,6 +99,10 @@ public class MemberEntity {
                         attendance.getCheckInTime().toLocalDateTime().toLocalDate().equals(today));
     }
 
+    public void setIsCheckedIn(Boolean isCheckedIn) {
+        // This method is not used in the current context, but can be implemented if needed.
+    }
+
     public Boolean getIsCheckedOut() {
         LocalDate today = LocalDate.now();
         if (attendanceEntities == null || attendanceEntities.isEmpty()) {
@@ -107,5 +111,9 @@ public class MemberEntity {
         return attendanceEntities.stream()
                 .anyMatch(attendance -> attendance.getCheckOutTime() != null &&
                         attendance.getCheckOutTime().toLocalDateTime().toLocalDate().equals(today));
+    }
+
+    public void setIsCheckedOut(Boolean isCheckedOut) {
+        // This method is not used in the current context, but can be implemented if needed.
     }
 }

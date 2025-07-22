@@ -1,15 +1,21 @@
 package com.web.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class ErrorResponse {
-    private String message;
-    private String details;
+public class ErrorResponse extends RuntimeException {
+    private int errorCode = 500; // Default error code
 
+    public ErrorResponse(String message) {
+        super(message);
+    }
+
+    public ErrorResponse(String message, int errorCode) {
+        super(message);
+        this.errorCode = errorCode;
+    }
 }

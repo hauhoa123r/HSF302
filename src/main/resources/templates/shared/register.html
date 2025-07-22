@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Đăng ký GymFitness" name="description">
+    <title>Đăng ký - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link href="../shared/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="../shared/assets/css/style.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #232d39 0%, #2c3e50 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        .register-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .register-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .register-header {
+            background: #232d39;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .register-header h3 {
+            color: #fff;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .register-header h3 span {
+            color: #ed563b;
+        }
+
+        .register-body {
+            padding: 30px;
+        }
+
+        .register-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-title h4 {
+            color: #232d39;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .register-title p {
+            color: #6c757d;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #232d39;
+        }
+
+        .form-control {
+            height: 45px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ed563b;
+        }
+
+        .input-group-text {
+            background-color: #ed563b;
+            border-color: #ed563b;
+            color: #fff;
+        }
+
+        .btn-register {
+            background-color: #ed563b;
+            border-color: #ed563b;
+            color: #fff;
+            height: 45px;
+            font-weight: 600;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            background-color: #e24c2f;
+            border-color: #e24c2f;
+        }
+
+        .register-footer {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .register-footer a {
+            color: #ed563b;
+            font-weight: 600;
+        }
+
+        .membership-plans {
+            margin-bottom: 30px;
+        }
+
+        .plan-option {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .plan-option:hover {
+            border-color: #ed563b;
+        }
+
+        .plan-option.selected {
+            border-color: #ed563b;
+            background-color: rgba(237, 86, 59, 0.05);
+        }
+
+        .plan-option .custom-control-label {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .plan-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #232d39;
+        }
+
+        .plan-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ed563b;
+        }
+
+        .plan-duration {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .plan-features {
+            margin-top: 10px;
+        }
+
+        .plan-features p {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .plan-features i {
+            color: #28a745;
+            margin-right: 5px;
+        }
+
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            z-index: 1;
+        }
+
+        .step.active:not(:last-child):after {
+            background-color: #ed563b;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active .step-number {
+            background-color: #ed563b;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-prev {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-prev:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+    </style>
+</head>
+
+<body>
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <h3>Gym<span>Fitness</span></h3>
+        </div>
+        <div class="register-body">
+            <div class="register-title">
+                <h4>Đăng ký thành viên</h4>
+                <p>Hãy điền đầy đủ thông tin để trở thành thành viên của GymFitness</p>
+            </div>
+
+            <div class="form-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Thông tin cá nhân</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Chọn gói tập</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Xác nhận</div>
+                </div>
+            </div>
+
+            <form action="./register" id="registerForm" method="post">
+                <!-- Step 1: Personal Information -->
+                <div class="step-content active" data-step="1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fullname">Họ và tên</label>
+                                <input class="form-control" id="fullname" name="fullname" placeholder="Nhập họ và tên"
+                                       required type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="form-control" id="email" name="email" placeholder="Nhập email" required
+                                       type="email">
+                                <div class="invalid-feedback" id="email-error">
+                                    Email không hợp lệ hoặc đã tồn tại.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại</label>
+                                <input class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại"
+                                       required type="tel">
+                                <div class="invalid-feedback" id="phone-error">
+                                    Số điện thoại không hợp lệ hoặc đã tồn tại.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="validateBirthday" name="validateBirthday" type="hidden" value="false">
+                            <div class="form-group">
+                                <label for="dob">Ngày sinh</label>
+                                <input class="form-control" id="dob" name="dob" required type="date">
+                                <div class="invalid-feedback" id="dob-error">
+                                    Ngày sinh không hợp lệ.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Địa chỉ hành chính</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="province">
+                                            <option value="">Chọn tỉnh</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="district">
+                                            <option value="">Chọn huyện</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-control" id="ward">
+                                            <option value="">Chọn xã</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="username">Tên đăng nhập</label>
+                                <input class="form-control" id="username" name="username"
+                                       placeholder="Nhập tên đăng nhập"
+                                       required type="text">
+                                <div class="invalid-feedback" id="username-error">
+                                    Tên đăng nhập không hợp lệ hoặc đã tồn tại.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                <div class="d-flex">
+                                    <div class="custom-control custom-radio mr-4">
+                                        <input checked class="custom-control-input" id="male" name="gender"
+                                               type="radio" value="male">
+                                        <label class="custom-control-label" for="male">Nam</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" id="female" name="gender" type="radio"
+                                               value="female">
+                                        <label class="custom-control-label" for="female">Nữ</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password">Mật khẩu</label>
+                                <input class="form-control" id="password" name="password" placeholder="Nhập mật khẩu"
+                                       required type="password">
+                                <div class="invalid-feedback" id="password-error">
+                                    Mật khẩu phải có ít nhất 8 ký tự.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="confirm_password">Xác nhận mật khẩu</label>
+                                <input class="form-control" id="confirm_password" name="confirm_password"
+                                       placeholder="Nhập lại mật khẩu" required type="password">
+                                <div class="invalid-feedback" id="confirm-password-error">
+                                    Mật khẩu phải khớp và có ít nhất 8 ký tự.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-buttons">
+                        <div></div>
+                        <button class="btn btn-register next-step" data-step="1" type="button">Tiếp theo</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Membership Plans -->
+                <div class="step-content" data-step="2">
+                    <div class="membership-plans">
+                        <div class="plan-option" th:each="item, iterStat : ${packages}">
+                            <input th:data-id="${item.getId()}" type="hidden">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input"
+                                       name="membership_plan"
+                                       th:id="'plan' + ${iterStat.index}"
+                                       th:value="${item.id}"
+                                       type="radio"/>
+
+                                <label class="custom-control-label" th:for="'plan' + ${iterStat.index}">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="plan-name" th:text="${item.name}"></span>
+                                        <div>
+                                            <span class="plan-price"
+                                                  th:text="${#numbers.formatCurrency(item.price)}"></span>
+                                            <span class="plan-duration" th:text="${item.durationDays} + ' ngày'"></span>
+                                        </div>
+                                    </div>
+                                    <div class="plan-features">
+                                        <p><i class="fas fa-check"></i> <span th:text="${item.description}"></span></p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="btn btn-prev prev-step" data-step="2" type="button">Quay lại</button>
+                        <button class="btn btn-register next-step" data-step="2" type="button">Tiếp theo</button>
+                    </div>
+                </div>
+                <div class="step-content" data-step="3">
+                    <div class="alert alert-info">
+                        <p><strong>Xin chào,</strong> <span id="confirm-name"></span></p>
+                        <p>Vui lòng kiểm tra lại thông tin đăng ký của bạn:</p>
+                        <ul>
+                            <li><strong>Email:</strong> <span id="confirm-email"></span></li>
+                            <li><strong>Số điện thoại:</strong> <span id="confirm-phone"></span></li>
+                            <li><strong>Gói tập:</strong> <span id="confirm-plan"></span></li>
+                            <li><strong>Thời gian đăng ký:</strong> <span id="confirm-duration"></span></li>
+                            <li><strong>Thời gian gia hạn:</strong> <span id="confirm-extensions"></span></li>
+                            <li><strong>Tổng thanh toán:</strong> <span id="confirm-total"></span></li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" id="terms" name="terms" required type="checkbox">
+                            <label class="custom-control-label" for="terms">Tôi đồng ý với <a href="../terms.html"
+                                                                                              target="_blank">điều khoản
+                                sử dụng</a> và <a href="../privacy.html"
+                                                  target="_blank">chính sách bảo mật</a> của GymFitness</label>
+                        </div>
+                    </div>
+
+                    <div class="step-buttons">
+                        <button class="btn btn-prev prev-step" data-step="3" type="button">Quay lại</button>
+                        <button class="btn btn-register" id="registerBtn" type="button">Hoàn tất đăng ký</button>
+                    </div>
+                </div>
+            </form>
+            <div class="register-footer">
+                <p>Đã có tài khoản? <a href="./login.html">Đăng nhập ngay</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.plan-option').on('click', function () {
+            $(this).find('input[type="radio"]').prop('checked', true);
+            $('.plan-option').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
+        $('.next-step').on('click', function () {
+            var currentStep = parseInt($(this).data('step'));
+            var nextStep = currentStep + 1;
+            if (validateStep(currentStep)) {
+                $('.step').removeClass('active');
+                $('.step[data-step="' + nextStep + '"]').addClass('active');
+                $('.step-content').removeClass('active');
+                $('.step-content[data-step="' + nextStep + '"]').addClass('active');
+
+                if (nextStep === 3) {
+                    updateConfirmation();
+                }
+            }
+        });
+
+        $('.prev-step').on('click', function () {
+            var currentStep = parseInt($(this).data('step'));
+            var prevStep = currentStep - 1;
+            $('.step').removeClass('active');
+            $('.step[data-step="' + prevStep + '"]').addClass('active');
+            $('.step-content').removeClass('active');
+            $('.step-content[data-step="' + prevStep + '"]').addClass('active');
+        });
+        $('#registerForm').on('submit', function (e) {
+        });
+
+        function validateStep(step) {
+            var isValid = true;
+
+            if (step === 1) {
+                var requiredFields = ['#fullname', '#email', '#phone', '#username', '#password', '#confirm_password'];
+
+                requiredFields.forEach(function (field) {
+                    if ($(field).val().trim() === '') {
+                        $(field).addClass('is-invalid');
+                        isValid = false;
+                    } else {
+                        $(field).removeClass('is-invalid');
+                    }
+                });
+
+                if ($('#password').val() !== $('#confirm_password').val()) {
+                    $('#confirm_password').addClass('is-invalid');
+                    alert('Mật khẩu không khớp!');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        let emailTimeout = null;
+
+        $(document).on('input', '#email', function () {
+            const $this = $(this);
+            const email = $this.val().trim();
+            const $error = $('#email-error');
+
+            clearTimeout(emailTimeout);
+
+            emailTimeout = setTimeout(function () {
+                if (!isValidEmail(email)) {
+                    $this.addClass('is-invalid').removeClass('is-valid');
+                    $error.text('Email không hợp lệ.');
+                    return;
+                }
+                $.ajax({
+                    url: '/api/user/verified/email/' + email,
+                    type: 'GET',
+                    success: function (data) {
+                        $this.addClass('is-valid').removeClass('is-invalid');
+                        $error.text('');
+                    },
+                    error: function () {
+                        $this.addClass('is-invalid').removeClass('is-valid');
+                        $error.text('Email đã tồn tại.');
+                    }
+                });
+            }, 1000);
+        });
+
+        function isValidVietnamPhone(phone) {
+            const regex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+            return regex.test(phone);
+        }
+
+        let phoneTimeout = null;
+
+        $(document).on('input', '#phone', function () {
+            const $this = $(this);
+            const phone = $this.val().trim();
+            const $error = $('#phone-error');
+            clearTimeout(phoneTimeout);
+            phoneTimeout = setTimeout(function () {
+                if (!isValidVietnamPhone(phone)) {
+                    $this.addClass('is-invalid').removeClass('is-valid');
+                    $error.text('Số điện thoại không hợp lệ.');
+                    return;
+                }
+
+                $.ajax({
+                    url: '/api/user/verified/phone/' + phone,
+                    type: 'GET',
+                    success: function (data) {
+                        $this.addClass('is-valid').removeClass('is-invalid');
+                        $error.text('');
+                    },
+                    error: function () {
+                        $this.addClass('is-invalid').removeClass('is-valid');
+                        $error.text('Số điện thoại đã tồn tại.');
+                    }
+                });
+            }, 1000);
+        });
+
+        function isValidDob(dob) {
+            const selectedDate = new Date(dob);
+            const today = new Date();
+            if (!dob) return {valid: false, msg: 'Vui lòng chọn ngày sinh.'};
+
+            if (selectedDate >= today) {
+                return {valid: false, msg: 'Bạn phải từ 5 tuổi trở lên.'};
+            }
+            const age = today.getFullYear() - selectedDate.getFullYear();
+            const m = today.getMonth() - selectedDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < selectedDate.getDate())) {
+                age--;
+            }
+
+            if (age < 5) {
+                return {valid: false, msg: 'Bạn phải từ 5 tuổi trở lên.'};
+            }
+
+            return {valid: true, msg: ''};
+        }
+
+        $(document).on('change', '#dob', function () {
+            const dob = $(this).val();
+            const $this = $(this);
+            const $error = $('#dob-error');
+            const result = isValidDob(dob);
+
+            if (!result.valid) {
+                $this.addClass('is-invalid').removeClass('is-valid');
+                $error.text(result.msg);
+                $('#validateBirthday').val('false');
+            } else {
+                $this.addClass('is-valid').removeClass('is-invalid');
+                $error.text('');
+                $('#validateBirthday').val('true');
+            }
+        });
+        $(document).ready(function () {
+            $.get('https://provinces.open-api.vn/api/p/', function (data) {
+                data.forEach(function (province) {
+                    $('#province').append(`<option value="${province.code}">${province.name}</option>`);
+                });
+            });
+
+            $('#province').on('change', function () {
+                const provinceCode = $(this).val();
+                $('#district').empty().append('<option value="">Chọn huyện</option>');
+                $('#ward').empty().append('<option value="">Chọn xã</option>');
+
+                if (provinceCode) {
+                    $.get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`, function (data) {
+                        data.districts.forEach(function (district) {
+                            $('#district').append(`<option value="${district.code}">${district.name}</option>`);
+                        });
+                    });
+                }
+            });
+
+            $('#district').on('change', function () {
+                const districtCode = $(this).val();
+                $('#ward').empty().append('<option value="">Chọn xã</option>');
+
+                if (districtCode) {
+                    $.get(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`, function (data) {
+                        data.wards.forEach(function (ward) {
+                            $('#ward').append(`<option value="${ward.code}">${ward.name}</option>`);
+                        });
+                    });
+                }
+            });
+        });
+
+        function isValidUsernameFormat(username) {
+            return username.length >= 8;
+        }
+
+        let usernameTimeout = null;
+
+        $(document).on('input', '#username', function () {
+            const $this = $(this);
+            const username = $this.val().trim();
+            const $error = $('#username-error');
+
+            clearTimeout(usernameTimeout);
+
+            usernameTimeout = setTimeout(function () {
+                if (!isValidUsernameFormat(username)) {
+                    $this.addClass('is-invalid').removeClass('is-valid');
+                    $error.text('Tên đăng nhập phải có ít nhất 8 ký tự.');
+                    return;
+                }
+
+                $.ajax({
+                    url: '/api/user/verified/username/' + username,
+                    type: 'GET',
+                    success: function (data) {
+                        $this.addClass('is-valid').removeClass('is-invalid');
+                        $error.text('');
+                    },
+                    error: function () {
+                        $this.addClass('is-invalid').removeClass('is-valid');
+                        $error.text('Tên đăng nhập đã tồn tại.');
+                    }
+                });
+            }, 1000);
+        });
+        $(document).on('input', '#password', function () {
+            const $this = $(this);
+            const password = $this.val();
+            const $error = $('#password-error');
+
+            if (password.length < 8) {
+                $this.addClass('is-invalid').removeClass('is-valid');
+                $error.text('Mật khẩu phải có ít nhất 8 ký tự.');
+            } else {
+                $this.addClass('is-valid').removeClass('is-invalid');
+                $error.text('');
+            }
+        });
+
+        $(document).on('input', '#confirm_password', function () {
+            const password = $('#password').val();
+            const confirmPassword = $(this).val();
+            const $error = $('#confirm-password-error');
+
+            if (confirmPassword.length < 8) {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+                $error.text('Mật khẩu phải có ít nhất 8 ký tự.');
+            } else if (confirmPassword !== password) {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+                $error.text('Mật khẩu xác nhận không khớp.');
+            } else {
+                $(this).addClass('is-valid').removeClass('is-invalid');
+                $error.text('');
+            }
+        });
+
+        function updateConfirmation() {
+            var name = $('#fullname').val();
+            var email = $('#email').val();
+            var phone = $('#phone').val();
+
+            var planValue = $('input[name="membership_plan"]:checked').val();
+            var planName = $('input[name="membership_plan"]:checked').closest('.plan-option').find('.plan-name').text();
+            var planPrice = $('input[name="membership_plan"]:checked').closest('.plan-option').find('.plan-price').text();
+            var durationText = $('input[name="membership_plan"]:checked')
+                .closest('.plan-option')
+                .find('.plan-duration')
+                .text();
+
+            var priceValue = parseInt(planPrice.replace(/[^0-9]/g, ''));
+            var durationValue = parseInt($('#duration').val());
+            var discount = 0;
+
+            if (durationValue === 3) discount = 0.05;
+            else if (durationValue === 6) discount = 0.10;
+            else if (durationValue === 12) discount = 0.15;
+
+            var total = priceValue * durationValue * (1 - discount);
+            var formattedTotal = total.toLocaleString() + 'đ';
+            var duration = parseInt(durationText);
+            const today = new Date();
+
+            const dateExtension = getRenewalDate(duration);
+            const formattedDate = today.toLocaleDateString('vi-VN');
+            $('#confirm-name').text(name);
+            $('#confirm-email').text(email);
+            $('#confirm-phone').text(phone);
+            $('#confirm-plan').text(planName + ' - ' + planPrice);
+            $('#confirm-duration').text(formattedDate);
+            $('#confirm-extensions').text(dateExtension)
+            $('#confirm-total').text(planPrice);
+        }
+    });
+
+    function getRenewalDate(daysToAdd) {
+        const today = new Date();
+        today.setDate(today.getDate() + daysToAdd);
+
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+
+        return `${day}/${month}/${year}`;
+    }
+
+    function renderPackages() {
+        var durationText = $('input[name="membership_plan"]:checked')
+            .closest('.plan-option')
+            .find('.plan-duration')
+            .text();
+        var duration = parseInt(durationText);
+        const dateExtension = getRenewalDate(duration);
+        return {
+            fullName: $('#fullname').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            birthDate: $('#dob').val(),
+            address: {
+                province: $('#province option:selected').text(),
+                district: $('#district option:selected').text(),
+                ward: $('#ward option:selected').text()
+            },
+            gender: $('input[name="gender"]:checked').val(),
+            username: $('#username').val(),
+            password: $('#password').val(),
+            packageId: $('input[name="membership_plan"]:checked')
+                .closest('.plan-option')
+                .find('input[type="hidden"]')
+                .data('id'),
+            endDate: dateExtension,
+            price: parseInt(
+                $('input[name="membership_plan"]:checked')
+                    .closest('.plan-option')
+                    .find('.plan-price')
+                    .text()
+                    .replace(/[^\d]/g, '')
+            ),
+        };
+    }
+
+    $(document).on('click', '#registerBtn', function (e) {
+        e.preventDefault();
+        const data = renderPackages();
+        $.ajax({
+            url: '/api/user/register',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                alert("Đăng ký thành công");
+                window.location.href = '/login';
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+
+    });
+</script>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</html>

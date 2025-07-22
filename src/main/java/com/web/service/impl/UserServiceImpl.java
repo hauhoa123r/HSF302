@@ -2,16 +2,14 @@ package com.web.service.impl;
 
 import com.web.converter.UserConverter;
 import com.web.entity.UserEntity;
-import com.web.exception.ResourceNotFoundException;
 import com.web.model.dto.UserLoginDTO;
 import com.web.model.dto.UserRegisterDTO;
-import com.web.model.response.UserLoginResponse;
 import com.web.repository.UserRepository;
 import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.text.ParseException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,23 +21,29 @@ public class UserServiceImpl implements UserService {
     UserConverter userConverter;
 
     @Override
-    public UserLoginResponse isLogin(UserLoginDTO userLoginDTO) {
-        return Optional.ofNullable(userRepositoryImpl.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword()))
-                .map(userConverter::toConverterUserLogin)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    public Boolean isLogin(UserLoginDTO userLoginDTO) {
+        UserEntity userEntity = userRepositoryImpl.findByUsernameAndPassword(userLoginDTO.getUsername(), userLoginDTO.getPassword());
+        return userEntity != null;
     }
+
     @Override
-    public UserEntity isRegister(UserRegisterDTO userRegisterDTO) {
-        if (userRepositoryImpl.existsByUsername(userRegisterDTO.getUsername())) {
-            throw new RuntimeException("Username exists");
-        }
+    public Boolean isVerifiedEmail(String email) {
+        return userRepositoryImpl.existsByEmail(email);
+    }
 
-        if (userRepositoryImpl.existsByEmail(userRegisterDTO.getEmail())) {
-            throw new RuntimeException("Email exists");
-        }
+    @Override
+    public Boolean isVerifiedPhone(String phone) {
+        return userRepositoryImpl.existsByPhone(phone);
+    }
 
-        UserEntity userEntity =userConverter.toConverterUserRegister(userRegisterDTO);
-        userRepositoryImpl.save(userEntity);
-        return userEntity;
+    @Override
+    public Boolean isVerifiedUsername(String username) {
+        return userRepositoryImpl.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean isRegister(UserRegisterDTO userRegisterDTO) throws ParseException {
+        Boolean isRegister = userConverter.toConverterRegister(userRegisterDTO);
+        return true;
     }
 }

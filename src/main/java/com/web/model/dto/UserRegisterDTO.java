@@ -17,4 +17,20 @@ public class UserRegisterDTO {
     private String username;
     @NotBlank
     private String password;
+    @NotBlank
+    private String birthDate;
+    @NotBlank
+    private String gender;
+    @NotBlank
+    private AddressDTO address;
+    @NotBlank
+    private String phone;
+    @NotBlank
+    private Long packageId;
+    @NotBlank
+    private String endDate;
+    @NotBlank
+    private String price;
+    @NotBlank
+    private String fullName;
 }

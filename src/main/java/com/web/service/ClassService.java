@@ -19,5 +19,5 @@ public interface ClassService {
 
     List<ClassResponse> getAllClasses();
 
-
+    Long countClasses();
 }

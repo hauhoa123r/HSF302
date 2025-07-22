@@ -45,7 +45,7 @@ public class ClassEnrollmentServiceImpl implements ClassEnrollmentService {
         ClassEnrollmentEntity classEnrollmentEntity = classEnrollmentRepositoryImpl.findByClassEntityIdAndMemberEntityId(classId, memberId);
 
         if (classEnrollmentEntity == null) {
-            throw new EntityNotFoundException("Enrollment not found for classId: " + classId + " and memberId: " + memberId);
+            throw new EntityNotFoundException("Enrollment not found for classId: " + classId + " and userId: " + memberId);
         } else {
             classEnrollmentRepositoryImpl.delete(classEnrollmentEntity);
         }

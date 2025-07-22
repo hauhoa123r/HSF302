@@ -10,16 +10,18 @@ import java.util.List;
 @Controller
 public class PackageController {
 
-    private PackageService packageServiceImpl;
+    private PackageService packageService;
 
     @Autowired
-    public void setPackageServiceImpl(PackageService packageServiceImpl) {
-        this.packageServiceImpl = packageServiceImpl;
+    public void setPackageService(PackageService packageService) {
+        this.packageService = packageService;
     }
 
-    public List<PackageResponse> getAllPackage(){
-        return packageServiceImpl.getAllPackages();
+    public List<PackageResponse> getAllPackage() {
+        return packageService.getAllPackages();
     }
 
-
+    public String showPackagePageForAdmin() {
+        return "admin/packages/list";
+    }
 }

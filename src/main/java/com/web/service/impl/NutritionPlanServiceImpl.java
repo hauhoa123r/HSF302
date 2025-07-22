@@ -10,7 +10,7 @@ import com.web.repository.NutritionPlanRepository;
 import com.web.service.NutritionPlanService;
 import com.web.utils.CalculatorTimestamp;
 import com.web.utils.CheckFieldObject;
-import com.web.utils.MergeEntity;
+import com.web.utils.MergeObjectUtils;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
     private NutritionPlanRepository nutritionPlanRepository;
     private NutritionPlanConverter nutritionPlanConverter;
     private CheckFieldObject checkFieldObject;
-    private MergeEntity<NutritionPlanEntity> mergeEntity;
+    private MergeObjectUtils mergeObjectUtils;
 
     @Autowired
     public void setNutritionPlanRepository(NutritionPlanRepository nutritionPlanRepository) {
@@ -43,8 +43,8 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
     }
 
     @Autowired
-    public void setMergeEntity(MergeEntity<NutritionPlanEntity> mergeEntity) {
-        this.mergeEntity = mergeEntity;
+    public void setMergeEntity(MergeObjectUtils mergeObjectUtils) {
+        this.mergeObjectUtils = mergeObjectUtils;
     }
 
     @Override
@@ -125,9 +125,9 @@ public class NutritionPlanServiceImpl implements NutritionPlanService {
 
         NutritionPlanEntity newNutritionPlanEntity = nutritionPlanConverter.toEntity(nutritionPlanDTO);
 
-        NutritionPlanEntity mergedNutritionPlanEntity = mergeEntity.merge(newNutritionPlanEntity, oldNutritionPlanEntity);
+        mergeObjectUtils.mergeNonNullFields(newNutritionPlanEntity, oldNutritionPlanEntity);
 
-        return nutritionPlanConverter.toResponse(nutritionPlanRepository.save(mergedNutritionPlanEntity));
+        return nutritionPlanConverter.toResponse(nutritionPlanRepository.save(oldNutritionPlanEntity));
     }
 
     @Override

@@ -20,7 +20,7 @@ public class PackageConverter {
         this.modelMapperConfig = modelMapperConfig;
     }
 
-    public PackageResponse toConverterPackage(PackageEntity packageEntity){
+    public PackageResponse toResponse(PackageEntity packageEntity){
         Optional<PackageResponse> packageResponseOptional = Optional.ofNullable(modelMapperConfig.modelMapper().map(packageEntity, PackageResponse.class));
         return packageResponseOptional.orElseThrow(() -> new ErrorMappingException(PackageEntity.class, PackageResponse.class));
     }

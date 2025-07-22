@@ -1,13 +1,5 @@
 package com.web.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
-import jakarta.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.web.converter.EquipmentConverter;
 import com.web.entity.EquipmentEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -17,7 +9,13 @@ import com.web.model.response.EquipmentResponse;
 import com.web.repository.EquipmentRepository;
 import com.web.service.EquipmentService;
 import com.web.utils.CheckFieldObject;
-import com.web.utils.MergeEntity;
+import com.web.utils.MergeObjectUtils;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,7 +23,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     private EquipmentConverter equipmentConverter;
     private EquipmentRepository equipmentRepository;
-    private MergeEntity<EquipmentEntity> mergeEntity;
+    private MergeObjectUtils mergeObjectUtils;
     private CheckFieldObject checkFieldObject;
 
     @Autowired
@@ -39,8 +37,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Autowired
-    public void setMergeEntity(MergeEntity<EquipmentEntity> mergeEntity) {
-        this.mergeEntity = mergeEntity;
+    public void setMergeEntity(MergeObjectUtils mergeObjectUtils) {
+        this.mergeObjectUtils = mergeObjectUtils;
     }
 
     @Autowired
@@ -94,8 +92,8 @@ public class EquipmentServiceImpl implements EquipmentService {
         EquipmentEntity oldEquipmentEntity = equipmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(EquipmentEntity.class));
         EquipmentEntity newEquipmentEntity = equipmentConverter.toEntity(equipmentDTO);
-        EquipmentEntity mergedEquipmentEntity = mergeEntity.merge(newEquipmentEntity, oldEquipmentEntity);
-        newEquipmentEntity = equipmentRepository.save(mergedEquipmentEntity);
+        mergeObjectUtils.mergeNonNullFields(newEquipmentEntity, oldEquipmentEntity);
+        newEquipmentEntity = equipmentRepository.save(oldEquipmentEntity);
 
         return equipmentConverter.toResponse(newEquipmentEntity);
     }

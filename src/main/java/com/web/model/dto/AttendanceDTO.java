@@ -1,11 +1,12 @@
 package com.web.model.dto;
 
-import java.sql.Timestamp;
-
+import com.web.enums.operation.SortDirection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -15,6 +16,9 @@ import lombok.Setter;
 public class AttendanceDTO {
     private Long id;
     private Timestamp checkInTime;
+    private Timestamp checkOutTime;
     private String method;
-    private Long memberEntityId;
+    private MemberDTO memberEntity;
+    private String sortFieldName;
+    private SortDirection sortDirection;
 }

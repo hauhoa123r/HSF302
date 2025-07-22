@@ -1,13 +1,13 @@
 package com.web.service;
 
-import java.util.List;
-
 import com.web.model.dto.NotificationDTO;
 import com.web.model.response.NotificationResponse;
 
+import java.util.List;
+
 public interface NotificationService {
 
-    List<NotificationResponse> getAllNotificationsByReceiverId(Long receiverId);
+    List<NotificationResponse> getNotificationsByUser(Long receiverId);
 
     NotificationResponse sendNotification(NotificationDTO notificationDTO);
 

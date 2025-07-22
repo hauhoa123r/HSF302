@@ -1,14 +1,5 @@
 package com.web.service.impl;
 
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Optional;
-
-import jakarta.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.web.converter.NotificationConverter;
 import com.web.entity.NotificationEntity;
 import com.web.exception.sql.EntityAlreadyExistException;
@@ -18,6 +9,13 @@ import com.web.model.response.NotificationResponse;
 import com.web.repository.NotificationRepository;
 import com.web.service.NotificationService;
 import com.web.utils.CheckFieldObject;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -42,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<NotificationResponse> getAllNotificationsByReceiverId(Long receiverId) {
+    public List<NotificationResponse> getNotificationsByUser(Long receiverId) {
         return notificationRepository.findAllByUserEntityId(receiverId).stream().map(notificationConverter::toResponse).toList();
     }
 

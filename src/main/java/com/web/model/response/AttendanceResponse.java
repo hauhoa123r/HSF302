@@ -1,11 +1,11 @@
 package com.web.model.response;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class AttendanceResponse {
-
     private Long id;
+    private MemberResponse memberEntity;
     private Timestamp checkInTime;
+    private Timestamp checkOutTime;
     private String method;
-    private Long memberEntityId;
 }

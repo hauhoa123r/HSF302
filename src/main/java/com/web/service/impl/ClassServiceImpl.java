@@ -10,38 +10,49 @@ import com.web.repository.ClassEnrollmentRepository;
 import com.web.repository.ClassRepository;
 import com.web.repository.TrainerRepository;
 import com.web.service.ClassService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ClassServiceImpl implements ClassService {
-    @Autowired
-    private ClassRepository classRepositoryImpl;
-
-    @Autowired
-    private TrainerRepository trainerRepository;
-
-    @Autowired
     private ClassRepository classRepository;
-
-    @Autowired
+    private TrainerRepository trainerRepository;
     private ClassConverter classConverter;
+    private ClassEnrollmentRepository classEnrollmentRepository;
 
     @Autowired
-    private ClassEnrollmentRepository classEnrollmentRepositoryImpl;
+    public void setClassRepository(ClassRepository classRepository) {
+        this.classRepository = classRepository;
+    }
+
+    @Autowired
+    public void setTrainerRepository(TrainerRepository trainerRepository) {
+        this.trainerRepository = trainerRepository;
+    }
+
+    @Autowired
+    public void setClassConverter(ClassConverter classConverter) {
+        this.classConverter = classConverter;
+    }
+
+    @Autowired
+    public void setClassEnrollmentRepository(ClassEnrollmentRepository classEnrollmentRepository) {
+        this.classEnrollmentRepository = classEnrollmentRepository;
+    }
 
     @Override
     public ClassEntity getClassById(Long id) {
-        return classRepositoryImpl.findById(id).orElseThrow(() -> new RuntimeException("Class not found with id: " + id));
+        return classRepository.findById(id).orElseThrow(() -> new RuntimeException("Class not found with id: " + id));
     }
 
     @Override
     public ClassEntity getClassByClassName(String className) {
-        return classRepositoryImpl.findByClassNameContaining(className).orElseThrow(() -> new RuntimeException("Class not found with name: " + className));
+        return classRepository.findByClassNameContaining(className).orElseThrow(() -> new RuntimeException("Class not found with name: " + className));
     }
 
 
@@ -59,23 +70,25 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public void updateClass(ClassEntity classEntity) {classRepositoryImpl.save(classEntity); }
+    public void updateClass(ClassEntity classEntity) {
+        classRepository.save(classEntity);
+    }
 
     @Override
     public void deleteClass(Long id) {
-        classRepositoryImpl.deleteById(id);
+        classRepository.deleteById(id);
     }
 
     @Override
     public List<ClassResponse> getAllClasses() {
         List<ClassResponse> classResponses = new ArrayList<>();
-        List<ClassEntity> classEntities = classRepositoryImpl.findAll();
+        List<ClassEntity> classEntities = classRepository.findAll();
 
         for (ClassEntity classEntity : classEntities) {
             ClassResponse classResponse = new ClassResponse();
             TrainerEntity trainerEntity = trainerRepository.findById(classEntity.getTrainerEntity().getId()).orElseThrow(() -> new RuntimeException("Trainer not found with id: " + classEntity.getTrainerEntity().getId()));
             UserEntity userEntity = trainerEntity.getUserEntity();
-            int memberCount = classEnrollmentRepositoryImpl.countByClassEntity(classEntity);
+            int memberCount = classEnrollmentRepository.countByClassEntity(classEntity);
             classResponse.setId(classEntity.getId());
             classResponse.setClassName(classEntity.getClassName());
             classResponse.setCapacity(classEntity.getCapacity());
@@ -93,6 +106,10 @@ public class ClassServiceImpl implements ClassService {
         return classResponses;
     }
 
+    @Override
+    public Long countClasses() {
+        return classRepository.count();
+    }
 }
 
 

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notification")
 public class NotificationAPI {
 
     private NotificationService notificationService;
@@ -19,35 +18,35 @@ public class NotificationAPI {
         this.notificationService = notificationService;
     }
 
-    @GetMapping("/member/{receiverId}")
+    @GetMapping("/api/user/notification/{receiverId}")
     public List<NotificationResponse> getAllNotifications(@PathVariable Long receiverId) {
-        return notificationService.getAllNotificationsByReceiverId(receiverId);
+        return notificationService.getNotificationsByUser(receiverId);
     }
 
-    @PutMapping("/read/{id}")
+    @PutMapping("/api/user/notification/read/{id}")
     public boolean markAsRead(@PathVariable Long id) {
         notificationService.markAsRead(id);
         return true;
     }
 
-    @PutMapping("/unread/{id}")
+    @PutMapping("/api/user/notification/unread/{id}")
     public boolean markAsUnread(@PathVariable Long id) {
         notificationService.markAsUnread(id);
         return true;
     }
 
-    @PutMapping("/read-all/member/{receiverId}")
+    @PutMapping("/api/user/notification/read-all/member/{receiverId}")
     public boolean markAllAsRead(@PathVariable Long receiverId) {
         notificationService.markAllAsRead(receiverId);
         return true;
     }
 
-    @PostMapping()
+    @PostMapping("/api/admin/notification")
     public NotificationResponse sendNotification(@RequestBody NotificationDTO notificationDTO) {
         return notificationService.sendNotification(notificationDTO);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/api/admin/notification/{id}")
     public void deleteNotification(@PathVariable Long id) {
         notificationService.deleteNotification(id);
     }

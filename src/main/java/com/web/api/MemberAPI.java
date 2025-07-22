@@ -24,7 +24,7 @@ public class MemberAPI {
     public Map<String, Object> getMembersPage(@PathVariable int pageIndex, @ModelAttribute MemberDTO memberDTO) {
         Page<MemberResponse> memberResponsePage = memberService.getMembers(pageIndex, PAGE_SIZE, memberDTO);
         return Map.of(
-                "members", memberResponsePage.getContent(),
+                "items", memberResponsePage.getContent(),
                 "currentPage", memberResponsePage.getNumber(),
                 "totalPages", memberResponsePage.getTotalPages()
         );

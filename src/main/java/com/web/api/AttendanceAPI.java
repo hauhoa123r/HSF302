@@ -70,7 +70,7 @@ public class AttendanceAPI {
     public Map<String, Object> getAttendanceForAdmin(@PathVariable int pageIndex, @ModelAttribute AttendanceDTO attendanceDTO) {
         Page<AttendanceResponse> attendanceResponsePage = attendanceService.getAttendances(pageIndex, 6, attendanceDTO);
         return Map.of(
-                "attendances", attendanceResponsePage.getContent(),
+                "items", attendanceResponsePage.getContent(),
                 "currentPage", attendanceResponsePage.getNumber(),
                 "totalPages", attendanceResponsePage.getTotalPages()
         );

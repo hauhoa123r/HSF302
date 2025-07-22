@@ -133,7 +133,7 @@ export function renderResponseListForAdmin(memberResponse) {
         <td>${memberResponse.userEntity.email}</td>
         <td>${memberResponse.userEntity.phone}</td>
         <td>${
-            memberResponse.memberPackageEntity?.packageEntity?.name || ""
+            memberResponse.memberPackageEntity?.packageEntity?.name || "Chưa có gói tập"
     }</td>
         <td>${memberResponse.formatDate(
             memberResponse.memberPackageEntity?.startDate || ""

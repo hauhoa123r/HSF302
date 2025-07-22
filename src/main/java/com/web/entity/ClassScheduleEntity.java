@@ -1,12 +1,14 @@
 package com.web.entity;
 
 import jakarta.persistence.*;
+import lombok.experimental.FieldNameConstants;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "class_schedules")
+@FieldNameConstants
 public class ClassScheduleEntity {
     @Column(name = "schedule_id")
     @Id

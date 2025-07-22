@@ -1,10 +1,12 @@
 package com.web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.Date;
 import java.util.Set;
@@ -15,10 +17,11 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 public class UserEntity {
     @Column(name = "user_id")
     @Id
-    
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -55,7 +58,7 @@ public class UserEntity {
     @Column(name = "avatar")
     private String avatar;
 
-    @OneToOne(mappedBy = "userEntity")
+    @OneToOne(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private MemberEntity memberEntity;
 
     @OneToOne(mappedBy = "userEntity")
@@ -63,4 +66,13 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity")
     private Set<NotificationEntity> notificationEntities;
+
+    @Size(max = 20)
+    @Column(name = "id_card", length = 20)
+    private String idCard;
+
+    @Size(max = 255)
+    @Column(name = "emergency_contact")
+    private String emergencyContact;
+
 }

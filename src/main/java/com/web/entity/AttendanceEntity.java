@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import java.sql.Timestamp;
 
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@FieldNameConstants
 public class AttendanceEntity {
     @Column(name = "attendance_id")
     @Id
@@ -30,4 +32,8 @@ public class AttendanceEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+    @Column(name = "checkout_time")
+    private Timestamp checkOutTime;
+
 }

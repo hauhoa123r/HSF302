@@ -1,13 +1,15 @@
 package com.web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.engine.internal.Cascade;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldNameConstants
 public class MemberEntity {
     @Column(name = "member_id")
     @Id
@@ -27,7 +30,7 @@ public class MemberEntity {
     @Column(name = "qr_code", unique = true, length = 36)
     private String qrCode;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
@@ -53,8 +56,56 @@ public class MemberEntity {
     private Set<MessageEntity> messageEntities;
 
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PaymentEntity> paymentEntities;
-
-    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberPackageEntity> memberPackageEntities;
+
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "assigned_trainer_id")
+    private TrainerEntity TrainerEntity;
+
+    @Lob
+    @Column(name = "note")
+    private String note;
+
+    @Size(max = 255)
+    @Column(name = "occupation")
+    private String occupation;
+
+    @Size(max = 255)
+    @Column(name = "hobby")
+    private String hobby;
+
+    public MemberPackageEntity getMemberPackageEntity() {
+        if (memberPackageEntities == null || memberPackageEntities.isEmpty()) {
+            return null;
+        }
+        for (MemberPackageEntity memberPackageEntity : memberPackageEntities) {
+            if (memberPackageEntity.getIsActive()) {
+                return memberPackageEntity;
+            }
+        }
+        return null;
+    }
+
+    public Boolean getIsCheckedIn() {
+        LocalDate today = LocalDate.now();
+        if (attendanceEntities == null || attendanceEntities.isEmpty()) {
+            return false;
+        }
+        return attendanceEntities.stream()
+                .anyMatch(attendance -> attendance.getCheckInTime() != null &&
+                        attendance.getCheckInTime().toLocalDateTime().toLocalDate().equals(today));
+    }
+
+    public Boolean getIsCheckedOut() {
+        LocalDate today = LocalDate.now();
+        if (attendanceEntities == null || attendanceEntities.isEmpty()) {
+            return false;
+        }
+        return attendanceEntities.stream()
+                .anyMatch(attendance -> attendance.getCheckOutTime() != null &&
+                        attendance.getCheckOutTime().toLocalDateTime().toLocalDate().equals(today));
+    }
 }

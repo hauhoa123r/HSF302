@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import java.sql.Date;
 
@@ -15,6 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@FieldNameConstants
 public class WorkoutProgressEntity {
     @Column(name = "progress_id")
     @Id

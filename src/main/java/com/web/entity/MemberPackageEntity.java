@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
@@ -15,6 +17,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@FieldNameConstants
 public class MemberPackageEntity {
     @Column(name = "member_package_id")
     @Id
@@ -37,4 +40,15 @@ public class MemberPackageEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+    @Column(name = "final_price", precision = 10, scale = 2)
+    private BigDecimal finalPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    private PromotionEntity promotionEntity;
+
+    @OneToOne(mappedBy = "memberPackage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PaymentEntity paymentEntities;
+
 }

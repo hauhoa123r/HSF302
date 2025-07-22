@@ -199,11 +199,7 @@
 
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" id="rememberMe" name="rememberMe" type="checkbox">
-                            <label class="custom-control-label" for="rememberMe">Ghi nhớ đăng nhập</label>
-                        </div>
-                        <a href="./forgot-password.html">Quên mật khẩu?</a>
+                        <a href="/forgot/password">Quên mật khẩu?</a>
                     </div>
                 </div>
 
@@ -222,12 +218,10 @@
 </body>
 <script>
     document.getElementById("loginForm").addEventListener("submit", async function (event) {
-        event.preventDefault(); // chặn form submit mặc định
-
+        event.preventDefault();
         const data = {
             username: document.getElementById("username").value,
             password: document.getElementById("password").value,
-            rememberMe: document.getElementById("rememberMe").checked
         };
 
         const response = await fetch("/api/user/login", {

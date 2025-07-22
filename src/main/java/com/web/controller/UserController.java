@@ -29,5 +29,18 @@ public class UserController {
         mav.addObject("packages", packages);
         return mav;
     }
+
+    @GetMapping("/forgot/password")
+    public ModelAndView forgotPassword(Model model) {
+        ModelAndView mav = new ModelAndView("shared/forgot-password");
+        return mav;
+    }
+
+    @GetMapping("/reset/password")
+    public ModelAndView resetPassword(Model model) {
+        ModelAndView mav = new ModelAndView("shared/reset-password");
+        return mav;
+    }
+
 }
 

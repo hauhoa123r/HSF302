@@ -2,6 +2,7 @@ package com.web.service.impl;
 
 import com.web.converter.UserConverter;
 import com.web.entity.UserEntity;
+import com.web.model.dto.ResetPasswordDTO;
 import com.web.model.dto.UserLoginDTO;
 import com.web.model.dto.UserRegisterDTO;
 import com.web.repository.UserRepository;
@@ -44,6 +45,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean isRegister(UserRegisterDTO userRegisterDTO) throws ParseException {
         Boolean isRegister = userConverter.toConverterRegister(userRegisterDTO);
+        return true;
+    }
+
+    @Override
+    public Boolean isResetPassword(ResetPasswordDTO resetPasswordDTO) {
+        UserEntity userEntity = userRepositoryImpl.findByEmail(resetPasswordDTO.getEmail());
+        if (userEntity == null) {
+            throw new RuntimeException("User not found with email: " + resetPasswordDTO.getEmail());
+        }
+        userEntity.setPassword(resetPasswordDTO.getPassword());
+        userRepositoryImpl.save(userEntity);
         return true;
     }
 }

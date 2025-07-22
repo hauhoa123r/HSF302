@@ -1,7 +1,8 @@
 package com.web.api;
 
-import com.web.model.dto.UserLoginDTO;
-import com.web.model.dto.UserRegisterDTO;
+import com.web.converter.OtpStorage;
+import com.web.model.dto.*;
+import com.web.service.EmailService;
 import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,13 @@ public class UserAPI {
 
     @Autowired
     UserService userSericeImpl;
+
+    @Autowired
+    private EmailService emailService;
+
+
+    @Autowired
+    private OtpStorage otpStorage;
 
     @PostMapping("/login")
     public ResponseEntity<?> isLogin(@RequestBody UserLoginDTO userLoginDTO) {
@@ -57,6 +65,32 @@ public class UserAPI {
         Boolean isRegister = userSericeImpl.isRegister(userRegisterDTO);
         if (isRegister) {
             return ResponseEntity.ok(isRegister);
+        }
+        return ResponseEntity.badRequest().body("failed");
+    }
+
+    @PostMapping("/send-otp")
+    public ResponseEntity<?> sendOTP(@RequestBody OTPDTO otpDTO) {
+        String otp = emailService.sendEmail(otpDTO.getEmail());
+        otpStorage.saveOtp(otpDTO.getEmail(), otp);
+        return ResponseEntity.ok("Đã gửi mã OTP đến " + otpDTO.getEmail());
+    }
+
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOTP(@RequestBody OTPVerifyDTO dto) {
+        boolean valid = otpStorage.verifyOtp(dto.getEmail(), dto.getOtp());
+        if (valid) {
+            return ResponseEntity.ok("Mã OTP hợp lệ");
+        } else {
+            return ResponseEntity.badRequest().body("Mã OTP không hợp lệ hoặc đã hết hạn");
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) {
+        Boolean isResetPassword = userSericeImpl.isResetPassword(resetPasswordDTO);
+        if (isResetPassword) {
+            return ResponseEntity.ok(isResetPassword);
         }
         return ResponseEntity.badRequest().body("failed");
     }

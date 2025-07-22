@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.model.dto.ResetPasswordDTO;
 import com.web.model.dto.UserLoginDTO;
 import com.web.model.dto.UserRegisterDTO;
 
@@ -15,4 +16,6 @@ public interface UserService {
     Boolean isVerifiedUsername(String username);
 
     Boolean isRegister(UserRegisterDTO userRegisterDTO) throws ParseException;
+
+    Boolean isResetPassword(ResetPasswordDTO resetPasswordDTO);
 }

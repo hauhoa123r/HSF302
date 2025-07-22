@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}, subNavActive=${1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng ký gói tập mới - GymFitness</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="page-header">
+                <h2>Đăng ký gói tập mới cho thành viên</h2>
+            </div>
+            <form id="register-package-form" th:object="${member}">
+                <div class="form-group">
+                    <label>Họ tên thành viên</label>
+                    <input class="form-control" readonly th:field="*{userEntity.fullName}" type="text">
+                </div>
+                <div class="form-group">
+                    <label>ID thành viên</label>
+                    <input class="form-control" name="memberEntityId" readonly th:value="${member.id}" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="member-package-select">Gói tập <span class="text-danger">*</span></label>
+                    <select class="form-control" id="member-package-select" name="packageEntityId" required>
+                        <option value="">-- Chọn gói tập --</option>
+                        <option th:data-duration-day="${package.durationDays}" th:data-price="${package.price}"
+                                th:each="package : ${packages}"
+                                th:text="${package.name}" th:value="${package.id}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start-date">Ngày bắt đầu <span class="text-danger">*</span></label>
+                    <input class="form-control" id="start-date" name="startDate" required type="date">
+                </div>
+                <div class="form-group">
+                    <label for="end-date">Ngày kết thúc</label>
+                    <input class="form-control" id="end-date" readonly type="date">
+                    <small class="form-text text-muted">Tự động tính dựa trên gói tập</small>
+                </div>
+                <div class="form-group">
+                    <label for="package-price">Giá gói tập</label>
+                    <input class="form-control" id="package-price" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="promotion-select">Chọn khuyến mãi</label>
+                    <select class="form-control" id="promotion-select" name="promotionEntityId"></select>
+                    <small class="form-text text-muted">Chỉ được chọn từ danh sách khuyến mãi.</small>
+                </div>
+                <div class="form-group">
+                    <label for="discount">Giảm giá (%)</label>
+                    <input class="form-control" id="discount" readonly type="number">
+                </div>
+                <div class="form-group">
+                    <label for="final-price">Thành tiền</label>
+                    <input class="form-control" id="final-price" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method">Phương thức thanh toán <span
+                            class="text-danger">*</span></label>
+                    <select class="form-control" id="payment-method" name="method" required>
+                        <option value="">-- Chọn phương thức --</option>
+                        <option value="CASH">Tiền mặt</option>
+                        <option value="TRANSFER">Chuyển khoản ngân hàng</option>
+                        <option value="MOMO">Ví điện tử MoMo</option>
+                    </select>
+                </div>
+                <a class="btn btn-secondary mr-2" th:href="@{/admin/member}">Quay lại</a>
+                <button class="btn btn-success" type="submit">Đăng ký gói tập</button>
+            </form>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/member/register-pacakge.js}" type="module"></script>
+</th:block>
+</body>
+</html>

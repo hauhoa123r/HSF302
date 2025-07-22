@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="content-navbar">
+    <div class="container-fluid">
+        <button class="btn btn-info" id="sidebar-collapse" type="button">
+            <i class="fas fa-align-left"></i>
+            <span>Thu gọn</span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+                <!--/*@thymesVar id="notifications" type="java.util.List<com.web.model.response.NotificationResponse>"*/-->
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       id="navbarDropdown" role="button" th:href="@{#}">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge badge-danger" th:text="${notifications.size()}">3</span>
+                    </a>
+                    <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" th:each="notification : ${notifications}" th:href="@{#}"
+                           th:text="${notification.content}"></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{#}">Xem tất cả thông báo</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                       data-toggle="dropdown"
+                       id="userDropdown" role="button" th:href="@{#}">
+                        <!--                        <img class="rounded-circle" height="30"-->
+                        <!--                             th:src="@{/templates/admin/assets/img/admin-avatar.jpg}"-->
+                        <!--                             width="30">-->
+                        <span>Admin</span>
+                    </a>
+                    <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" th:href="@{/admin/profile.html}">Thông tin cá nhân</a>
+                        <a class="dropdown-item" th:href="@{/admin/settings.html}">Cài đặt</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/shared/login.html}">Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

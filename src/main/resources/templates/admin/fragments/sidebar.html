@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/*@thymesVar id="navActive" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="subNavActive" type="java.lang.Integer"*/-->
+<nav id="sidebar" th:fragment="sidebar">
+    <div class="sidebar-header">
+        <h3>Gym<span>Fitness</span></h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        <li th:classappend="${navActive == 1 || navActive == null} ? 'active'">
+            <a th:href="@{/admin}"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+        </li>
+        <li th:classappend="${navActive == 2} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#userSubmenu}">
+                <i class="fas fa-users"></i> Quản lý thành viên
+            </a>
+            <ul class="collapse list-unstyled" id="userSubmenu">
+                <li th:classappend="${subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/member}">Danh sách thành viên</a>
+                </li>
+                <li th:classappend="${subNavActive == 3} ? 'active'">
+                    <a th:href="@{/admin/members/attendance}">Điểm danh</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 3} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#packageSubmenu}">
+                <i class="fas fa-box"></i> Quản lý gói tập
+            </a>
+            <ul class="collapse list-unstyled" id="packageSubmenu">
+                <li th:classappend="${navActive == 3 && subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/packages/list.html}">Danh sách gói tập</a>
+                </li>
+                <li th:classappend="${navActive == 3 && subNavActive == 2} ? 'active'">
+                    <a th:href="@{/admin/packages/add.html}">Thêm gói tập</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 4} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#trainerSubmenu}">
+                <i class="fas fa-user-tie"></i> Quản lý huấn luyện viên
+            </a>
+            <ul class="collapse list-unstyled" id="trainerSubmenu">
+                <li th:classappend="${navActive == 4 && subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/trainers/list.html}">Danh sách HLV</a>
+                </li>
+                <li th:classappend="${navActive == 4 && subNavActive == 2} ? 'active'">
+                    <a th:href="@{/admin/trainers/add.html}">Thêm HLV</a>
+                </li>
+                <li th:classappend="${navActive == 4 && subNavActive == 3} ? 'active'">
+                    <a th:href="@{/admin/trainers/schedule.html}">Lịch làm việc</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 5} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#classSubmenu}">
+                <i class="fas fa-dumbbell"></i> Quản lý lớp học
+            </a>
+            <ul class="collapse list-unstyled" id="classSubmenu">
+                <li th:classappend="${navActive == 5 && subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/classes/list.html}">Danh sách lớp</a>
+                </li>
+                <li th:classappend="${navActive == 5 && subNavActive == 2} ? 'active'">
+                    <a th:href="@{/admin/classes/add.html}">Thêm lớp</a>
+                </li>
+                <li th:classappend="${navActive == 5 && subNavActive == 3} ? 'active'">
+                    <a th:href="@{/admin/classes/schedule.html}">Lịch học</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 6} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#equipmentSubmenu}">
+                <i class="fas fa-tools"></i> Quản lý thiết bị
+            </a>
+            <ul class="collapse list-unstyled" id="equipmentSubmenu">
+                <li th:classappend="${navActive == 6 && subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/equipment/list.html}">Danh sách thiết bị</a>
+                </li>
+                <li th:classappend="${navActive == 6 && subNavActive == 2} ? 'active'">
+                    <a th:href="@{/admin/equipment/add.html}">Thêm thiết bị</a>
+                </li>
+                <li th:classappend="${navActive == 6 && subNavActive == 3} ? 'active'">
+                    <a th:href="@{/admin/equipment/maintenance.html}">Bảo trì</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 7} ? 'active'">
+            <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#promotionSubmenu}">
+                <i class="fas fa-tags"></i> Quản lý khuyến mãi
+            </a>
+            <ul class="collapse list-unstyled" id="promotionSubmenu">
+                <li th:classappend="${navActive == 7 && subNavActive == 1} ? 'active'">
+                    <a th:href="@{/admin/promotions/list.html}">Danh sách KM</a>
+                </li>
+                <li th:classappend="${navActive == 7 && subNavActive == 2} ? 'active'">
+                    <a th:href="@{/admin/promotions/add.html}">Thêm KM</a>
+                </li>
+            </ul>
+        </li>
+        <li th:classappend="${navActive == 8} ? 'active'">
+            <a th:href="@{/admin/reports.html}"><i class="fas fa-chart-line"></i> Báo cáo doanh thu</a>
+        </li>
+        <li th:classappend="${navActive == 9} ? 'active'">
+            <a th:href="@{/admin/settings.html}"><i class="fas fa-cog"></i> Cài đặt</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

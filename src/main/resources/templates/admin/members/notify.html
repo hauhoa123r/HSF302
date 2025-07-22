@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gửi thông báo - GymFitness</title>
+</head>
+<body>
+<section class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Gửi thông báo</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Gửi thông báo cho thành viên</h4>
+                    <form id="notify-form">
+                        <input name="userEntityId" th:value="${userId}" type="hidden"/>
+                        <div class="form-group">
+                            <label>Nội dung thông báo</label>
+                            <textarea class="form-control" id="input" name="content" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Gửi</button>
+                        <a class="btn btn-secondary" th:href="@{/admin/member}">Quay lại</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/member/notify.js}" type="module"></script>
+</th:block>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi"
+      layout:decorate="~{/admin/layout/main-layout}"
+      th:with="navActive=${1}, subNavActive=${null}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trang chủ Admin</title>
+</head>
+<body>
+<section class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Bảng điều khiển</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card stat-card bg-primary text-white">
+                <div class="card-body">
+                    <div class="stat-icon">
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
+                    <div class="stat-data text-center">
+                        <h3 th:text="${#numbers.formatInteger(memberCount, 0, 'COMMA')}">1,256</h3>
+                        <p>Thành viên</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card bg-success text-white">
+                <div class="card-body">
+                    <div class="stat-icon">
+                        <i class="fas fa-money-bill-wave fa-3x"></i>
+                    </div>
+                    <div class="stat-data text-center">
+                        <h3 th:text="${totalRevenueThisMonth}">458.5M</h3>
+                        <p>Doanh thu tháng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card bg-warning text-white">
+                <div class="card-body">
+                    <div class="stat-icon">
+                        <i class="fas fa-dumbbell fa-3x"></i>
+                    </div>
+                    <div class="stat-data text-center">
+                        <h3 th:text="${classCount}">28</h3>
+                        <p>Lớp học</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card stat-card bg-danger text-white">
+                <div class="card-body">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-tie fa-3x"></i>
+                    </div>
+                    <div class="stat-data text-center">
+                        <h3 th:text="${trainerCount}">18</h3>
+                        <p>Huấn luyện viên</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Doanh thu theo tháng</h5>
+                </div>
+                <div class="card-body">
+                    <canvas height="300" id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Điểm danh hôm nay</h5>
+                </div>
+                <div class="card-body">
+                    <canvas height="200" id="attendanceChart"></canvas>
+                    <div class="attendance-stats mt-3">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <h4>156</h4>
+                                <p>Buổi sáng</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>238</h4>
+                                <p>Buổi chiều</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>185</h4>
+                                <p>Buổi tối</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Phân bố thành viên</h5>
+                </div>
+                <div class="card-body">
+                    <canvas height="300" id="membershipChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Content End -->
+
+<!-- JavaScript Files -->
+<th:block layout:fragment="custom-js">
+    <script th:inline="javascript">
+        let revenueMap = /*[[${revenueMap}]]*/ {};
+        let revenueLabels = Object.keys(revenueMap);
+        let revenueData = Object.values(revenueMap);
+
+        let packageCountMap = /*[[${packageCountMap}]]*/ {};
+        let packageCountLabels = Object.keys(packageCountMap);
+        let packageCountData = Object.values(packageCountMap);
+
+        let attendanceCountMap = /*[[${attendanceCountMap}]]*/ {};
+        let attendanceCountLabels = Object.keys(attendanceCountMap);
+        let attendanceCountData = Object.values(attendanceCountMap);
+    </script>
+    <script>
+        // Sample Chart Data
+        document.addEventListener("DOMContentLoaded", function () {
+            // Revenue Chart
+            var revenueCtx = document.getElementById("revenueChart").getContext("2d");
+            var revenueChart = new Chart(revenueCtx, {
+                type: "line",
+                data: {
+                    labels: revenueLabels,
+                    datasets: [{
+                        label: "Doanh thu (triệu)",
+                        data: revenueData,
+                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        borderWidth: 2,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+
+            // Attendance Chart
+            var attendanceCtx = document.getElementById("attendanceChart").getContext("2d");
+            var attendanceChart = new Chart(attendanceCtx, {
+                type: "bar",
+                data: {
+                    labels: attendanceCountLabels,
+                    datasets: [{
+                        label: "Số lượng thành viên",
+                        data: attendanceCountData,
+                        backgroundColor: "rgba(75, 192, 192, 0.8)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Membership Chart
+            if (packageCountLabels.length === 0) {
+                packageCountLabels = ["Chưa có dữ liệu"];
+                packageCountData = [1];
+            }
+            var membershipCtx = document.getElementById("membershipChart").getContext("2d");
+            var membershipChart = new Chart(membershipCtx, {
+                type: "doughnut",
+                data: {
+                    labels: packageCountLabels,
+                    datasets: [{
+                        data: packageCountData,
+                        backgroundColor: [
+                            "rgba(255, 99, 132, 0.8)",
+                            "rgba(54, 162, 235, 0.8)",
+                            "rgba(255, 206, 86, 0.8)",
+                            "rgba(75, 192, 192, 0.8)"
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "bottom"
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

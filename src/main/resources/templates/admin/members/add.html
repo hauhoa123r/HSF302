@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}, subNavActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm thành viên mới - GymFitness</title>
+</head>
+<body>
+<section class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Thêm thành viên mới</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="add-member-form" th:object="${member}">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Vui lòng điền đầy đủ thông tin thành viên. Các
+                                    trường có dấu (<span class="text-danger">*</span>) là bắt buộc.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thông tin cá nhân -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-user"></i> Thông tin cá nhân</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberFullName">Họ và tên <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberFullName" required
+                                           th:field="*{userEntity.fullName}" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberEmail">Email <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberEmail" required th:field="*{userEntity.email}"
+                                           type="email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberPhone">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberPhone" required th:field="*{userEntity.phone}"
+                                           type="tel">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberBirthday">Ngày sinh <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberBirthday" required
+                                           th:field="*{userEntity.dateOfBirth}" type="date">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Giới tính <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="memberGender" required
+                                            th:field="*{userEntity.gender}">
+                                        <option th:text="'Nam'" value="MALE">Nam</option>
+                                        <option th:text="'Nữ'" value="FEMALE">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberIdCard">Số CMND/CCCD <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberIdCard" required
+                                           th:field="*{userEntity.idCard}" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="memberAddress">Địa chỉ <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="memberAddress" required rows="2"
+                                              th:field="*{userEntity.address}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberAvatar">Ảnh đại diện</label>
+                                    <input class="form-control-file" id="memberAvatar" th:field="*{userEntity.avatar}"
+                                           type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberEmergencyContact">Liên hệ khẩn cấp <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="memberEmergencyContact" placeholder="Tên và số điện thoại"
+                                           required th:field="*{userEntity.emergencyContact}"
+                                           type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thông tin bổ sung -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-clipboard-list"></i> Thông tin bổ sung
+                                </h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="job">Công việc <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="job" placeholder="Nhập công việc của bạn..."
+                                              required rows="3"
+                                              th:field="*{occupation}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hobbies">Sở thích <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="hobbies" placeholder="Nhập sở thích của bạn..."
+                                              required rows="3"
+                                              th:field="*{hobby}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="adminNotes">Ghi chú của quản trị viên</label>
+                                    <textarea class="form-control" id="adminNotes" rows="3"
+                                              th:field="*{note}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="agreeTerms" required type="checkbox">
+                                    <label class="form-check-label" for="agreeTerms">
+                                        Thành viên đã đọc và đồng ý với <a th:href="@{#}">điều khoản sử dụng</a>
+                                        và <a th:href="@{#}">chính sách bảo mật</a> của GymFitness <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-secondary mr-2" onclick="window.location.href='/admin/member'"
+                                        type="button">Hủy
+                                </button>
+                                <button class="btn btn-success" type="submit">Thêm thành viên</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/member/add.js}" type="module"></script>
+</th:block>
+</body>
+</html>

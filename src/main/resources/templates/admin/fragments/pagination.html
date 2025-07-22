@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/*@thymesVar id="currentPage" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="totalPages" type="java.lang.Integer"*/-->
+<nav aria-label="Page navigation" th:fragment="pagination(url)">
+    <ul class="pagination justify-content-end">
+        <!-- Nút Trước -->
+        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+            <a class="page-link"
+               tabindex="-1"
+               th:href="${currentPage > 0} ? (${url} + '/page/' + (currentPage - 1)) : '#'">Trước</a>
+        </li>
+        <!-- Hiển thị các số trang -->
+        <li class="page-item"
+            th:classappend="${i == currentPage} ? 'active'"
+            th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a class="page-link"
+               th:href="${url} + '/page/' + ${i}">[[${i+1}]]</a>
+        </li>
+        <!-- Nút Sau -->
+        <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+            <a class="page-link"
+               th:href="${currentPage < totalPages - 1} ? (${url} + '/page/' + (currentPage + 1)) : '#'"
+            >Sau</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

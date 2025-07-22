@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}, subNavActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Điểm danh thành viên - GymFitness</title>
+</head>
+<body>
+<section class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Điểm danh thành viên</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần tìm kiếm và quét mã -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-filter"></i> Bộ lọc thành viên</h5>
+                </div>
+                <div class="card-body">
+                    <form id="filter-form" th:object="${attendance}">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="filterId">ID</label>
+                                <input class="form-control" id="filterId" placeholder="Nhập ID..."
+                                       th:field="*{memberEntity.id}" type="text">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="filterName">Tên thành viên</label>
+                                <input class="form-control" id="filterName" placeholder="Nhập tên thành viên..."
+                                       th:field="*{memberEntity.userEntity.fullName}" type="text">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="filterCheckIn">Thời gian vào</label>
+                                <input class="form-control" id="filterCheckIn" th:field="*{checkInTime}"
+                                       type="datetime-local">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="filterCheckOut">Thời gian ra</label>
+                                <input class="form-control" id="filterCheckOut" th:field="*{checkOutTime}"
+                                       type="datetime-local">
+                            </div>
+                        </div>
+                        <div class="form-row mt-2">
+                            <div class="form-group col-md-3">
+                                <label for="filterMethod">Phương pháp</label>
+                                <select class="form-control" id="filterMethod" th:field="*{method}">
+                                    <option value="">-- Chọn phương pháp --</option>
+                                    <option value="QR">QR</option>
+                                    <option value="MANUAL">MANUAL</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="filterSort">Sắp xếp theo</label>
+                                <select class="form-control" id="filterSort" name="fieldSortName">
+                                    <option value="">-- Chọn kiểu sắp xếp --</option>
+                                    <option value="checkInTime">Thời gian vào</option>
+                                    <option value="checkOutTime">Thời gian ra</option>
+                                    <option value="userEntity.fullName">Tên thành viên</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="filterSortDir">Hướng</label>
+                                <select class="form-control" id="filterSortDir" name="sortDirection">
+                                    <option value="ASC">Tăng dần</option>
+                                    <option value="DESC">Giảm dần</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4 d-flex align-items-end">
+                                <button class="btn btn-primary mr-2" id="filterBtn" type="submit">
+                                    <i class="fas fa-search"></i> Lọc
+                                </button>
+                                <button class="btn btn-secondary" id="resetFilterBtn" type="reset">
+                                    <i class="fas fa-undo"></i> Làm mới
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lịch sử điểm danh gần đây -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5><i class="fas fa-history"></i> Lịch sử điểm danh gần đây</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ tên</th>
+                                <th>Thời gian check-in</th>
+                                <th>Thời gian check-out</th>
+                                <th>Thời gian tập</th>
+                                <th>Phương pháp</th>
+                            </tr>
+                            </thead>
+                            <tbody id="attendance-list"></tbody>
+                        </table>
+                    </div>
+                    <nav id="pagination"></nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/member/attendance.js}" type="module"></script>
+</th:block>
+</body>
+
+</html>

@@ -10,13 +10,13 @@ export class RenderUtils {
      * @param responseClass
      * @param {string} apiUrl
      * @param {function} renderStrategy
-     * @param {string[]} customFormSelector
+     * @param {string[]} formSelector
      * @param {string} listSelector
      * @param {string} paginationSelector
      */
     constructor(
             {
-                dtoInstance, responseClass, apiUrl, renderStrategy, customFormSelector = ["#filter-form"],
+                dtoInstance, responseClass, apiUrl, renderStrategy, formSelector: formSelector = ["#filter-form"],
                 listSelector = "#list", paginationSelector = "#pagination"
             }
     ) {
@@ -24,7 +24,7 @@ export class RenderUtils {
         this.responseClass = responseClass;
         this.apiUrl = apiUrl;
         this.renderStrategy = renderStrategy;
-        this.customFormSelector = customFormSelector;
+        this.formSelector = formSelector;
         this.listSelector = listSelector;
         this.paginationSelector = paginationSelector;
     }
@@ -63,7 +63,7 @@ export class RenderUtils {
     }
 
     setupFormEvents() {
-        this.customFormSelector.forEach((selector) => {
+        this.formSelector.forEach((selector) => {
             const formElement = document.querySelector(selector);
             if (!formElement) return;
             formElement.addEventListener("submit", async (event) => {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/equipment")
+@RequestMapping("api/admin/equipment")
 public class EquipmentAPI {
 
     private EquipmentService equipmentService;

@@ -10,6 +10,7 @@ import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -64,6 +65,12 @@ public class MemberEntity {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TrainerReviewEntity> trainerReviewEntities;
+
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<WorkoutGoalEntity> workoutGoalEntities = new HashSet<>();
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_trainer_id")
     private TrainerEntity trainerEntity;
@@ -102,6 +109,10 @@ public class MemberEntity {
                         attendance.getCheckInTime().toLocalDateTime().toLocalDate().equals(today));
     }
 
+    public void setIsCheckedIn(Boolean isCheckedIn) {
+        // This method is not used in the current context, but can be implemented if needed.
+    }
+
     public Boolean getIsCheckedOut() {
         LocalDate today = LocalDate.now();
         if (attendanceEntities == null || attendanceEntities.isEmpty()) {
@@ -110,5 +121,9 @@ public class MemberEntity {
         return attendanceEntities.stream()
                 .anyMatch(attendance -> attendance.getCheckOutTime() != null &&
                         attendance.getCheckOutTime().toLocalDateTime().toLocalDate().equals(today));
+    }
+
+    public void setIsCheckedOut(Boolean isCheckedOut) {
+        // This method is not used in the current context, but can be implemented if needed.
     }
 }

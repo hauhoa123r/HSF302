@@ -38,7 +38,7 @@ public class PackageEntity {
     @Column(name = "duration_days")
     private Long durationDays;
 
-    @OneToMany(mappedBy = "packageEntity")
+    @OneToMany(mappedBy = "packageEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MemberPackageEntity> memberPackageEntities;
 
     @Size(max = 50)
@@ -61,4 +61,21 @@ public class PackageEntity {
     @Column(name = "created_at")
     private Timestamp createdAt;
 
+    public Long getMemberCount() {
+        if (memberPackageEntities == null || memberPackageEntities.isEmpty()) {
+            return 0L;
+        }
+        Long memberCount = 0L;
+        for (MemberPackageEntity memberPackageEntity : memberPackageEntities) {
+            if (memberPackageEntity.getIsActive()) {
+                memberCount++;
+            }
+        }
+        return memberCount;
+    }
+
+    public void setMemberCount(Long memberCount) {
+        // This method is not needed as member count is derived from memberPackageEntities
+        // Keeping it for compatibility with the original code structure
+    }
 }

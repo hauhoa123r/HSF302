@@ -137,4 +137,9 @@ public class MemberPackageServiceImpl implements MemberPackageService {
         paymentEntity.setStatus("PENDING");
         paymentRepository.save(paymentEntity);
     }
+
+    @Override
+    public Long countActiveMemberPackages() {
+        return memberPackageRepository.countByIsActive(true);
+    }
 }

@@ -7,6 +7,7 @@ import com.web.entity.MemberPackageEntity;
 import com.web.entity.UserEntity;
 import com.web.enums.operation.AggregationFunction;
 import com.web.enums.operation.ComparisonOperator;
+import com.web.exception.ErrorResponse;
 import com.web.exception.sql.EntityNotFoundException;
 import com.web.model.dto.MemberDTO;
 import com.web.model.dto.UserDTO;
@@ -164,15 +165,15 @@ public class MemberServiceImpl implements MemberService {
     public void createMember(MemberDTO memberDTO) {
         // Kiem tra trung email trong db
         if (memberRepository.existsByUserEntityEmail(memberDTO.getUserEntity().getEmail())) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new ErrorResponse("Email đã tồn tại trong hệ thống", 400);
         }
         // Kiem tra trung phone trong db
         if (memberRepository.existsByUserEntityPhone(memberDTO.getUserEntity().getPhone())) {
-            throw new IllegalArgumentException("Phone number already exists");
+            throw new ErrorResponse("Số điện thoại đã tồn tại trong hệ thống", 400);
         }
         // Kiem tra trung idCard trong db
         if (memberRepository.existsByUserEntityIdCard(memberDTO.getUserEntity().getIdCard())) {
-            throw new IllegalArgumentException("ID Card already exists");
+            throw new ErrorResponse("Chứng minh nhân dân đã tồn tại trong hệ thống", 400);
         }
         MemberEntity memberEntity = memberConverter.toEntity(memberDTO);
         memberRepository.save(memberEntity);

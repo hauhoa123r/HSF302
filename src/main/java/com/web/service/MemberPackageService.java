@@ -10,4 +10,6 @@ public interface MemberPackageService {
     void cancelMemberPackage(Long memberId);
 
     void createMemberPackage(MemberPackageDTO memberPackageDTO);
+
+    Long countActiveMemberPackages();
 }

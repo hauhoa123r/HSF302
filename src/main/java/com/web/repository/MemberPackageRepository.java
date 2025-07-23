@@ -12,4 +12,8 @@ public interface MemberPackageRepository extends JpaRepository<MemberPackageEnti
     void cancelMemberPackage(Long memberId);
 
     Long countByPromotionEntityId(Long promotionEntityId);
+
+    Long countByIsActive(boolean isActive);
+
+    boolean existsByPackageEntityId(Long packageEntityId);
 }

@@ -12,7 +12,11 @@ import lombok.Setter;
 public class PackageResponse {
     private Long id;
     private String name;
+    private String packageType;
+    private String packageCode;
     private String description;
     private String price;
+    private Long memberCount;
+    private String status;
     private String durationDays;
 }

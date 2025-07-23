@@ -1,5 +1,8 @@
 package com.web.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +14,19 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class PackageDTO {
+    @NotBlank
     private String name;
+    @Pattern(regexp = "^(ACTIVE|INACTIVE)$")
+    private String status;
+    @NotBlank
+    private String packageCode;
+    @Pattern(regexp = "^(MONTHLY|WEEKLY|YEARLY|DAILY)$")
+    private String packageType;
     private String description;
-    private float price;
-    private int durationDays;
+    @Positive
+    private Float price;
+    @Positive
+    private Integer durationDays;
+    private String sortFieldName;
+    private String sortDirection;
 }

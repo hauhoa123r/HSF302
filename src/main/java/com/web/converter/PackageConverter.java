@@ -25,7 +25,7 @@ public class PackageConverter {
         return packageResponseOptional.orElseThrow(() -> new ErrorMappingException(PackageEntity.class, PackageResponse.class));
     }
 
-    public PackageEntity toConverterPackageEntity(PackageDTO packageDTO){
+    public PackageEntity toEntity(PackageDTO packageDTO){
         Optional<PackageEntity> packageEntityOptional = Optional.ofNullable(modelMapperConfig.modelMapper().map(packageDTO, PackageEntity.class));
         return packageEntityOptional.orElseThrow(() -> new ErrorMappingException(PackageDTO.class, PackageEntity.class));
     }

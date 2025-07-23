@@ -184,29 +184,29 @@
 </div>
 
 <!-- JavaScript Files -->
-<script src="../../shared/js/bootstrap.bundle.min.js"></script>
-<script src="../../shared/js/main.js"></script>
+<script src="../../shared/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../../shared/assets/js/main.js"></script>
 <script src="../assets/js/member.js"></script>
 <script>
     function cancelClass(classId) {
-        if (confirm('Bạn có chắc chắn muốn hủy lớp học này?')) {
-            alert('Đã hủy lớp học thành công!');
+        if (confirm("Bạn có chắc chắn muốn hủy lớp học này?")) {
+            alert("Đã hủy lớp học thành công!");
         }
     }
 
     function generateAutoSchedule() {
-        alert('Đã tạo lịch tự động dựa trên tùy chọn của bạn!');
+        alert("Đã tạo lịch tự động dựa trên tùy chọn của bạn!");
     }
 
     function addSchedule() {
-        alert('Đã thêm lịch tập thành công!');
-        $('#addScheduleModal').modal('hide');
+        alert("Đã thêm lịch tập thành công!");
+        $("#addScheduleModal").modal("hide");
     }
 
     // Handle form submission
-    document.getElementById('schedulePreferencesForm').addEventListener('submit', function (e) {
+    document.getElementById("schedulePreferencesForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        alert('Đã lưu tùy chọn lịch tập!');
+        alert("Đã lưu tùy chọn lịch tập!");
     });
 </script>
 </body>

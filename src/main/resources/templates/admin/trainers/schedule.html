@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Trang quản lý lịch làm việc huấn luyện viên GymFitness">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Trang quản lý lịch làm việc huấn luyện viên GymFitness" name="description">
     <title>Lịch làm việc huấn luyện viên - GymFitness</title>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="../../shared/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../../shared/css/style.css">
-    <link rel="stylesheet" href="../css/admin-style.css">
+    <link href="../../shared/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="../../shared/assets/css/style.css" rel="stylesheet">
+    <link href="../css/admin-style.css" rel="stylesheet">
     <style>
         .calendar-container {
             background: white;
@@ -100,7 +100,7 @@
             overflow: hidden;
         }
 
-        .week-header>div {
+        .week-header > div {
             padding: 15px 10px;
             text-align: center;
             font-weight: bold;
@@ -269,204 +269,491 @@
 </head>
 
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar Begin -->
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>Gym<span>Fitness</span></h3>
+<div class="dashboard-container">
+    <!-- Sidebar Begin -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Gym<span>Fitness</span></h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#userSubmenu">
+                    <i class="fas fa-users"></i> Quản lý thành viên
+                </a>
+                <ul class="collapse list-unstyled" id="userSubmenu">
+                    <li>
+                        <a href="../members/list.html">Danh sách thành viên</a>
+                    </li>
+                    <li>
+                        <a href="../members/add.html">Thêm thành viên</a>
+                    </li>
+                    <li>
+                        <a href="../members/attendance.html">Điểm danh</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#packageSubmenu">
+                    <i class="fas fa-box"></i> Quản lý gói tập
+                </a>
+                <ul class="collapse list-unstyled" id="packageSubmenu">
+                    <li>
+                        <a href="../packages/list.html">Danh sách gói tập</a>
+                    </li>
+                    <li>
+                        <a href="../packages/add.html">Thêm gói tập</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active">
+                <a aria-expanded="true" class="dropdown-toggle" data-toggle="collapse" href="#trainerSubmenu">
+                    <i class="fas fa-user-tie"></i> Quản lý huấn luyện viên
+                </a>
+                <ul class="collapse list-unstyled show" id="trainerSubmenu">
+                    <li>
+                        <a href="./list.html">Danh sách HLV</a>
+                    </li>
+                    <li>
+                        <a href="./add.html">Thêm HLV</a>
+                    </li>
+                    <li class="active">
+                        <a href="./schedule.html">Lịch làm việc</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#classSubmenu">
+                    <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                </a>
+                <ul class="collapse list-unstyled" id="classSubmenu">
+                    <li>
+                        <a href="../classes/list.html">Danh sách lớp</a>
+                    </li>
+                    <li>
+                        <a href="../classes/add.html">Thêm lớp</a>
+                    </li>
+                    <li>
+                        <a href="../classes/schedule.html">Lịch học</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#equipmentSubmenu">
+                    <i class="fas fa-tools"></i> Quản lý thiết bị
+                </a>
+                <ul class="collapse list-unstyled" id="equipmentSubmenu">
+                    <li>
+                        <a href="../equipment/list.html">Danh sách thiết bị</a>
+                    </li>
+                    <li>
+                        <a href="../equipment/add.html">Thêm thiết bị</a>
+                    </li>
+                    <li>
+                        <a href="../equipment/maintenance.html">Bảo trì</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#promotionSubmenu">
+                    <i class="fas fa-tags"></i> Quản lý khuyến mãi
+                </a>
+                <ul class="collapse list-unstyled" id="promotionSubmenu">
+                    <li>
+                        <a href="../promotions/list.html">Danh sách KM</a>
+                    </li>
+                    <li>
+                        <a href="../promotions/add.html">Thêm KM</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="../reports.html"><i class="fas fa-chart-line"></i> Báo cáo doanh thu</a>
+            </li>
+            <li>
+                <a href="../settings.html"><i class="fas fa-cog"></i> Cài đặt</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Sidebar End -->
+
+    <!-- Content Begin -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="btn btn-info" id="sidebar-collapse" type="button">
+                    <i class="fas fa-align-left"></i>
+                    <span>Thu gọn</span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                               href="#" id="navbarDropdown" role="button">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge badge-danger">3</span>
+                            </a>
+                            <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Thông báo mới về lịch làm việc</a>
+                                <a class="dropdown-item" href="#">Thông báo về huấn luyện viên</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                               href="#" id="userDropdown" role="button">
+                                <img class="rounded-circle" height="30" src="../img/admin-avatar.jpg" width="30">
+                                <span>Admin</span>
+                            </a>
+                            <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="../profile.html">Thông tin cá nhân</a>
+                                <a class="dropdown-item" href="../settings.html">Cài đặt</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../../shared/login.html">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
-                </li>
-                <li>
-                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-users"></i> Quản lý thành viên
-                    </a>
-                    <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li>
-                            <a href="../members/list.html">Danh sách thành viên</a>
-                        </li>
-                        <li>
-                            <a href="../members/add.html">Thêm thành viên</a>
-                        </li>
-                        <li>
-                            <a href="../members/attendance.html">Điểm danh</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#packageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-box"></i> Quản lý gói tập
-                    </a>
-                    <ul class="collapse list-unstyled" id="packageSubmenu">
-                        <li>
-                            <a href="../packages/list.html">Danh sách gói tập</a>
-                        </li>
-                        <li>
-                            <a href="../packages/add.html">Thêm gói tập</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="active">
-                    <a href="#trainerSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                        <i class="fas fa-user-tie"></i> Quản lý huấn luyện viên
-                    </a>
-                    <ul class="collapse list-unstyled show" id="trainerSubmenu">
-                        <li>
-                            <a href="./list.html">Danh sách HLV</a>
-                        </li>
-                        <li>
-                            <a href="./add.html">Thêm HLV</a>
-                        </li>
-                        <li class="active">
-                            <a href="./schedule.html">Lịch làm việc</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#classSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
-                    </a>
-                    <ul class="collapse list-unstyled" id="classSubmenu">
-                        <li>
-                            <a href="../classes/list.html">Danh sách lớp</a>
-                        </li>
-                        <li>
-                            <a href="../classes/add.html">Thêm lớp</a>
-                        </li>
-                        <li>
-                            <a href="../classes/schedule.html">Lịch học</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#equipmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-tools"></i> Quản lý thiết bị
-                    </a>
-                    <ul class="collapse list-unstyled" id="equipmentSubmenu">
-                        <li>
-                            <a href="../equipment/list.html">Danh sách thiết bị</a>
-                        </li>
-                        <li>
-                            <a href="../equipment/add.html">Thêm thiết bị</a>
-                        </li>
-                        <li>
-                            <a href="../equipment/maintenance.html">Bảo trì</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#promotionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-tags"></i> Quản lý khuyến mãi
-                    </a>
-                    <ul class="collapse list-unstyled" id="promotionSubmenu">
-                        <li>
-                            <a href="../promotions/list.html">Danh sách KM</a>
-                        </li>
-                        <li>
-                            <a href="../promotions/add.html">Thêm KM</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../reports.html"><i class="fas fa-chart-line"></i> Báo cáo doanh thu</a>
-                </li>
-                <li>
-                    <a href="../settings.html"><i class="fas fa-cog"></i> Cài đặt</a>
-                </li>
-            </ul>
         </nav>
-        <!-- Sidebar End -->
 
-        <!-- Content Begin -->
-        <div id="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <button type="button" id="sidebar-collapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Thu gọn</span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="badge badge-danger">3</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Thông báo mới về lịch làm việc</a>
-                                    <a class="dropdown-item" href="#">Thông báo về huấn luyện viên</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="../img/admin-avatar.jpg" class="rounded-circle" width="30" height="30">
-                                    <span>Admin</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="../profile.html">Thông tin cá nhân</a>
-                                    <a class="dropdown-item" href="../settings.html">Cài đặt</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="../../shared/login.html">Đăng xuất</a>
-                                </div>
-                            </li>
-                        </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header d-flex justify-content-between align-items-center">
+                        <h1>Lịch làm việc huấn luyện viên</h1>
+                        <div>
+                            <button class="btn btn-success mr-2">
+                                <i class="fas fa-plus"></i> Thêm lịch làm việc
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-download"></i> Xuất lịch
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </div>
 
-            <div class="container-fluid">
+            <!-- Thống kê nhanh -->
+            <div class="schedule-stats">
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Huấn luyện viên đang làm việc</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">Buổi tập tuần này</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">89%</div>
+                    <div class="stat-label">Tỷ lệ hoàn thành lịch</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">HLV nghỉ phép</div>
+                </div>
+            </div>
+
+            <!-- Bộ lọc huấn luyện viên -->
+            <div class="trainer-filter">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header d-flex justify-content-between align-items-center">
-                            <h1>Lịch làm việc huấn luyện viên</h1>
-                            <div>
-                                <button class="btn btn-success mr-2">
-                                    <i class="fas fa-plus"></i> Thêm lịch làm việc
-                                </button>
-                                <button class="btn btn-outline-primary">
-                                    <i class="fas fa-download"></i> Xuất lịch
-                                </button>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="trainerSelect">Chọn huấn luyện viên</label>
+                            <select class="form-control" id="trainerSelect">
+                                <option value="">Tất cả huấn luyện viên</option>
+                                <option value="HLV001">Nguyễn Văn A - Thể hình, Cardio</option>
+                                <option value="HLV002">Trần Thị B - Yoga, Pilates</option>
+                                <option value="HLV003">Lê Văn C - Boxing, Kickboxing</option>
+                                <option value="HLV004">Phạm Thị D - Dinh dưỡng, Giảm cân</option>
+                                <option value="HLV005">Hoàng Văn E - Crossfit, Calisthenics</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="specializationFilter">Chuyên môn</label>
+                            <select class="form-control" id="specializationFilter">
+                                <option value="">Tất cả chuyên môn</option>
+                                <option value="bodybuilding">Thể hình</option>
+                                <option value="cardio">Cardio</option>
+                                <option value="yoga">Yoga</option>
+                                <option value="pilates">Pilates</option>
+                                <option value="boxing">Boxing</option>
+                                <option value="kickboxing">Kickboxing</option>
+                                <option value="crossfit">Crossfit</option>
+                                <option value="calisthenics">Calisthenics</option>
+                                <option value="nutrition">Dinh dưỡng</option>
+                                <option value="weightloss">Giảm cân</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="statusFilter">Trạng thái</label>
+                            <select class="form-control" id="statusFilter">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="working">Đang làm việc</option>
+                                <option value="leave">Nghỉ phép</option>
+                                <option value="off">Nghỉ việc</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary btn-block" id="applyFilter">
+                                <i class="fas fa-filter"></i> Lọc
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thao tác nhanh -->
+            <div class="quick-actions">
+                <h5><i class="fas fa-bolt"></i> Thao tác nhanh</h5>
+                <button class="quick-action-btn" data-target="#addScheduleModal" data-toggle="modal">
+                    <i class="fas fa-plus"></i> Thêm lịch làm việc
+                </button>
+                <button class="quick-action-btn" data-target="#bulkScheduleModal" data-toggle="modal">
+                    <i class="fas fa-copy"></i> Sao chép lịch tuần
+                </button>
+                <button class="quick-action-btn" data-target="#leaveRequestModal" data-toggle="modal">
+                    <i class="fas fa-calendar-times"></i> Đăng ký nghỉ phép
+                </button>
+                <button class="quick-action-btn" data-target="#swapScheduleModal" data-toggle="modal">
+                    <i class="fas fa-exchange-alt"></i> Đổi lịch làm việc
+                </button>
+                <button class="quick-action-btn">
+                    <i class="fas fa-print"></i> In lịch làm việc
+                </button>
+            </div>
+
+            <!-- Lịch làm việc -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-nav">
+                        <div>
+                            <button id="prevWeek"><i class="fas fa-chevron-left"></i></button>
+                            <button id="today">Hôm nay</button>
+                            <button id="nextWeek"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendar-title" id="currentDate">Tuần 25 - 31 tháng 12, 2024</div>
+                        <div class="calendar-view-toggle">
+                            <button class="active" data-view="week">Tuần</button>
+                            <button data-view="month">Tháng</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Thống kê nhanh -->
-                <div class="schedule-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">15</div>
-                        <div class="stat-label">Huấn luyện viên đang làm việc</div>
+                <div class="calendar-body">
+                    <!-- Lịch tuần -->
+                    <div class="week-view active" id="weekView">
+                        <div class="week-header">
+                            <div>Giờ</div>
+                            <div>Thứ 2</div>
+                            <div>Thứ 3</div>
+                            <div>Thứ 4</div>
+                            <div>Thứ 5</div>
+                            <div>Thứ 6</div>
+                            <div>Thứ 7</div>
+                            <div>Chủ nhật</div>
+                        </div>
+                        <div class="week-grid">
+                            <div class="time-slot">06:00</div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nguyễn Văn A<br>Thể hình - 06:00-07:00
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item group" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Trần Thị B<br>Yoga - 06:00-07:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Lê Văn C<br>Boxing - 06:00-07:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item group" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Phạm Thị D<br>Pilates - 06:00-07:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">07:00</div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ giải lao
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Hoàng Văn E<br>Crossfit - 07:00-08:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item group" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nguyễn Văn A<br>Cardio - 07:00-08:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Trần Thị B<br>Pilates - 07:00-08:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">08:00</div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">09:00</div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Lê Văn C<br>Kickboxing - 09:00-10:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item group" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Phạm Thị D<br>Dinh dưỡng - 09:00-10:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot">
+                                <div class="schedule-item private" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Hoàng Văn E<br>Calisthenics - 09:00-10:00
+                                </div>
+                            </div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">10:00</div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">11:00</div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+                            <div class="day-slot"></div>
+
+                            <div class="time-slot">12:00</div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                            <div class="day-slot">
+                                <div class="schedule-item break" data-target="#scheduleDetailModal"
+                                     data-toggle="modal">
+                                    Nghỉ trưa
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">127</div>
-                        <div class="stat-label">Buổi tập tuần này</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">89%</div>
-                        <div class="stat-label">Tỷ lệ hoàn thành lịch</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">HLV nghỉ phép</div>
+
+                    <!-- Lịch tháng -->
+                    <div class="month-view" id="monthView">
+                        <div class="month-calendar">
+                            <!-- Các ngày trong tháng sẽ được tạo bằng JavaScript -->
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content End -->
+</div>
 
-                <!-- Bộ lọc huấn luyện viên -->
-                <div class="trainer-filter">
+<!-- Modal thêm lịch làm việc -->
+<div aria-hidden="true" aria-labelledby="addScheduleModalLabel" class="modal fade" id="addScheduleModal"
+     tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addScheduleModalLabel">Thêm lịch làm việc</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addScheduleForm">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="trainerSelect">Chọn huấn luyện viên</label>
-                                <select class="form-control" id="trainerSelect">
-                                    <option value="">Tất cả huấn luyện viên</option>
+                                <label for="scheduleTrainer">Huấn luyện viên <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-control" id="scheduleTrainer" required>
+                                    <option value="">-- Chọn huấn luyện viên --</option>
                                     <option value="HLV001">Nguyễn Văn A - Thể hình, Cardio</option>
                                     <option value="HLV002">Trần Thị B - Yoga, Pilates</option>
                                     <option value="HLV003">Lê Văn C - Boxing, Kickboxing</option>
@@ -475,394 +762,107 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="specializationFilter">Chuyên môn</label>
-                                <select class="form-control" id="specializationFilter">
-                                    <option value="">Tất cả chuyên môn</option>
-                                    <option value="bodybuilding">Thể hình</option>
-                                    <option value="cardio">Cardio</option>
-                                    <option value="yoga">Yoga</option>
-                                    <option value="pilates">Pilates</option>
-                                    <option value="boxing">Boxing</option>
-                                    <option value="kickboxing">Kickboxing</option>
-                                    <option value="crossfit">Crossfit</option>
-                                    <option value="calisthenics">Calisthenics</option>
-                                    <option value="nutrition">Dinh dưỡng</option>
-                                    <option value="weightloss">Giảm cân</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="statusFilter">Trạng thái</label>
-                                <select class="form-control" id="statusFilter">
-                                    <option value="">Tất cả trạng thái</option>
-                                    <option value="working">Đang làm việc</option>
+                                <label for="scheduleType">Loại lịch <span class="text-danger">*</span></label>
+                                <select class="form-control" id="scheduleType" required>
+                                    <option value="">-- Chọn loại lịch --</option>
+                                    <option value="private">Buổi tập cá nhân</option>
+                                    <option value="group">Lớp tập nhóm</option>
+                                    <option value="break">Nghỉ giải lao</option>
                                     <option value="leave">Nghỉ phép</option>
-                                    <option value="off">Nghỉ việc</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>&nbsp;</label>
-                                <button class="btn btn-primary btn-block" id="applyFilter">
-                                    <i class="fas fa-filter"></i> Lọc
-                                </button>
+                                <label for="scheduleDate">Ngày <span class="text-danger">*</span></label>
+                                <input class="form-control" id="scheduleDate" required type="date">
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Thao tác nhanh -->
-                <div class="quick-actions">
-                    <h5><i class="fas fa-bolt"></i> Thao tác nhanh</h5>
-                    <button class="quick-action-btn" data-toggle="modal" data-target="#addScheduleModal">
-                        <i class="fas fa-plus"></i> Thêm lịch làm việc
-                    </button>
-                    <button class="quick-action-btn" data-toggle="modal" data-target="#bulkScheduleModal">
-                        <i class="fas fa-copy"></i> Sao chép lịch tuần
-                    </button>
-                    <button class="quick-action-btn" data-toggle="modal" data-target="#leaveRequestModal">
-                        <i class="fas fa-calendar-times"></i> Đăng ký nghỉ phép
-                    </button>
-                    <button class="quick-action-btn" data-toggle="modal" data-target="#swapScheduleModal">
-                        <i class="fas fa-exchange-alt"></i> Đổi lịch làm việc
-                    </button>
-                    <button class="quick-action-btn">
-                        <i class="fas fa-print"></i> In lịch làm việc
-                    </button>
-                </div>
-
-                <!-- Lịch làm việc -->
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <div class="calendar-nav">
-                            <div>
-                                <button id="prevWeek"><i class="fas fa-chevron-left"></i></button>
-                                <button id="today">Hôm nay</button>
-                                <button id="nextWeek"><i class="fas fa-chevron-right"></i></button>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="startTime">Giờ bắt đầu <span class="text-danger">*</span></label>
+                                <input class="form-control" id="startTime" required type="time">
                             </div>
-                            <div class="calendar-title" id="currentDate">Tuần 25 - 31 tháng 12, 2024</div>
-                            <div class="calendar-view-toggle">
-                                <button class="active" data-view="week">Tuần</button>
-                                <button data-view="month">Tháng</button>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="endTime">Giờ kết thúc <span class="text-danger">*</span></label>
+                                <input class="form-control" id="endTime" required type="time">
                             </div>
                         </div>
                     </div>
 
-                    <div class="calendar-body">
-                        <!-- Lịch tuần -->
-                        <div class="week-view active" id="weekView">
-                            <div class="week-header">
-                                <div>Giờ</div>
-                                <div>Thứ 2</div>
-                                <div>Thứ 3</div>
-                                <div>Thứ 4</div>
-                                <div>Thứ 5</div>
-                                <div>Thứ 6</div>
-                                <div>Thứ 7</div>
-                                <div>Chủ nhật</div>
-                            </div>
-                            <div class="week-grid">
-                                <div class="time-slot">06:00</div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nguyễn Văn A<br>Thể hình - 06:00-07:00
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item group" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Trần Thị B<br>Yoga - 06:00-07:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Lê Văn C<br>Boxing - 06:00-07:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item group" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Phạm Thị D<br>Pilates - 06:00-07:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">07:00</div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ giải lao
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Hoàng Văn E<br>Crossfit - 07:00-08:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item group" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nguyễn Văn A<br>Cardio - 07:00-08:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Trần Thị B<br>Pilates - 07:00-08:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">08:00</div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">09:00</div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Lê Văn C<br>Kickboxing - 09:00-10:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item group" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Phạm Thị D<br>Dinh dưỡng - 09:00-10:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot">
-                                    <div class="schedule-item private" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Hoàng Văn E<br>Calisthenics - 09:00-10:00
-                                    </div>
-                                </div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">10:00</div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">11:00</div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-                                <div class="day-slot"></div>
-
-                                <div class="time-slot">12:00</div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                                <div class="day-slot">
-                                    <div class="schedule-item break" data-toggle="modal"
-                                        data-target="#scheduleDetailModal">
-                                        Nghỉ trưa
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Lịch tháng -->
-                        <div class="month-view" id="monthView">
-                            <div class="month-calendar">
-                                <!-- Các ngày trong tháng sẽ được tạo bằng JavaScript -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="scheduleDescription">Mô tả</label>
+                                <textarea class="form-control" id="scheduleDescription" placeholder="Mô tả chi tiết về lịch làm việc..."
+                                          rows="3"></textarea>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="scheduleClient">Khách hàng (nếu có)</label>
+                                <input class="form-control" id="scheduleClient" placeholder="Tên khách hàng"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="scheduleLocation">Địa điểm</label>
+                                <input class="form-control" id="scheduleLocation" placeholder="Khu vực tập luyện"
+                                       type="text">
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-        <!-- Content End -->
-    </div>
-
-    <!-- Modal thêm lịch làm việc -->
-    <div class="modal fade" id="addScheduleModal" tabindex="-1" aria-labelledby="addScheduleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addScheduleModalLabel">Thêm lịch làm việc</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="addScheduleForm">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="scheduleTrainer">Huấn luyện viên <span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-control" id="scheduleTrainer" required>
-                                        <option value="">-- Chọn huấn luyện viên --</option>
-                                        <option value="HLV001">Nguyễn Văn A - Thể hình, Cardio</option>
-                                        <option value="HLV002">Trần Thị B - Yoga, Pilates</option>
-                                        <option value="HLV003">Lê Văn C - Boxing, Kickboxing</option>
-                                        <option value="HLV004">Phạm Thị D - Dinh dưỡng, Giảm cân</option>
-                                        <option value="HLV005">Hoàng Văn E - Crossfit, Calisthenics</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="scheduleType">Loại lịch <span class="text-danger">*</span></label>
-                                    <select class="form-control" id="scheduleType" required>
-                                        <option value="">-- Chọn loại lịch --</option>
-                                        <option value="private">Buổi tập cá nhân</option>
-                                        <option value="group">Lớp tập nhóm</option>
-                                        <option value="break">Nghỉ giải lao</option>
-                                        <option value="leave">Nghỉ phép</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="scheduleDate">Ngày <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="scheduleDate" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="startTime">Giờ bắt đầu <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" id="startTime" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="endTime">Giờ kết thúc <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" id="endTime" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="scheduleDescription">Mô tả</label>
-                                    <textarea class="form-control" id="scheduleDescription" rows="3"
-                                        placeholder="Mô tả chi tiết về lịch làm việc..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="scheduleClient">Khách hàng (nếu có)</label>
-                                    <input type="text" class="form-control" id="scheduleClient"
-                                        placeholder="Tên khách hàng">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="scheduleLocation">Địa điểm</label>
-                                    <input type="text" class="form-control" id="scheduleLocation"
-                                        placeholder="Khu vực tập luyện">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-success" id="saveSchedule">Lưu lịch</button>
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Hủy</button>
+                <button class="btn btn-success" id="saveSchedule" type="button">Lưu lịch</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal chi tiết lịch -->
-    <div class="modal fade" id="scheduleDetailModal" tabindex="-1" aria-labelledby="scheduleDetailModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="scheduleDetailModalLabel">Chi tiết lịch làm việc</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+<!-- Modal chi tiết lịch -->
+<div aria-hidden="true" aria-labelledby="scheduleDetailModalLabel" class="modal fade" id="scheduleDetailModal"
+     tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleDetailModalLabel">Chi tiết lịch làm việc</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="schedule-detail-content">
+                    <!-- Nội dung chi tiết sẽ được thêm bằng JavaScript -->
                 </div>
-                <div class="modal-body">
-                    <div class="schedule-detail-content">
-                        <!-- Nội dung chi tiết sẽ được thêm bằng JavaScript -->
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Chỉnh sửa</button>
-                    <button type="button" class="btn btn-danger">Xóa</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Đóng</button>
+                <button class="btn btn-primary" type="button">Chỉnh sửa</button>
+                <button class="btn btn-danger" type="button">Xóa</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- JavaScript Files -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../shared/js/main.js"></script>
-    <script src="../js/admin.js"></script>
+<!-- JavaScript Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../shared/assets/js/main.js"></script>
+<script src="../js/admin.js"></script>
 </body>
 
 </html>

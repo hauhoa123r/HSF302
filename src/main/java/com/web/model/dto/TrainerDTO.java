@@ -1,4 +1,4 @@
-package com.web.model.response;
+package com.web.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,24 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrainerResponse {
-    private UserResponse userEntity;
+public class TrainerDTO {
     private Long id;
-    private Integer experienceYears;
-    private String biography;
-    private String status;
-    private String memberCount;
+    private UserDTO userEntity;
     private String specialization;
+    private Integer experienceYears;
     private String certificates;
     private String employmentType;
-    private Date startDate;
     private BigDecimal baseSalary;
     private String bankAccount;
     private String taxCode;
+    private String status;
+    private String sortFieldName;
+    private String sortDirection;
 }

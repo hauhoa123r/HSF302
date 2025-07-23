@@ -10,7 +10,7 @@ import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -56,7 +56,7 @@ public class TrainerEntity {
     private String employmentType;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private Date startDate;
 
     @Column(name = "base_salary", precision = 10, scale = 2)
     private BigDecimal baseSalary;
@@ -79,5 +79,21 @@ public class TrainerEntity {
     @Size(max = 50)
     @Column(name = "tax_code", length = 50)
     private String taxCode;
+
+
+    @OneToMany(mappedBy = "TrainerEntity")
+    private List<MemberEntity> memberEntities;
+
+    public Long getCountMember() {
+        if (memberEntities == null) {
+            return 0L;
+        }
+        return (long) memberEntities.size();
+    }
+
+    public void setCountMember(Long countMember) {
+        // This method is not needed as countMember is derived from the size of the members set
+        // Keeping it for compatibility with the original code structure
+    }
 
 }

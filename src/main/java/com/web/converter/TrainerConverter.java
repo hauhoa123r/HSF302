@@ -2,6 +2,7 @@ package com.web.converter;
 
 import com.web.entity.TrainerEntity;
 import com.web.exception.mapping.ErrorMappingException;
+import com.web.model.dto.TrainerDTO;
 import com.web.model.response.TrainerResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,8 @@ public class TrainerConverter {
                 .orElseThrow(() -> new ErrorMappingException(TrainerEntity.class, TrainerResponse.class));
     }
 
+    public TrainerEntity toEntity(TrainerDTO trainerDTO) {
+        return Optional.ofNullable(modelMapper.map(trainerDTO, TrainerEntity.class))
+                .orElseThrow(() -> new ErrorMappingException(TrainerDTO.class, TrainerEntity.class));
+    }
 }

@@ -15,7 +15,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @FieldNameConstants
 public class BoxChatEntity {
     @Column(name = "box_chat_id")
@@ -27,6 +26,6 @@ public class BoxChatEntity {
     @JoinColumn(name = "class_id")
     private ClassEntity classEntity;
 
-    @OneToMany(mappedBy = "boxChatEntity")
+    @OneToMany(mappedBy = "boxChatEntity", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<MessageEntity> messageEntities;
 }

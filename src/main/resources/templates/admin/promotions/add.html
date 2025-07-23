@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}, subNavActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thêm khuyến mãi mới - GymFitness</title>
+</head>
+<body>
+<div class="container-fluid"  layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Thêm khuyến mãi mới</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="addPromotionForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Vui lòng điền đầy đủ thông tin khuyến
+                                    mãi. Các trường có dấu (*) là bắt buộc.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thông tin cơ bản -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-info-circle"></i> Thông tin
+                                    cơ
+                                    bản</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionName">Tên khuyến mãi <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="promotionName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionCode">Mã khuyến mãi <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="promotionCode" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionType">Loại khuyến mãi <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" id="promotionType" required>
+                                        <option value="">-- Chọn loại khuyến mãi --</option>
+                                        <option value="discount">Giảm giá</option>
+                                        <option value="free">Tặng thêm</option>
+                                        <option value="combo">Combo</option>
+                                        <option value="special">Đối tượng đặc biệt</option>
+                                        <option value="referral">Giới thiệu</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionCategory">Danh mục</label>
+                                    <select class="form-control" id="promotionCategory">
+                                        <option value="">-- Chọn danh mục --</option>
+                                        <option value="new_member">Thành viên mới</option>
+                                        <option value="existing_member">Thành viên hiện tại</option>
+                                        <option value="student">Sinh viên</option>
+                                        <option value="vip">VIP</option>
+                                        <option value="seasonal">Theo mùa</option>
+                                        <option value="holiday">Ngày lễ</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="promotionDescription">Mô tả khuyến mãi</label>
+                                    <textarea class="form-control" id="promotionDescription" rows="3"
+                                              placeholder="Mô tả chi tiết về khuyến mãi, điều kiện áp dụng..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cấu hình khuyến mãi -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-cog"></i> Cấu hình khuyến
+                                    mãi</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountType">Loại giảm giá</label>
+                                    <select class="form-control" id="discountType">
+                                        <option value="">-- Chọn loại giảm giá --</option>
+                                        <option value="percentage">Phần trăm (%)</option>
+                                        <option value="fixed_amount">Số tiền cố định (VNĐ)</option>
+                                        <option value="free_period">Thời gian miễn phí</option>
+                                        <option value="free_service">Dịch vụ miễn phí</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="discountValue">Giá trị giảm <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="discountValue" min="0"
+                                           required>
+                                    <small class="form-text text-muted">Nhập phần trăm (1-100) hoặc số tiền
+                                        (VNĐ)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="minimumAmount">Giá trị đơn hàng tối thiểu (VNĐ)</label>
+                                    <input type="number" class="form-control" id="minimumAmount" min="0">
+                                    <small class="form-text text-muted">Để trống nếu không có yêu
+                                        cầu</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="maximumDiscount">Giảm giá tối đa (VNĐ)</label>
+                                    <input type="number" class="form-control" id="maximumDiscount" min="0">
+                                    <small class="form-text text-muted">Giới hạn số tiền giảm tối đa</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="usageLimit">Giới hạn sử dụng</label>
+                                    <input type="number" class="form-control" id="usageLimit" min="1">
+                                    <small class="form-text text-muted">Số lần sử dụng tối đa</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="usagePerCustomer">Sử dụng/khách hàng</label>
+                                    <input type="number" class="form-control" id="usagePerCustomer" min="1"
+                                           value="1">
+                                    <small class="form-text text-muted">Số lần mỗi khách hàng được sử
+                                        dụng</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thời gian áp dụng -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-calendar-alt"></i> Thời gian
+                                    áp dụng</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="startDate">Ngày bắt đầu <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endDate">Ngày kết thúc <span
+                                            class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="endDate" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="startTime">Giờ bắt đầu</label>
+                                    <input type="time" class="form-control" id="startTime" value="00:00">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endTime">Giờ kết thúc</label>
+                                    <input type="time" class="form-control" id="endTime" value="23:59">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Đối tượng áp dụng -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-users"></i> Đối tượng áp
+                                    dụng</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="targetAudience">Đối tượng mục tiêu</label>
+                                    <select multiple class="form-control" id="targetAudience">
+                                        <option value="all">Tất cả khách hàng</option>
+                                        <option value="new">Khách hàng mới</option>
+                                        <option value="existing">Khách hàng hiện tại</option>
+                                        <option value="student">Sinh viên</option>
+                                        <option value="vip">Khách hàng VIP</option>
+                                        <option value="inactive">Khách hàng không hoạt động</option>
+                                    </select>
+                                    <small class="form-text text-muted">Giữ Ctrl để chọn nhiều đối
+                                        tượng</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="applicablePackages">Gói tập áp dụng</label>
+                                    <select multiple class="form-control" id="applicablePackages">
+                                        <option value="all">Tất cả gói tập</option>
+                                        <option value="monthly">Gói tháng</option>
+                                        <option value="quarterly">Gói quý</option>
+                                        <option value="yearly">Gói năm</option>
+                                        <option value="personal">Gói cá nhân</option>
+                                        <option value="group">Gói nhóm</option>
+                                    </select>
+                                    <small class="form-text text-muted">Giữ Ctrl để chọn nhiều gói</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Điều kiện áp dụng -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-list-check"></i> Điều kiện
+                                    áp
+                                    dụng</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ageMin">Độ tuổi tối thiểu</label>
+                                    <input type="number" class="form-control" id="ageMin" min="0" max="100">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ageMax">Độ tuổi tối đa</label>
+                                    <input type="number" class="form-control" id="ageMax" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="gender">Giới tính</label>
+                                    <select class="form-control" id="gender">
+                                        <option value="">Tất cả giới tính</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="location">Khu vực</label>
+                                    <select class="form-control" id="location">
+                                        <option value="">Tất cả khu vực</option>
+                                        <option value="hanoi">Hà Nội</option>
+                                        <option value="hcm">TP. Hồ Chí Minh</option>
+                                        <option value="danang">Đà Nẵng</option>
+                                        <option value="other">Khu vực khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="specialConditions">Điều kiện đặc biệt</label>
+                                    <textarea class="form-control" id="specialConditions" rows="3"
+                                              placeholder="Các điều kiện đặc biệt khác..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cài đặt hiển thị -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-eye"></i> Cài đặt hiển thị
+                                </h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionImage">Hình ảnh khuyến mãi</label>
+                                    <input type="file" class="form-control-file" id="promotionImage"
+                                           accept="image/*">
+                                    <small class="form-text text-muted">Hình ảnh hiển thị cho khuyến
+                                        mãi</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="promotionColor">Màu sắc chủ đạo</label>
+                                    <input type="color" class="form-control" id="promotionColor"
+                                           value="#007bff">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="displayPriority">Độ ưu tiên hiển thị</label>
+                                    <select class="form-control" id="displayPriority">
+                                        <option value="1">Thấp</option>
+                                        <option value="2">Trung bình</option>
+                                        <option value="3" selected>Cao</option>
+                                        <option value="4">Rất cao</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="isActive">Trạng thái</label>
+                                    <select class="form-control" id="isActive">
+                                        <option value="1" selected>Hoạt động</option>
+                                        <option value="0">Không hoạt động</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="displayMessage">Thông điệp hiển thị</label>
+                                    <textarea class="form-control" id="displayMessage" rows="2"
+                                              placeholder="Thông điệp ngắn gọn hiển thị cho khách hàng..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ghi chú -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="adminNotes">Ghi chú của quản trị viên</label>
+                                    <textarea class="form-control" id="adminNotes" rows="3"
+                                              placeholder="Ghi chú nội bộ về khuyến mãi..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-secondary mr-2"
+                                        onclick="window.location.href='./list.html'">Hủy</button>
+                                <button type="button" class="btn btn-primary mr-2">Lưu nháp</button>
+                                <button type="submit" class="btn btn-success">Tạo khuyến mãi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

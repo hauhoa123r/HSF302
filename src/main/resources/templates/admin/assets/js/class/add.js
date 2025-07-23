@@ -24,7 +24,7 @@ document.getElementById("addClassBtn").addEventListener("click", function () {
         capacity: parseInt(capacity)
     };
     console.log(payload);
-    fetch("/api/class/add", {
+    fetch("/api/admin/class/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

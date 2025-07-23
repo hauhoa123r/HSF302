@@ -41,7 +41,7 @@ document.getElementById("addEquipmentBtn").addEventListener("click", function ()
     };
 
 
-    fetch("/api/equipment/add", {
+    fetch("/api/admin/equipment/add", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

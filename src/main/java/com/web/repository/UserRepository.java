@@ -4,6 +4,8 @@ import com.web.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUsernameAndPassword(String username, String password);
@@ -15,4 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     Boolean existsByPhone(String phone);
 
     UserEntity findByEmail(String email);
+
+    List<UserEntity> findByRole(String role);
 }

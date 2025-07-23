@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Theo dõi tiến độ thành viên - GymFitness">
+    <title>Theo dõi tiến độ thành viên - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../../trainer/css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../../trainer/index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled show" id="membersSubmenu">
+                        <li>
+                            <a href="list.html">Danh sách thành viên</a>
+                        </li>
+                        <li class="active">
+                            <a href="progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled" id="classesSubmenu">
+                        <li>
+                            <a href="../classes/list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="../classes/attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li>
+                    <a href="../assessments.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li>
+                    <a href="../messages.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <a class="dropdown-item" href="../messages.html">Tin nhắn</a>
+                                    <a class="dropdown-item" href="../reports.html">Báo cáo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-4">Theo dõi tiến độ thành viên</h2>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="filterMember">Thành viên</label>
+                                            <select class="form-control" id="filterMember">
+                                                <option value="">Tất cả thành viên</option>
+                                                <option value="1">Nguyễn Thị B</option>
+                                                <option value="2">Trần Văn C</option>
+                                                <option value="3">Lê Thị D</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="filterClass">Lớp học</label>
+                                            <select class="form-control" id="filterClass">
+                                                <option value="">Tất cả lớp</option>
+                                                <option value="yoga">Yoga cơ bản</option>
+                                                <option value="cardio">Cardio nâng cao</option>
+                                                <option value="hiit">HIIT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="filterPeriod">Thời gian</label>
+                                            <select class="form-control" id="filterPeriod">
+                                                <option value="week">Tuần này</option>
+                                                <option value="month">Tháng này</option>
+                                                <option value="quarter">3 tháng</option>
+                                                <option value="year">Năm</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            <div class="d-flex">
+                                                <button class="btn btn-primary mr-2" id="applyFilter">
+                                                    <i class="fas fa-filter"></i> Lọc
+                                                </button>
+                                                <button class="btn btn-secondary" id="resetFilter">
+                                                    <i class="fas fa-undo"></i> Đặt lại
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Overview -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Tổng thành viên</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">45</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Tiến bộ tốt</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">32</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-arrow-up fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Cần hỗ trợ</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Tỷ lệ tham gia</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">78%</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-percentage fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Progress Table -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Tiến độ thành viên</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="progressTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Thành viên</th>
+                                                <th>Lớp học</th>
+                                                <th>Buổi tham gia</th>
+                                                <th>Tiến độ</th>
+                                                <th>Đánh giá</th>
+                                                <th>Ghi chú</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://via.placeholder.com/40"
+                                                            class="rounded-circle me-2">
+                                                        <div>
+                                                            <strong>Nguyễn Thị B</strong><br>
+                                                            <small class="text-muted">ID: MB001</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Yoga cơ bản</td>
+                                                <td>12/15</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-success" style="width: 80%">80%
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-success">Tốt</span></td>
+                                                <td>Tiến bộ rõ rệt</td>
+                                                <td>
+                                                    <a href="detail.html" class="btn btn-sm btn-primary"
+                                                        title="Xem chi tiết">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="edit-progress.html" class="btn btn-sm btn-warning"
+                                                        title="Chỉnh sửa ghi chú">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="https://via.placeholder.com/40"
+                                                            class="rounded-circle me-2">
+                                                        <div>
+                                                            <strong>Trần Văn C</strong><br>
+                                                            <small class="text-muted">ID: MB002</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>Cardio nâng cao</td>
+                                                <td>8/12</td>
+                                                <td>
+                                                    <div class="progress" style="height: 20px;">
+                                                        <div class="progress-bar bg-warning" style="width: 67%">67%
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge bg-warning">Cần cải thiện</span></td>
+                                                <td>Thiếu động lực</td>
+                                                <td>
+                                                    <a href="detail.html" class="btn btn-sm btn-primary"
+                                                        title="Xem chi tiết">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="edit-progress.html" class="btn btn-sm btn-warning"
+                                                        title="Chỉnh sửa ghi chú">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Detail Modal -->
+    <div class="modal fade" id="progressDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết tiến độ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Thông tin thành viên</h6>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td>Tên:</td>
+                                    <td><strong>Nguyễn Thị B</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td>MB001</td>
+                                </tr>
+                                <tr>
+                                    <td>Lớp học:</td>
+                                    <td>Yoga cơ bản</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày bắt đầu:</td>
+                                    <td>01/04/2024</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Thống kê</h6>
+                            <table class="table table-sm">
+                                <tr>
+                                    <td>Buổi tham gia:</td>
+                                    <td>12/15</td>
+                                </tr>
+                                <tr>
+                                    <td>Tỷ lệ tham gia:</td>
+                                    <td>80%</td>
+                                </tr>
+                                <tr>
+                                    <td>Đánh giá:</td>
+                                    <td><span class="badge bg-success">Tốt</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Mục tiêu:</td>
+                                    <td>Giảm cân 5kg</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <h6>Biểu đồ tiến độ</h6>
+                        <canvas id="progressChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Cập nhật đánh giá</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../../trainer/js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Filter functionality
+            $('#applyFilter').on('click', function () {
+                // Add your filter logic here
+                alert('Đã áp dụng bộ lọc!');
+            });
+
+            $('#resetFilter').on('click', function () {
+                $('#filterMember').val('');
+                $('#filterClass').val('');
+                $('#filterPeriod').val('week');
+                alert('Đã đặt lại bộ lọc!');
+            });
+        });
+    </script>
+</body>
+
+</html>

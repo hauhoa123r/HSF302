@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Xóa lớp học - GymFitness">
+    <title>Xóa lớp học - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li>
+                            <a href="../members/list.html">Danh sách thành viên</a>
+                        </li>
+                        <li>
+                            <a href="../members/progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled show" id="classesSubmenu">
+                        <li class="active">
+                            <a href="list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li>
+                    <a href="../assessments.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li>
+                    <a href="../messages.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <a class="dropdown-item" href="../messages.html">Tin nhắn</a>
+                                    <a class="dropdown-item" href="../reports.html">Báo cáo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Xóa lớp học</h2>
+                            <div>
+                                <a href="detail.html" class="btn btn-info">
+                                    <i class="fas fa-eye"></i> Xem chi tiết
+                                </a>
+                                <a href="list.html" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="card-header bg-danger text-white">
+                                <h5><i class="fas fa-exclamation-triangle"></i> Xác nhận xóa lớp học</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Class Info -->
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-center">
+                                        <i class="fas fa-dumbbell fa-4x text-danger mb-2"></i>
+                                        <h6>Yoga cơ bản</h6>
+                                        <small class="text-muted">ID: CL001</small>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Loại lớp:</strong> <span class="badge badge-info">Yoga</span>
+                                                </p>
+                                                <p><strong>Thời gian:</strong> 07:00 - 08:00</p>
+                                                <p><strong>Phòng:</strong> Phòng A</p>
+                                                <p><strong>Trạng thái:</strong> <span class="badge badge-success">Đang
+                                                        hoạt động</span></p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Số học viên:</strong> 15/20</p>
+                                                <p><strong>Ngày bắt đầu:</strong> 01/01/2024</p>
+                                                <p><strong>HLV phụ trách:</strong> Nguyễn Văn A</p>
+                                                <p><strong>Lịch học:</strong> Thứ 2, 4, 6</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Warning Messages -->
+                                <div class="alert alert-danger">
+                                    <h6><i class="fas fa-exclamation-triangle"></i> Cảnh báo quan trọng:</h6>
+                                    <ul class="mb-0">
+                                        <li>Hành động này <strong>KHÔNG THỂ HOÀN TÁC</strong></li>
+                                        <li>Tất cả dữ liệu lớp học sẽ bị xóa vĩnh viễn</li>
+                                        <li>15 học viên đang tham gia lớp này sẽ bị ảnh hưởng</li>
+                                        <li>Lịch học và điểm danh sẽ bị mất</li>
+                                        <li>Thông báo sẽ được gửi đến tất cả học viên</li>
+                                    </ul>
+                                </div>
+
+                                <div class="alert alert-warning">
+                                    <h6><i class="fas fa-lightbulb"></i> Gợi ý thay thế:</h6>
+                                    <ul class="mb-0">
+                                        <li>Thay vì xóa, hãy cân nhắc <strong>Tạm ngưng</strong> lớp học</li>
+                                        <li>Chuyển học viên sang lớp khác tương tự</li>
+                                        <li>Lưu trữ dữ liệu để tham khảo sau này</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Confirmation Form -->
+                                <form id="deleteClassForm">
+                                    <div class="form-group">
+                                        <label for="deleteReason">Lý do xóa lớp học *</label>
+                                        <select class="form-control" id="deleteReason" required>
+                                            <option value="">Chọn lý do</option>
+                                            <option value="low_attendance">Ít học viên tham gia</option>
+                                            <option value="schedule_conflict">Xung đột lịch</option>
+                                            <option value="trainer_unavailable">HLV không có sẵn</option>
+                                            <option value="facility_issue">Vấn đề cơ sở vật chất</option>
+                                            <option value="other">Lý do khác</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="deleteNote">Ghi chú bổ sung</label>
+                                        <textarea class="form-control" id="deleteNote" rows="3"
+                                            placeholder="Mô tả chi tiết lý do xóa lớp học..."></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="notifyStudents"
+                                                checked>
+                                            <label class="custom-control-label" for="notifyStudents">
+                                                Thông báo cho tất cả học viên về việc hủy lớp
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="confirmDelete"
+                                                required>
+                                            <label class="custom-control-label" for="confirmDelete">
+                                                <strong>Tôi hiểu rằng hành động này không thể hoàn tác và đồng ý xóa lớp
+                                                    học</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center mt-4">
+                                        <button type="submit" class="btn btn-danger" id="deleteBtn" disabled>
+                                            <i class="fas fa-trash"></i> Xóa lớp học
+                                        </button>
+                                        <button type="button" class="btn btn-secondary ml-2" onclick="history.back()">
+                                            <i class="fas fa-times"></i> Hủy
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Thống kê lớp học</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item d-flex justify-content-between">
+                                        <span>Tổng học viên:</span>
+                                        <strong>15</strong>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between">
+                                        <span>Buổi học đã diễn ra:</span>
+                                        <strong>12</strong>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between">
+                                        <span>Tỷ lệ tham gia TB:</span>
+                                        <strong>85%</strong>
+                                    </div>
+                                    <div class="list-group-item d-flex justify-content-between">
+                                        <span>Đánh giá trung bình:</span>
+                                        <strong>4.8/5</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mt-3">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Hành động thay thế</h6>
+                            </div>
+                            <div class="card-body">
+                                <a href="edit.html" class="btn btn-warning btn-block mb-2">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa lớp học
+                                </a>
+                                <a href="#" class="btn btn-info btn-block mb-2">
+                                    <i class="fas fa-pause"></i> Tạm ngưng lớp học
+                                </a>
+                                <a href="#" class="btn btn-success btn-block">
+                                    <i class="fas fa-users"></i> Chuyển học viên
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Enable/disable delete button based on checkbox
+            $('#confirmDelete').on('change', function () {
+                $('#deleteBtn').prop('disabled', !this.checked);
+            });
+
+            // Form submission
+            $('#deleteClassForm').on('submit', function (e) {
+                e.preventDefault();
+
+                if (!confirm('Bạn có chắc chắn muốn xóa lớp học này? Hành động này không thể hoàn tác!')) {
+                    return;
+                }
+
+                // Add your form submission logic here
+                alert('Lớp học đã được xóa thành công!');
+                window.location.href = 'list.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

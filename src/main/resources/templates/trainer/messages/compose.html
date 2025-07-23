@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Soạn tin nhắn mới - GymFitness">
+    <title>Soạn tin nhắn mới - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li>
+                            <a href="../members/list.html">Danh sách thành viên</a>
+                        </li>
+                        <li>
+                            <a href="../members/progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled" id="classesSubmenu">
+                        <li>
+                            <a href="../classes/list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="../classes/attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition/nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li>
+                    <a href="../assessments/assessment.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li class="active">
+                    <a href="message.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <a class="dropdown-item" href="message.html">Tin nhắn</a>
+                                    <a class="dropdown-item" href="../reports.html">Báo cáo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Soạn tin nhắn mới</h2>
+                            <div>
+                                <a href="message.html" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Nội dung tin nhắn</h6>
+                            </div>
+                            <div class="card-body">
+                                <form id="composeForm">
+                                    <div class="form-group">
+                                        <label for="recipient">Người nhận <span class="text-danger">*</span></label>
+                                        <select class="form-control" id="recipient" required>
+                                            <option value="">Chọn người nhận</option>
+                                            <option value="all">Tất cả thành viên</option>
+                                            <option value="group1">Nhóm giảm cân</option>
+                                            <option value="group2">Nhóm tăng cơ</option>
+                                            <option value="member1">Nguyễn Thị B</option>
+                                            <option value="member2">Trần Văn C</option>
+                                            <option value="member3">Lê Thị D</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="subject">Tiêu đề</label>
+                                        <input type="text" class="form-control" id="subject"
+                                            placeholder="Nhập tiêu đề tin nhắn...">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="messageContent">Nội dung <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="messageContent" rows="8"
+                                            placeholder="Nhập nội dung tin nhắn..." required></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="priority">Mức độ ưu tiên</label>
+                                        <select class="form-control" id="priority">
+                                            <option value="normal">Bình thường</option>
+                                            <option value="important">Quan trọng</option>
+                                            <option value="urgent">Khẩn cấp</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="scheduleMessage">
+                                            <label class="custom-control-label" for="scheduleMessage">
+                                                Lên lịch gửi tin nhắn
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" id="scheduleOptions" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="scheduleDate">Ngày gửi</label>
+                                                <input type="date" class="form-control" id="scheduleDate">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="scheduleTime">Giờ gửi</label>
+                                                <input type="time" class="form-control" id="scheduleTime">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Tùy chọn gửi</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="sendEmail" checked>
+                                        <label class="custom-control-label" for="sendEmail">
+                                            Gửi qua email
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="sendSMS">
+                                        <label class="custom-control-label" for="sendSMS">
+                                            Gửi qua SMS
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="sendNotification">
+                                        <label class="custom-control-label" for="sendNotification">
+                                            Gửi thông báo trong app
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="saveTemplate">
+                                        <label class="custom-control-label" for="saveTemplate">
+                                            Lưu làm mẫu tin nhắn
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" id="templateName" style="display: none;">
+                                    <label for="templateNameInput">Tên mẫu tin nhắn</label>
+                                    <input type="text" class="form-control" id="templateNameInput"
+                                        placeholder="Nhập tên mẫu...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mt-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Mẫu tin nhắn</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action" data-template="reminder">
+                                        <h6 class="mb-1">Nhắc nhở tập luyện</h6>
+                                        <small class="text-muted">Mẫu nhắc nhở thành viên về lịch tập</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-template="nutrition">
+                                        <h6 class="mb-1">Tư vấn dinh dưỡng</h6>
+                                        <small class="text-muted">Mẫu tư vấn về chế độ dinh dưỡng</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-template="assessment">
+                                        <h6 class="mb-1">Lịch đánh giá</h6>
+                                        <small class="text-muted">Mẫu thông báo lịch đánh giá thể chất</small>
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action"
+                                        data-template="motivation">
+                                        <h6 class="mb-1">Động viên</h6>
+                                        <small class="text-muted">Mẫu tin nhắn động viên thành viên</small>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow mt-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Thao tác</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" form="composeForm" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i> Gửi tin nhắn
+                                    </button>
+                                    <button type="button" class="btn btn-info" id="previewBtn">
+                                        <i class="fas fa-eye"></i> Xem trước
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="saveDraftBtn">
+                                        <i class="fas fa-save"></i> Lưu nháp
+                                    </button>
+                                    <a href="message.html" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times"></i> Hủy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewModalLabel">Xem trước tin nhắn</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">Tin nhắn mới</h6>
+                                <small class="text-muted" id="previewTime"></small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong>Đến:</strong> <span id="previewRecipient"></span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Tiêu đề:</strong> <span id="previewSubject"></span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Nội dung:</strong>
+                                <div class="border p-3 bg-light" id="previewContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="sendFromPreview">Gửi tin nhắn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Schedule message toggle
+            $('#scheduleMessage').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#scheduleOptions').show();
+                } else {
+                    $('#scheduleOptions').hide();
+                }
+            });
+
+            // Save template toggle
+            $('#saveTemplate').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#templateName').show();
+                } else {
+                    $('#templateName').hide();
+                }
+            });
+
+            // Template selection
+            $('.list-group-item').on('click', function (e) {
+                e.preventDefault();
+                const template = $(this).data('template');
+
+                const templates = {
+                    reminder: {
+                        subject: 'Nhắc nhở lịch tập',
+                        content: 'Chào bạn,\n\nĐây là lời nhắc nhở về lịch tập của bạn vào ngày mai. Vui lòng chuẩn bị sẵn sàng và đến đúng giờ.\n\nTrân trọng,\nHLV Nguyễn Văn A'
+                    },
+                    nutrition: {
+                        subject: 'Tư vấn dinh dưỡng',
+                        content: 'Chào bạn,\n\nTôi muốn chia sẻ một số lời khuyên về chế độ dinh dưỡng để hỗ trợ mục tiêu tập luyện của bạn.\n\nHãy liên hệ với tôi để được tư vấn chi tiết hơn.\n\nTrân trọng,\nHLV Nguyễn Văn A'
+                    },
+                    assessment: {
+                        subject: 'Lịch đánh giá thể chất',
+                        content: 'Chào bạn,\n\nĐã đến lúc đánh giá thể chất định kỳ. Vui lòng sắp xếp thời gian để gặp tôi vào tuần tới.\n\nTrân trọng,\nHLV Nguyễn Văn A'
+                    },
+                    motivation: {
+                        subject: 'Động viên tập luyện',
+                        content: 'Chào bạn,\n\nTôi rất ấn tượng với sự tiến bộ của bạn trong thời gian qua. Hãy tiếp tục duy trì tinh thần tập luyện này!\n\nTrân trọng,\nHLV Nguyễn Văn A'
+                    }
+                };
+
+                if (templates[template]) {
+                    $('#subject').val(templates[template].subject);
+                    $('#messageContent').val(templates[template].content);
+                }
+            });
+
+            // Preview button
+            $('#previewBtn').on('click', function () {
+                const recipient = $('#recipient option:selected').text();
+                const subject = $('#subject').val();
+                const content = $('#messageContent').val();
+                const now = new Date().toLocaleString('vi-VN');
+
+                $('#previewRecipient').text(recipient || 'Chưa chọn');
+                $('#previewSubject').text(subject || 'Không có tiêu đề');
+                $('#previewContent').text(content || 'Không có nội dung');
+                $('#previewTime').text(now);
+
+                $('#previewModal').modal('show');
+            });
+
+            // Send from preview
+            $('#sendFromPreview').on('click', function () {
+                $('#previewModal').modal('hide');
+                $('#composeForm').submit();
+            });
+
+            // Save draft
+            $('#saveDraftBtn').on('click', function () {
+                alert('Tin nhắn đã được lưu vào nháp!');
+            });
+
+            // Form submission
+            $('#composeForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const recipient = $('#recipient').val();
+                const content = $('#messageContent').val();
+
+                if (!recipient) {
+                    alert('Vui lòng chọn người nhận!');
+                    return;
+                }
+
+                if (!content.trim()) {
+                    alert('Vui lòng nhập nội dung tin nhắn!');
+                    return;
+                }
+
+                const isScheduled = $('#scheduleMessage').is(':checked');
+                const message = isScheduled ? 'Tin nhắn đã được lên lịch gửi!' : 'Tin nhắn đã được gửi thành công!';
+
+                alert(message);
+                window.location.href = 'message.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

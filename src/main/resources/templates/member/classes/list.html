@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lớp học thành viên GymFitness">
+    <title>Lớp học - Member Dashboard</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+    <link rel="stylesheet" href="../css/member-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch tập
+                    </a>
+                    <ul class="list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Lớp học
+                    </a>
+                    <ul class="list-unstyled show" id="classSubmenu">
+                        <li class="active">
+                            <a href="./list.html">Danh sách lớp</a>
+                        </li>
+                        <li>
+                            <a href="./schedule.html">Lịch học</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-chart-line"></i> Tiến độ
+                    </a>
+                    <ul class="list-unstyled" id="progressSubmenu">
+                        <li>
+                            <a href="../progress/view.html">Xem tiến độ</a>
+                        </li>
+                        <li>
+                            <a href="../progress/statistics.html">Thống kê</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-user"></i> Hồ sơ
+                    </a>
+                    <ul class="list-unstyled" id="profileSubmenu">
+                        <li>
+                            <a href="../profile/view.html">Xem hồ sơ</a>
+                        </li>
+                        <li>
+                            <a href="../profile/edit.html">Chỉnh sửa</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../attendance/view.html"><i class="fas fa-check-circle"></i> Điểm danh</a>
+                </li>
+                <li>
+                    <a href="../notifications/view.html"><i class="fas fa-bell"></i> Thông báo</a>
+                </li>
+                <li>
+                    <a href="../achievements/view.html"><i class="fas fa-trophy"></i> Thành tích</a>
+                </li>
+                <li>
+                    <a href="../settings/general.html"><i class="fas fa-cog"></i> Cài đặt</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">5</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới</a>
+                                    <a class="dropdown-item" href="#">Nhắc nhở tập luyện</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../img/member-avatar.jpg" class="rounded-circle" width="30" height="30">
+                                    <span>Nguyễn Thị B</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header">
+                            <h1>Lớp học</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-filter"></i> Bộ lọc</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="filterType" class="form-label">Loại lớp</label>
+                                        <select class="form-control" id="filterType">
+                                            <option value="">Tất cả</option>
+                                            <option value="yoga">Yoga</option>
+                                            <option value="cardio">Cardio</option>
+                                            <option value="strength">Strength</option>
+                                            <option value="hiit">HIIT</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="filterLevel" class="form-label">Mức độ</label>
+                                        <select class="form-control" id="filterLevel">
+                                            <option value="">Tất cả</option>
+                                            <option value="beginner">Cơ bản</option>
+                                            <option value="intermediate">Trung bình</option>
+                                            <option value="advanced">Nâng cao</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="filterTime" class="form-label">Thời gian</label>
+                                        <select class="form-control" id="filterTime">
+                                            <option value="">Tất cả</option>
+                                            <option value="morning">Sáng (6:00-12:00)</option>
+                                            <option value="afternoon">Chiều (12:00-18:00)</option>
+                                            <option value="evening">Tối (18:00-22:00)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">&nbsp;</label>
+                                        <button class="btn btn-primary d-block w-100" id="applyFilter">
+                                            <i class="fas fa-filter"></i> Lọc
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Classes -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-users"></i> Lớp học của tôi</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Yoga cơ bản</h5>
+                                                <p class="card-text">
+                                                    <i class="fas fa-user"></i> Nguyễn Văn A<br>
+                                                    <i class="fas fa-clock"></i> Thứ 2, 4, 6 - 06:00-07:00<br>
+                                                    <i class="fas fa-map-marker-alt"></i> Phòng A
+                                                </p>
+                                                <div class="progress mb-2">
+                                                    <div class="progress-bar bg-success" style="width: 80%">80%</div>
+                                                </div>
+                                                <small class="text-muted">12/15 buổi đã tham gia</small>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-sm btn-primary">Xem chi tiết</button>
+                                                <button class="btn btn-sm btn-outline-danger">Hủy đăng ký</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Cardio nâng cao</h5>
+                                                <p class="card-text">
+                                                    <i class="fas fa-user"></i> Trần Thị B<br>
+                                                    <i class="fas fa-clock"></i> Thứ 2, 4, 6 - 18:00-19:00<br>
+                                                    <i class="fas fa-map-marker-alt"></i> Phòng B
+                                                </p>
+                                                <div class="progress mb-2">
+                                                    <div class="progress-bar bg-warning" style="width: 60%">60%</div>
+                                                </div>
+                                                <small class="text-muted">9/15 buổi đã tham gia</small>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-sm btn-primary">Xem chi tiết</button>
+                                                <button class="btn btn-sm btn-outline-danger">Hủy đăng ký</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Classes -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-plus-circle"></i> Lớp học có sẵn</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title">HIIT</h5>
+                                                <p class="card-text">
+                                                    <i class="fas fa-user"></i> Nguyễn Văn A<br>
+                                                    <i class="fas fa-clock"></i> Thứ 3, 5 - 07:00-08:00<br>
+                                                    <i class="fas fa-map-marker-alt"></i> Phòng C
+                                                </p>
+                                                <span class="badge badge-success">Còn chỗ</span>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-sm btn-primary">Đăng ký</button>
+                                                <button class="btn btn-sm btn-outline-secondary">Xem chi tiết</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/member.js"></script>
+    <script src="../../shared/js/main.js"></script>
+</body>
+
+</html>
+</html>

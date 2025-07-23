@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chỉnh sửa thông tin cá nhân - GymFitness">
+    <title>Chỉnh sửa thông tin cá nhân - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li>
+                            <a href="../members/list.html">Danh sách thành viên</a>
+                        </li>
+                        <li>
+                            <a href="../members/progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled" id="classesSubmenu">
+                        <li>
+                            <a href="../classes/list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="../classes/attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition/nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li>
+                    <a href="../assessments/assessment.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li>
+                    <a href="../messages/message.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li class="active">
+                    <a href="view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <a class="dropdown-item" href="../messages/message.html">Tin nhắn</a>
+                                    <a class="dropdown-item" href="../reports.html">Báo cáo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Chỉnh sửa thông tin cá nhân</h2>
+                            <div>
+                                <a href="view.html" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="editProfileForm">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ảnh đại diện</h6>
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="position-relative mb-3">
+                                        <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle"
+                                            width="150" height="150" alt="Avatar" id="avatarPreview">
+                                        <div class="position-absolute"
+                                            style="bottom: 10px; right: 50%; transform: translateX(50%);">
+                                            <label for="avatarInput" class="btn btn-sm btn-primary rounded-circle">
+                                                <i class="fas fa-camera"></i>
+                                            </label>
+                                            <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">Click vào icon camera để thay đổi ảnh</small>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Thông tin liên hệ</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="email"><i class="fas fa-envelope text-primary"></i> Email</label>
+                                        <input type="email" class="form-control" id="email"
+                                            value="nguyenvana@gymfitness.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone"><i class="fas fa-phone text-primary"></i> Điện thoại</label>
+                                        <input type="tel" class="form-control" id="phone" value="0901 234 567" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address"><i class="fas fa-map-marker-alt text-primary"></i> Địa
+                                            chỉ</label>
+                                        <textarea class="form-control" id="address"
+                                            rows="3">123 Đường ABC, Quận 1, TP.HCM</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Thông tin cá nhân</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="fullName">Họ và tên <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="fullName"
+                                                    value="Nguyễn Văn A" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="dateOfBirth">Ngày sinh</label>
+                                                <input type="date" class="form-control" id="dateOfBirth"
+                                                    value="1990-03-15">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gender">Giới tính</label>
+                                                <select class="form-control" id="gender">
+                                                    <option value="male" selected>Nam</option>
+                                                    <option value="female">Nữ</option>
+                                                    <option value="other">Khác</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="position">Chức vụ</label>
+                                                <select class="form-control" id="position">
+                                                    <option value="main" selected>HLV Chính</option>
+                                                    <option value="assistant">HLV Phụ</option>
+                                                    <option value="specialist">HLV Chuyên môn</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="specialization">Chuyên môn</label>
+                                                <select class="form-control" id="specialization" multiple>
+                                                    <option value="yoga" selected>Yoga</option>
+                                                    <option value="cardio" selected>Cardio</option>
+                                                    <option value="strength" selected>Strength</option>
+                                                    <option value="hiit">HIIT</option>
+                                                    <option value="pilates">Pilates</option>
+                                                    <option value="boxing">Boxing</option>
+                                                </select>
+                                                <small class="form-text text-muted">Giữ Ctrl để chọn nhiều</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="experience">Kinh nghiệm (năm)</label>
+                                                <input type="number" class="form-control" id="experience" value="5"
+                                                    min="0" max="50">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="education">Bằng cấp</label>
+                                                <input type="text" class="form-control" id="education"
+                                                    value="Đại học TDTT">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="certifications">Chứng chỉ</label>
+                                                <input type="text" class="form-control" id="certifications"
+                                                    value="Yoga 200h, PT Level 3">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bio">Tiểu sử</label>
+                                        <textarea class="form-control" id="bio" rows="4"
+                                            placeholder="Mô tả về bản thân, kinh nghiệm, phương pháp giảng dạy...">Huấn luyện viên có 5 năm kinh nghiệm trong lĩnh vực fitness. Chuyên về Yoga và Cardio. Đã giúp hàng trăm học viên đạt được mục tiêu tập luyện của mình.</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Đổi mật khẩu</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="currentPassword">Mật khẩu hiện tại</label>
+                                                <input type="password" class="form-control" id="currentPassword">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="newPassword">Mật khẩu mới</label>
+                                                <input type="password" class="form-control" id="newPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="confirmPassword">Xác nhận mật khẩu mới</label>
+                                                <input type="password" class="form-control" id="confirmPassword">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>&nbsp;</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="showPassword">
+                                                    <label class="form-check-label" for="showPassword">
+                                                        Hiển thị mật khẩu
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <a href="view.html" class="btn btn-secondary">
+                                            <i class="fas fa-times"></i> Hủy
+                                        </a>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Lưu thay đổi
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Avatar preview
+            $('#avatarInput').on('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#avatarPreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Show/hide password
+            $('#showPassword').on('change', function () {
+                const type = this.checked ? 'text' : 'password';
+                $('#currentPassword, #newPassword, #confirmPassword').attr('type', type);
+            });
+
+            // Form submission
+            $('#editProfileForm').on('submit', function (e) {
+                e.preventDefault();
+                alert('Thông tin đã được cập nhật thành công!');
+                window.location.href = 'view.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

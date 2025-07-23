@@ -4,23 +4,20 @@ import java.sql.Date;
 import java.util.List;
 
 import com.web.model.dto.NutritionPlanDTO;
+import com.web.model.response.MemberOfTrainerResponse;
+import com.web.model.response.NutritionPlanDetailResponse;
 import com.web.model.response.NutritionPlanResponse;
+import com.web.model.response.NutritionPlanResponsePlus;
+
 
 public interface NutritionPlanService {
+    List<MemberOfTrainerResponse> getMemberOfTrainer(Long id);
 
-    NutritionPlanResponse createNutritionPlan(NutritionPlanDTO nutritionPlanDTO);
+    boolean saveNutritionPlan(NutritionPlanDTO dto);
 
-    NutritionPlanResponse getNutritionPlanById(Long id);
+    List<NutritionPlanResponsePlus> getNutritionPlanByTrainerId(Long id);
 
-    List<NutritionPlanResponse> getAllByMemberId(Long memberId);
+    NutritionPlanResponsePlus getNutritionPlanById(Long id);
 
-    List<NutritionPlanResponse> getAllByMemberIdAndDate(Long memberId, Date date);
-
-    List<NutritionPlanResponse> getAllByMemberIdAndWeek(Long memberId, Date date);
-
-    List<NutritionPlanResponse> getAllByMemberIdAndMonth(Long memberId, Date date);
-
-    NutritionPlanResponse updateNutritionPlan(Long id, NutritionPlanDTO nutritionPlanDTO);
-
-    void deleteNutritionPlan(Long id);
+    List<NutritionPlanDetailResponse> getNutritionPlanDetailByPlanId(Long id);
 }

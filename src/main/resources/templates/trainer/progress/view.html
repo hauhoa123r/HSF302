@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiến độ - Trainer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/trainer.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-dumbbell"></i> GymFitness</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                <li><a href="schedule.html"><i class="fas fa-calendar-alt"></i><span>Lịch làm việc</span></a></li>
+                <li><a href="classes.html"><i class="fas fa-users"></i><span>Lớp học</span></a></li>
+                <li><a href="members.html"><i class="fas fa-user-friends"></i><span>Thành viên</span></a></li>
+                <li class="active"><a href="progress.html"><i class="fas fa-chart-line"></i><span>Tiến độ</span></a>
+                </li>
+                <li><a href="profile.html"><i class="fas fa-user"></i><span>Hồ sơ</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i><span>Cài đặt</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-bars"></i><span>Thu gọn</span>
+                    </button>
+                    <div class="ms-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i><span>Nguyễn Văn A</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Hồ sơ</a>
+                                </li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-4">Theo dõi tiến độ</h2>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Tổng thành viên</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">45</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Đạt mục tiêu</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">32</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Tiến độ trung bình</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">78%</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-percentage fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Cần hỗ trợ</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Overview -->
+                <div class="row mb-4">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Tiến độ tổng quan</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="progressChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Phân loại mục tiêu</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="goalChart" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Progress Table -->
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tiến độ thành viên</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="progressTable">
+                                <thead>
+                                    <tr>
+                                        <th>Thành viên</th>
+                                        <th>Mục tiêu</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Cân nặng ban đầu</th>
+                                        <th>Cân nặng hiện tại</th>
+                                        <th>Tiến độ</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="rounded-circle me-3"
+                                                    alt="Avatar">
+                                                <div>
+                                                    <h6 class="mb-0">Nguyễn Thị B</h6>
+                                                    <small class="text-muted">Giảm cân</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Giảm 10kg</td>
+                                        <td>01/01/2024</td>
+                                        <td>70kg</td>
+                                        <td>63kg</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                                            </div>
+                                            <small>85% (7kg/10kg)</small>
+                                        </td>
+                                        <td><span class="badge bg-success">Tốt</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#progressDetailModal">
+                                                <i class="fas fa-chart-line"></i> Chi tiết
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="rounded-circle me-3"
+                                                    alt="Avatar">
+                                                <div>
+                                                    <h6 class="mb-0">Trần Văn C</h6>
+                                                    <small class="text-muted">Tăng cơ</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Tăng 5kg cơ</td>
+                                        <td>15/02/2024</td>
+                                        <td>65kg</td>
+                                        <td>67kg</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-warning" style="width: 40%"></div>
+                                            </div>
+                                            <small>40% (2kg/5kg)</small>
+                                        </td>
+                                        <td><span class="badge bg-warning">Trung bình</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#progressDetailModal">
+                                                <i class="fas fa-chart-line"></i> Chi tiết
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://via.placeholder.com/40" class="rounded-circle me-3"
+                                                    alt="Avatar">
+                                                <div>
+                                                    <h6 class="mb-0">Lê Thị D</h6>
+                                                    <small class="text-muted">Cải thiện sức bền</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Chạy 10km</td>
+                                        <td>01/03/2024</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-info" style="width: 60%"></div>
+                                            </div>
+                                            <small>60% (6km/10km)</small>
+                                        </td>
+                                        <td><span class="badge bg-info">Khá</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#progressDetailModal">
+                                                <i class="fas fa-chart-line"></i> Chi tiết
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Achievements -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Thành tích gần đây</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="achievement-item text-center p-3">
+                                            <i class="fas fa-trophy fa-3x text-warning mb-3"></i>
+                                            <h6>Nguyễn Thị B</h6>
+                                            <p class="text-muted">Đạt mục tiêu giảm 8kg trong 3 tháng</p>
+                                            <small class="text-success">2 ngày trước</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="achievement-item text-center p-3">
+                                            <i class="fas fa-medal fa-3x text-primary mb-3"></i>
+                                            <h6>Trần Văn C</h6>
+                                            <p class="text-muted">Hoàn thành 30 buổi tập liên tiếp</p>
+                                            <small class="text-success">1 tuần trước</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="achievement-item text-center p-3">
+                                            <i class="fas fa-star fa-3x text-warning mb-3"></i>
+                                            <h6>Lê Thị D</h6>
+                                            <p class="text-muted">Cải thiện thời gian chạy 5km</p>
+                                            <small class="text-success">2 tuần trước</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Detail Modal -->
+    <div class="modal fade" id="progressDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chi tiết tiến độ - Nguyễn Thị B</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Biểu đồ cân nặng</h6>
+                            <canvas id="weightChart" width="300" height="200"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Thống kê tập luyện</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tr>
+                                        <td>Tổng buổi tập:</td>
+                                        <td><strong>45 buổi</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tần suất trung bình:</td>
+                                        <td><strong>3-4 buổi/tuần</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thời gian tập trung bình:</td>
+                                        <td><strong>60 phút/buổi</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Calo đốt cháy trung bình:</td>
+                                        <td><strong>400 calo/buổi</strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6>Ghi chú và đánh giá</h6>
+                            <div class="alert alert-success">
+                                <strong>Tiến độ tốt!</strong> Thành viên đang đạt được mục tiêu giảm cân một cách ổn
+                                định.
+                                Cần duy trì chế độ tập luyện và dinh dưỡng hiện tại.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Cập nhật tiến độ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/trainer.js"></script>
+</body>
+
+</html>

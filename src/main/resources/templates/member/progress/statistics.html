@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thống kê tiến độ tập luyện thành viên GymFitness">
+    <title>Thống kê tiến độ - GymFitness</title>
+    <link rel="stylesheet" href="../../shared/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+    <link rel="stylesheet" href="../css/member-style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-dumbbell"></i> GymFitness</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch tập
+                    </a>
+                    <ul class="list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Lớp học
+                    </a>
+                    <ul class="list-unstyled" id="classSubmenu">
+                        <li>
+                            <a href="../classes/list.html">Danh sách lớp</a>
+                        </li>
+                        <li>
+                            <a href="../classes/schedule.html">Lịch học</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-chart-line"></i> Tiến độ
+                    </a>
+                    <ul class="list-unstyled show" id="progressSubmenu">
+                        <li>
+                            <a href="./view.html">Xem tiến độ</a>
+                        </li>
+                        <li class="active">
+                            <a href="./statistics.html">Thống kê</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="fas fa-user"></i> Hồ sơ
+                    </a>
+                    <ul class="list-unstyled" id="profileSubmenu">
+                        <li>
+                            <a href="../profile/view.html">Xem hồ sơ</a>
+                        </li>
+                        <li>
+                            <a href="../profile/detail.html">Chi tiết</a>
+                        </li>
+                        <li>
+                            <a href="../profile/edit.html">Chỉnh sửa</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../attendance/view.html"><i class="fas fa-check-circle"></i> Điểm danh</a>
+                </li>
+                <li>
+                    <a href="../notifications/view.html"><i class="fas fa-bell"></i> Thông báo</a>
+                </li>
+                <li>
+                    <a href="../achievements/view.html"><i class="fas fa-trophy"></i> Thành tích</a>
+                </li>
+                <li>
+                    <a href="../settings/general.html"><i class="fas fa-cog"></i> Cài đặt</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">5</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới</a>
+                                    <a class="dropdown-item" href="#">Nhắc nhở tập luyện</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../img/member-avatar.jpg" class="rounded-circle" width="30" height="30">
+                                    <span>Nguyễn Thị B</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Thống kê tiến độ</h2>
+                            <div>
+                                <button class="btn btn-outline-primary" onclick="exportData()">
+                                    <i class="fas fa-download"></i> Xuất báo cáo
+                                </button>
+                                <a href="../progress/view.html" class="btn btn-outline-secondary">
+                                    <i class="fas fa-chart-line"></i> Xem tiến độ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card stat-card bg-primary text-white">
+                            <div class="card-body">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-check fa-3x"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h3>156</h3>
+                                    <p>Buổi tập trong năm</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card bg-success text-white">
+                            <div class="card-body">
+                                <div class="stat-icon">
+                                    <i class="fas fa-fire fa-3x"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h3>45,230</h3>
+                                    <p>Calo đốt cháy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card bg-info text-white">
+                            <div class="card-body">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock fa-3x"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h3>234h</h3>
+                                    <p>Thời gian tập luyện</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card stat-card bg-warning text-white">
+                            <div class="card-body">
+                                <div class="stat-icon">
+                                    <i class="fas fa-trophy fa-3x"></i>
+                                </div>
+                                <div class="stat-data">
+                                    <h3>85%</h3>
+                                    <p>Hoàn thành mục tiêu</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row mb-4">
+                    <!-- Weekly Progress Chart -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-area"></i> Tiến độ tuần</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="weeklyChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Attendance -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-calendar-alt"></i> Điểm danh tháng</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="attendanceChart" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Statistics -->
+                <div class="row">
+                    <!-- Class Performance -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-users"></i> Hiệu suất lớp học</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Lớp học</th>
+                                                <th>Tham gia</th>
+                                                <th>Hiệu suất</th>
+                                                <th>Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Yoga cơ bản</td>
+                                                <td>24/30</td>
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success" style="width: 80%">80%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge badge-success">Tốt</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cardio nâng cao</td>
+                                                <td>18/25</td>
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-warning" style="width: 72%">72%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge badge-warning">Khá</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pilates</td>
+                                                <td>15/20</td>
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-danger" style="width: 75%">75%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge badge-info">Tốt</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Zumba</td>
+                                                <td>20/28</td>
+                                                <td>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success" style="width: 71%">71%</div>
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge badge-warning">Khá</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Goals Progress -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-bullseye"></i> Tiến độ mục tiêu</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="goal-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Giảm cân 5kg</span>
+                                        <span class="text-success">80%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" style="width: 80%"></div>
+                                    </div>
+                                    <small class="text-muted">Đã giảm 4kg / 5kg</small>
+                                </div>
+
+                                <div class="goal-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Tập luyện 3 lần/tuần</span>
+                                        <span class="text-warning">67%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 67%"></div>
+                                    </div>
+                                    <small class="text-muted">Trung bình 2 lần/tuần</small>
+                                </div>
+
+                                <div class="goal-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Chạy 5km</span>
+                                        <span class="text-info">90%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-info" style="width: 90%"></div>
+                                    </div>
+                                    <small class="text-muted">Đã chạy 4.5km</small>
+                                </div>
+
+                                <div class="goal-item mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Tăng cơ bắp</span>
+                                        <span class="text-primary">75%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" style="width: 75%"></div>
+                                    </div>
+                                    <small class="text-muted">Tăng 3kg cơ</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monthly Comparison -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-bar"></i> So sánh tháng</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="monthlyChart" width="400" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../shared/js/main.js"></script>
+    <script src="../js/member.js"></script>
+    <script>
+        // Weekly Progress Chart
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        const weeklyChart = new Chart(weeklyCtx, {
+            type: 'line',
+            data: {
+                labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+                datasets: [{
+                    label: 'Buổi tập',
+                    data: [1, 2, 1, 3, 2, 1, 0],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Calo đốt cháy',
+                    data: [300, 600, 300, 900, 600, 300, 0],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Buổi tập'
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Calo'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Attendance Chart
+        const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+        const attendanceChart = new Chart(attendanceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Có mặt', 'Vắng mặt'],
+                datasets: [{
+                    data: [24, 6],
+                    backgroundColor: ['#28a745', '#dc3545'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Monthly Comparison Chart
+        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+        const monthlyChart = new Chart(monthlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+                datasets: [{
+                    label: 'Buổi tập',
+                    data: [20, 22, 25, 23, 26, 24, 28, 25, 27, 26, 24, 26],
+                    backgroundColor: '#007bff'
+                }, {
+                    label: 'Calo (x1000)',
+                    data: [6, 6.6, 7.5, 6.9, 7.8, 7.2, 8.4, 7.5, 8.1, 7.8, 7.2, 7.8],
+                    backgroundColor: '#28a745',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Buổi tập'
+                        }
+                    },
+                    y1: {
+                        position: 'right',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Calo (x1000)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Export function
+        function exportData() {
+            alert('Tính năng xuất báo cáo sẽ được phát triển sau!');
+        }
+    </script>
+</body>
+
+</html> 

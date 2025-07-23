@@ -1,5 +1,6 @@
 package com.web.model.dto;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -13,9 +14,13 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class NutritionPlanDTO {
-    private Long id;
-    private Date planDate;
-    private String mealDescription;
-    private String calories;
-    private Long memberEntityId;
+    private Long memberId;
+    private int totalTime;
+    private String description;
+    private BigDecimal calories;
+    private BigDecimal protein;
+    private BigDecimal carb;
+    private BigDecimal fat;
+    private BigDecimal fiber;
+    private BigDecimal water;
 }

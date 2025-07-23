@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang lịch làm việc huấn luyện viên GymFitness">
+    <title>Lịch làm việc - GymFitness Trainer</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../css/trainer-style.css">
+
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li class="active">
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="show collapse list-unstyled" id="scheduleSubmenu">
+                        <li class="active"><a href="view.html">Xem lịch</a></li>
+                        <li><a href="manage.html">Quản lý lịch</a></li>
+                        <li><a href="add.html">Thêm lịch mới</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li><a href="../members/list.html">Danh sách thành viên</a></li>
+                        <li><a href="../members/progress.html">Theo dõi tiến độ</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled" id="classesSubmenu">
+                        <li><a href="../classes/list.html">Lớp học của tôi</a></li>
+                        <li><a href="../classes/attendance.html">Điểm danh</a></li>
+                    </ul>
+                </li>
+                <li><a href="../nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a></li>
+                <li><a href="../assessments.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a></li>
+                <li><a href="../messages.html"><i class="fas fa-comments"></i> Tin nhắn</a></li>
+                <li><a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Huấn luyện viên</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header d-flex justify-content-between align-items-center">
+                            <h1>Lịch làm việc</h1>
+                            <div>
+                                <button class="btn btn-primary" id="saveSchedule">
+                                    <i class="fas fa-save"></i> Lưu lịch
+                                </button>
+                                <button class="btn btn-outline-secondary ml-2">
+                                    <i class="fas fa-print"></i> In lịch
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thống kê nhanh -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>25</h4>
+                                        <p class="mb-0">Giờ làm việc/tuần</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="fas fa-clock fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>8</h4>
+                                        <p class="mb-0">Lớp học hôm nay</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="fas fa-dumbbell fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>45</h4>
+                                        <p class="mb-0">Thành viên</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="fas fa-users fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <h4>95%</h4>
+                                        <p class="mb-0">Tỷ lệ hoàn thành</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="fas fa-chart-line fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bộ lọc và điều hướng -->
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-primary active" id="weekView">
+                                                <i class="fas fa-calendar-week"></i> Tuần
+                                            </button>
+                                            <button type="button" class="btn btn-outline-primary" id="monthView">
+                                                <i class="fas fa-calendar-alt"></i> Tháng
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-secondary" id="prevWeek">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" disabled>
+                                                <span id="currentDateRange">Tuần 13/05 - 19/05/2024</span>
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" id="nextWeek">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-filter"></i> Lọc
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Tất cả lớp học</a>
+                                                <a class="dropdown-item" href="#">Lớp Yoga</a>
+                                                <a class="dropdown-item" href="#">Lớp Cardio</a>
+                                                <a class="dropdown-item" href="#">Lớp Strength</a>
+                                                <a class="dropdown-item" href="#">Lớp cá nhân</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lịch làm việc -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="schedule-container">
+                                    <!-- Header với các ngày -->
+                                    <div class="schedule-header">
+                                        <div class="time-column">Giờ</div>
+                                        <div class="day-column">Thứ 2</div>
+                                        <div class="day-column">Thứ 3</div>
+                                        <div class="day-column">Thứ 4</div>
+                                        <div class="day-column">Thứ 5</div>
+                                        <div class="day-column">Thứ 6</div>
+                                        <div class="day-column">Thứ 7</div>
+                                        <div class="day-column">Chủ nhật</div>
+                                    </div>
+
+                                    <!-- Các khung giờ -->
+                                    <div class="schedule-body">
+                                        <!-- 6:00 - 7:00 -->
+                                        <div class="schedule-row">
+                                            <div class="time-slot">06:00 - 07:00</div>
+                                            <div class="schedule-slot available" data-time="06:00" data-day="monday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="06:00" data-day="tuesday">
+                                                <div class="slot-content">
+                                                    <strong>Yoga sáng</strong>
+                                                    <small>Phòng A - 15 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="06:00" data-day="wednesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="06:00" data-day="thursday">
+                                                <div class="slot-content">
+                                                    <strong>Cardio sáng</strong>
+                                                    <small>Phòng B - 20 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="06:00" data-day="friday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="06:00" data-day="saturday">
+                                                <div class="slot-content">
+                                                    <strong>Yoga cuối tuần</strong>
+                                                    <small>Phòng A - 25 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot rest" data-time="06:00" data-day="sunday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-bed"></i>
+                                                    <small>Nghỉ</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 7:00 - 8:00 -->
+                                        <div class="schedule-row">
+                                            <div class="time-slot">07:00 - 08:00</div>
+                                            <div class="schedule-slot booked" data-time="07:00" data-day="monday">
+                                                <div class="slot-content">
+                                                    <strong>Strength Training</strong>
+                                                    <small>Phòng C - 12 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="07:00" data-day="tuesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="07:00" data-day="wednesday">
+                                                <div class="slot-content">
+                                                    <strong>HIIT</strong>
+                                                    <small>Phòng B - 18 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="07:00" data-day="thursday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="07:00" data-day="friday">
+                                                <div class="slot-content">
+                                                    <strong>Pilates</strong>
+                                                    <small>Phòng A - 15 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="07:00" data-day="saturday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot rest" data-time="07:00" data-day="sunday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-bed"></i>
+                                                    <small>Nghỉ</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 8:00 - 9:00 -->
+                                        <div class="schedule-row">
+                                            <div class="time-slot">08:00 - 09:00</div>
+                                            <div class="schedule-slot available" data-time="08:00" data-day="monday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="08:00" data-day="tuesday">
+                                                <div class="slot-content">
+                                                    <strong>Zumba</strong>
+                                                    <small>Phòng B - 22 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="08:00" data-day="wednesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="08:00" data-day="thursday">
+                                                <div class="slot-content">
+                                                    <strong>Boxing</strong>
+                                                    <small>Phòng C - 10 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="08:00" data-day="friday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="08:00" data-day="saturday">
+                                                <div class="slot-content">
+                                                    <strong>CrossFit</strong>
+                                                    <small>Phòng C - 15 học viên</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot rest" data-time="08:00" data-day="sunday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-bed"></i>
+                                                    <small>Nghỉ</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Thêm các khung giờ khác tương tự -->
+                                        <!-- 9:00 - 10:00 -->
+                                        <div class="schedule-row">
+                                            <div class="time-slot">09:00 - 10:00</div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="monday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="tuesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="wednesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="thursday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="friday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot break" data-time="09:00" data-day="saturday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-coffee"></i>
+                                                    <small>Nghỉ giải lao</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot rest" data-time="09:00" data-day="sunday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-bed"></i>
+                                                    <small>Nghỉ</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 10:00 - 11:00 -->
+                                        <div class="schedule-row">
+                                            <div class="time-slot">10:00 - 11:00</div>
+                                            <div class="schedule-slot booked" data-time="10:00" data-day="monday">
+                                                <div class="slot-content">
+                                                    <strong>Personal Training</strong>
+                                                    <small>Nguyễn Văn A</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="10:00" data-day="tuesday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="10:00" data-day="wednesday">
+                                                <div class="slot-content">
+                                                    <strong>Personal Training</strong>
+                                                    <small>Trần Thị B</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="10:00" data-day="thursday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot booked" data-time="10:00" data-day="friday">
+                                                <div class="slot-content">
+                                                    <strong>Personal Training</strong>
+                                                    <small>Lê Văn C</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot available" data-time="10:00" data-day="saturday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-plus"></i>
+                                                    <small>Thêm lớp</small>
+                                                </div>
+                                            </div>
+                                            <div class="schedule-slot rest" data-time="10:00" data-day="sunday">
+                                                <div class="slot-content">
+                                                    <i class="fas fa-bed"></i>
+                                                    <small>Nghỉ</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chú thích -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Chú thích:</h6>
+                                <div class="d-flex flex-wrap">
+                                    <div class="mr-4 mb-2">
+                                        <span class="badge badge-success mr-1">●</span>
+                                        <small>Lớp đã đăng ký</small>
+                                    </div>
+                                    <div class="mr-4 mb-2">
+                                        <span class="badge badge-light mr-1">●</span>
+                                        <small>Có thể thêm lớp</small>
+                                    </div>
+                                    <div class="mr-4 mb-2">
+                                        <span class="badge badge-warning mr-1">●</span>
+                                        <small>Nghỉ giải lao</small>
+                                    </div>
+                                    <div class="mr-4 mb-2">
+                                        <span class="badge badge-secondary mr-1">●</span>
+                                        <small>Ngày nghỉ</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- Modal thêm lớp học -->
+    <div class="modal fade" id="addClassModal" tabindex="-1" aria-labelledby="addClassModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addClassModalLabel">Thêm lớp học</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addClassForm">
+                        <div class="form-group">
+                            <label for="className">Tên lớp học</label>
+                            <input type="text" class="form-control" id="className" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="classType">Loại lớp</label>
+                            <select class="form-control" id="classType" required>
+                                <option value="">-- Chọn loại lớp --</option>
+                                <option value="yoga">Yoga</option>
+                                <option value="cardio">Cardio</option>
+                                <option value="strength">Strength Training</option>
+                                <option value="hiit">HIIT</option>
+                                <option value="pilates">Pilates</option>
+                                <option value="zumba">Zumba</option>
+                                <option value="boxing">Boxing</option>
+                                <option value="crossfit">CrossFit</option>
+                                <option value="personal">Personal Training</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="classRoom">Phòng học</label>
+                            <select class="form-control" id="classRoom" required>
+                                <option value="">-- Chọn phòng --</option>
+                                <option value="A">Phòng A</option>
+                                <option value="B">Phòng B</option>
+                                <option value="C">Phòng C</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="maxStudents">Số học viên tối đa</label>
+                            <input type="number" class="form-control" id="maxStudents" min="1" max="30" value="15">
+                        </div>
+                        <div class="form-group">
+                            <label for="classNotes">Ghi chú</label>
+                            <textarea class="form-control" id="classNotes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="saveClass">Lưu lớp học</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle giống index.html
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find('span');
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text('Mở rộng');
+                } else {
+                    span.text('Thu gọn');
+                }
+            });
+        });
+    </script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+</body>
+
+</html>

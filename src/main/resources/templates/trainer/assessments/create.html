@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tạo đánh giá thể chất mới - GymFitness">
+    <title>Tạo đánh giá thể chất mới - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Begin -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li>
+                            <a href="../members/list.html">Danh sách thành viên</a>
+                        </li>
+                        <li>
+                            <a href="../members/progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled" id="classesSubmenu">
+                        <li>
+                            <a href="../classes/list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="../classes/attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition/nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li class="active">
+                    <a href="assessment.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li>
+                    <a href="../messages/message.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Sidebar End -->
+
+        <!-- Content Begin -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">3</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                    <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile/view.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings/general.html">Cài đặt</a>
+                                    <a class="dropdown-item" href="../messages/message.html">Tin nhắn</a>
+                                    <a class="dropdown-item" href="../reports.html">Báo cáo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../shared/assets/login.html">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Tạo đánh giá thể chất mới</h2>
+                            <div>
+                                <a href="assessment.html" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="createAssessmentForm">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Thông tin cơ bản</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="member">Thành viên <span
+                                                        class="text-danger">*</span></label>
+                                                <select class="form-control" id="member" required>
+                                                    <option value="">Chọn thành viên</option>
+                                                    <option value="1">Nguyễn Thị B</option>
+                                                    <option value="2">Trần Văn C</option>
+                                                    <option value="3">Lê Thị D</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="assessmentDate">Ngày đánh giá <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="assessmentDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="weight">Cân nặng (kg) <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="weight" step="0.1"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="height">Chiều cao (cm) <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="height" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="age">Tuổi</label>
+                                                <input type="number" class="form-control" id="age" min="15" max="80">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="gender">Giới tính</label>
+                                                <select class="form-control" id="gender">
+                                                    <option value="">Chọn giới tính</option>
+                                                    <option value="female">Nữ</option>
+                                                    <option value="male">Nam</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Chỉ số cơ thể</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="bodyFat">% Mỡ cơ thể</label>
+                                                <input type="number" class="form-control" id="bodyFat" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="muscleMass">Khối lượng cơ (kg)</label>
+                                                <input type="number" class="form-control" id="muscleMass" step="0.1">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="fatMass">Khối lượng mỡ (kg)</label>
+                                                <input type="number" class="form-control" id="fatMass" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="boneMass">Khối lượng xương (kg)</label>
+                                                <input type="number" class="form-control" id="boneMass" step="0.1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Kích thước cơ thể</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="chest">Vòng ngực (cm)</label>
+                                                <input type="number" class="form-control" id="chest" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="waist">Vòng eo (cm)</label>
+                                                <input type="number" class="form-control" id="waist" step="0.1">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="hip">Vòng mông (cm)</label>
+                                                <input type="number" class="form-control" id="hip" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="arm">Vòng bắp tay (cm)</label>
+                                                <input type="number" class="form-control" id="arm" step="0.1">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="thigh">Vòng đùi (cm)</label>
+                                                <input type="number" class="form-control" id="thigh" step="0.1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Đánh giá sức khỏe</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="heartRate">Nhịp tim nghỉ (bpm)</label>
+                                                <input type="number" class="form-control" id="heartRate">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="bloodPressure">Huyết áp (mmHg)</label>
+                                                <input type="text" class="form-control" id="bloodPressure"
+                                                    placeholder="120/80">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="vo2max">VO2 Max (ml/kg/min)</label>
+                                                <input type="number" class="form-control" id="vo2max" step="0.1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="flexibility">Độ linh hoạt</label>
+                                                <select class="form-control" id="flexibility">
+                                                    <option value="">Chọn mức độ</option>
+                                                    <option value="poor">Kém</option>
+                                                    <option value="fair">Trung bình</option>
+                                                    <option value="good">Tốt</option>
+                                                    <option value="excellent">Rất tốt</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Tính toán tự động</h6>
+                                </div>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary btn-block mb-3" id="calculateBtn">
+                                        <i class="fas fa-calculator"></i> Tính BMI
+                                    </button>
+
+                                    <div class="alert alert-info">
+                                        <h6><i class="fas fa-info-circle"></i> Hướng dẫn:</h6>
+                                        <ul class="mb-0">
+                                            <li>Nhập cân nặng và chiều cao</li>
+                                            <li>Click "Tính BMI" để tự động tính</li>
+                                            <li>Điền thêm thông tin chi tiết</li>
+                                            <li>Lưu đánh giá khi hoàn thành</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Ghi chú</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="notes">Ghi chú đánh giá</label>
+                                        <textarea class="form-control" id="notes" rows="4"
+                                            placeholder="Ghi chú về đánh giá thể chất..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recommendations">Khuyến nghị</label>
+                                        <textarea class="form-control" id="recommendations" rows="4"
+                                            placeholder="Khuyến nghị cho thành viên..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card shadow mt-4">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Thao tác</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-save"></i> Lưu đánh giá
+                                        </button>
+                                        <a href="assessment.html" class="btn btn-secondary">
+                                            <i class="fas fa-times"></i> Hủy
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            $('#assessmentDate').val(today);
+
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Calculate BMI
+            $('#calculateBtn').on('click', function () {
+                const weight = parseFloat($('#weight').val()) || 0;
+                const height = parseFloat($('#height').val()) || 0;
+
+                if (weight > 0 && height > 0) {
+                    const heightInMeters = height / 100;
+                    const bmi = weight / (heightInMeters * heightInMeters);
+
+                    let bmiStatus = '';
+                    if (bmi < 18.5) {
+                        bmiStatus = 'Thiếu cân';
+                    } else if (bmi >= 18.5 && bmi < 25) {
+                        bmiStatus = 'Bình thường';
+                    } else if (bmi >= 25 && bmi < 30) {
+                        bmiStatus = 'Thừa cân';
+                    } else {
+                        bmiStatus = 'Béo phì';
+                    }
+
+                    alert(`BMI: ${bmi.toFixed(1)} - ${bmiStatus}`);
+                } else {
+                    alert('Vui lòng nhập cân nặng và chiều cao!');
+                }
+            });
+
+            // Form submission
+            $('#createAssessmentForm').on('submit', function (e) {
+                e.preventDefault();
+                alert('Đánh giá thể chất đã được tạo thành công!');
+                window.location.href = 'assessment.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

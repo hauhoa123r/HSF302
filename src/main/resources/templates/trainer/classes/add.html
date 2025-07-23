@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm lớp học mới - Trainer</title>
+    <link rel="stylesheet" href="../../shared/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/assets/css/style.css">
+    <link rel="stylesheet" href="../../trainer/css/trainer-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Gym<span>Fitness</span></h3>
+                <div class="trainer-profile">
+                    <img src="../../shared/assets/img/avatar-default.jpg" class="rounded-circle" width="60" height="60"
+                        alt="HLV">
+                    <h5>Nguyễn Văn A</h5>
+                    <span class="badge badge-success">HLV Chính</span>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+                </li>
+                <li>
+                    <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                    </a>
+                    <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                        <li>
+                            <a href="../schedule/view.html">Xem lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/manage.html">Quản lý lịch</a>
+                        </li>
+                        <li>
+                            <a href="../schedule/add.html">Thêm lịch mới</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users"></i> Quản lý thành viên
+                    </a>
+                    <ul class="collapse list-unstyled" id="membersSubmenu">
+                        <li>
+                            <a href="../members/list.html">Danh sách thành viên</a>
+                        </li>
+                        <li>
+                            <a href="../members/progress.html">Theo dõi tiến độ</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                    </a>
+                    <ul class="collapse list-unstyled show" id="classesSubmenu">
+                        <li>
+                            <a href="list.html">Lớp học của tôi</a>
+                        </li>
+                        <li>
+                            <a href="attendance.html">Điểm danh</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../nutrition.html"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+                </li>
+                <li>
+                    <a href="../assessments.html"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+                </li>
+                <li>
+                    <a href="../messages.html"><i class="fas fa-comments"></i> Tin nhắn</a>
+                </li>
+                <li>
+                    <a href="../profile/view.html"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Thu gọn</span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger">2</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                    <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../../trainer/img/trainer-avatar.jpg" class="rounded-circle" width="30"
+                                        height="30">
+                                    <span>Nguyễn Văn A</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="../profile.html">Thông tin cá nhân</a>
+                                    <a class="dropdown-item" href="../settings.html">Cài đặt</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="../../auth/logout">Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Thêm lớp học mới</h2>
+                            <div>
+                                <a href="list.html" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Class Form -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Thông tin lớp học</h6>
+                            </div>
+                            <div class="card-body">
+                                <form id="addClassForm">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="className" class="form-label">Tên lớp học *</label>
+                                                <input type="text" class="form-control" id="className" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classType" class="form-label">Loại lớp *</label>
+                                                <select class="form-select" id="classType" required>
+                                                    <option value="">Chọn loại lớp</option>
+                                                    <option value="yoga">Yoga</option>
+                                                    <option value="cardio">Cardio</option>
+                                                    <option value="strength">Strength Training</option>
+                                                    <option value="hiit">HIIT</option>
+                                                    <option value="pilates">Pilates</option>
+                                                    <option value="zumba">Zumba</option>
+                                                    <option value="boxing">Boxing</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classLevel" class="form-label">Mức độ *</label>
+                                                <select class="form-select" id="classLevel" required>
+                                                    <option value="">Chọn mức độ</option>
+                                                    <option value="beginner">Cơ bản</option>
+                                                    <option value="intermediate">Trung bình</option>
+                                                    <option value="advanced">Nâng cao</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classDuration" class="form-label">Thời lượng (phút)
+                                                    *</label>
+                                                <input type="number" class="form-control" id="classDuration" min="15"
+                                                    max="120" value="60" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classCapacity" class="form-label">Sức chứa tối đa *</label>
+                                                <input type="number" class="form-control" id="classCapacity" min="1"
+                                                    max="50" value="20" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classRoom" class="form-label">Phòng tập *</label>
+                                                <select class="form-select" id="classRoom" required>
+                                                    <option value="">Chọn phòng</option>
+                                                    <option value="room-a">Phòng A</option>
+                                                    <option value="room-b">Phòng B</option>
+                                                    <option value="room-c">Phòng C</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="classDescription" class="form-label">Mô tả lớp học</label>
+                                        <textarea class="form-control" id="classDescription" rows="4"
+                                            placeholder="Mô tả chi tiết về lớp học, mục tiêu, đối tượng phù hợp..."></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="classRequirements" class="form-label">Yêu cầu</label>
+                                        <textarea class="form-control" id="classRequirements" rows="3"
+                                            placeholder="Các yêu cầu về trang phục, dụng cụ, sức khỏe..."></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classPrice" class="form-label">Giá vé (VNĐ)</label>
+                                                <input type="number" class="form-control" id="classPrice" min="0"
+                                                    placeholder="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="classStatus" class="form-label">Trạng thái</label>
+                                                <select class="form-select" id="classStatus">
+                                                    <option value="active">Hoạt động</option>
+                                                    <option value="inactive">Tạm ngưng</option>
+                                                    <option value="draft">Bản nháp</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-secondary me-2"
+                                            onclick="history.back()">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Tạo lớp học</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Hướng dẫn</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <h6><i class="fas fa-info-circle"></i> Lưu ý khi tạo lớp học:</h6>
+                                    <ul class="mb-0">
+                                        <li>Đặt tên lớp rõ ràng, dễ hiểu</li>
+                                        <li>Chọn mức độ phù hợp với đối tượng</li>
+                                        <li>Mô tả chi tiết để thành viên hiểu rõ</li>
+                                        <li>Kiểm tra sức chứa phòng trước khi đặt</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/assets/js/main.js"></script>
+    <script src="../js/trainer.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sidebar toggle
+            $('#sidebar-collapse').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-collapsed');
+                $('#content').toggleClass('content-collapsed');
+                // Update button text
+                var span = $(this).find("span");
+                if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                    span.text("Mở rộng");
+                } else {
+                    span.text("Thu gọn");
+                }
+            });
+
+            // Form submission
+            $('#addClassForm').on('submit', function(e) {
+                e.preventDefault();
+                // Add your form submission logic here
+                alert('Lớp học đã được tạo thành công!');
+                window.location.href = 'list.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

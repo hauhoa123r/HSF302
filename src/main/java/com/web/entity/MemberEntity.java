@@ -58,12 +58,15 @@ public class MemberEntity {
     @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberPackageEntity> memberPackageEntities;
 
+    @OneToMany(mappedBy = "memberEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<WorkoutGoalEntity> workoutGoalEntities;
+
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_trainer_id")
-    private TrainerEntity TrainerEntity;
+    private TrainerEntity trainerEntity;
 
     @Lob
     @Column(name = "note")

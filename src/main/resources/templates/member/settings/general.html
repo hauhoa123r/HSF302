@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - Member</title>
+    <link rel="stylesheet" href="../../shared/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../../shared/css/style.css">
+    <link rel="stylesheet" href="../../member/css/member-style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-dumbbell"></i> GymFitness</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="../index.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../schedule/view.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Lịch tập</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../classes/list.html">
+                        <i class="fas fa-users"></i>
+                        <span>Lớp học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../progress/view.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Tiến độ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../profile/view.html">
+                        <i class="fas fa-user"></i>
+                        <span>Hồ sơ</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="general.html">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-bars"></i>
+                        <span>Thu gọn</span>
+                    </button>
+                    <div class="ms-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Nguyễn Thị B</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../profile/view.html"><i class="fas fa-user"></i> Hồ
+                                        sơ</a>
+                                </li>
+                                <li><a class="dropdown-item" href="general.html"><i class="fas fa-cog"></i> Cài đặt</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-4">Cài đặt</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Settings Navigation -->
+                    <div class="col-lg-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <a href="#general" class="list-group-item list-group-item-action active"
+                                        data-bs-toggle="list">
+                                        <i class="fas fa-cog"></i> Cài đặt chung
+                                    </a>
+                                    <a href="#notifications" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="list">
+                                        <i class="fas fa-bell"></i> Thông báo
+                                    </a>
+                                    <a href="#privacy" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="list">
+                                        <i class="fas fa-shield-alt"></i> Bảo mật
+                                    </a>
+                                    <a href="#preferences" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="list">
+                                        <i class="fas fa-heart"></i> Sở thích
+                                    </a>
+                                    <a href="#account" class="list-group-item list-group-item-action"
+                                        data-bs-toggle="list">
+                                        <i class="fas fa-user-cog"></i> Tài khoản
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Content -->
+                    <div class="col-lg-9">
+                        <div class="tab-content">
+                            <!-- General Settings -->
+                            <div class="tab-pane fade show active" id="general">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Cài đặt chung</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="generalSettingsForm">
+                                            <div class="mb-3">
+                                                <label for="language" class="form-label">Ngôn ngữ</label>
+                                                <select class="form-select" id="language">
+                                                    <option value="vi" selected>Tiếng Việt</option>
+                                                    <option value="en">English</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timezone" class="form-label">Múi giờ</label>
+                                                <select class="form-select" id="timezone">
+                                                    <option value="Asia/Ho_Chi_Minh" selected>Asia/Ho_Chi_Minh (GMT+7)
+                                                    </option>
+                                                    <option value="UTC">UTC (GMT+0)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="dateFormat" class="form-label">Định dạng ngày</label>
+                                                <select class="form-select" id="dateFormat">
+                                                    <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                                    <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                                    <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="timeFormat" class="form-label">Định dạng thời gian</label>
+                                                <select class="form-select" id="timeFormat">
+                                                    <option value="12" selected>12 giờ (AM/PM)</option>
+                                                    <option value="24">24 giờ</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Lưu cài đặt</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notifications Settings -->
+                            <div class="tab-pane fade" id="notifications">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Cài đặt thông báo</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="notificationSettingsForm">
+                                            <h6>Thông báo email</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailReminders"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailReminders">
+                                                        Nhắc nhở lịch tập qua email
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailProgress"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailProgress">
+                                                        Báo cáo tiến độ hàng tuần
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="emailPromotions">
+                                                    <label class="form-check-label" for="emailPromotions">
+                                                        Thông báo khuyến mãi
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <h6>Thông báo ứng dụng</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appReminders"
+                                                        checked>
+                                                    <label class="form-check-label" for="appReminders">
+                                                        Nhắc nhở lịch tập
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appAchievements"
+                                                        checked>
+                                                    <label class="form-check-label" for="appAchievements">
+                                                        Thông báo thành tựu
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appNewClasses">
+                                                    <label class="form-check-label" for="appNewClasses">
+                                                        Lớp học mới
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Lưu cài đặt</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Privacy Settings -->
+                            <div class="tab-pane fade" id="privacy">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Cài đặt bảo mật</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="privacySettingsForm">
+                                            <h6>Quyền riêng tư</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="profileVisibility" checked>
+                                                    <label class="form-check-label" for="profileVisibility">
+                                                        Cho phép xem hồ sơ công khai
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="progressVisibility">
+                                                    <label class="form-check-label" for="progressVisibility">
+                                                        Chia sẻ tiến độ tập luyện
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="achievementVisibility" checked>
+                                                    <label class="form-check-label" for="achievementVisibility">
+                                                        Hiển thị thành tựu
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <h6>Bảo mật tài khoản</h6>
+                                            <div class="mb-3">
+                                                <label for="currentPassword" class="form-label">Mật khẩu hiện
+                                                    tại</label>
+                                                <input type="password" class="form-control" id="currentPassword">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                                <input type="password" class="form-control" id="newPassword">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu
+                                                    mới</label>
+                                                <input type="password" class="form-control" id="confirmPassword">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Cập nhật mật khẩu</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preferences Settings -->
+                            <div class="tab-pane fade" id="preferences">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Sở thích tập luyện</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="preferencesSettingsForm">
+                                            <h6>Loại lớp yêu thích</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="prefYoga"
+                                                        checked>
+                                                    <label class="form-check-label" for="prefYoga">Yoga</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="prefCardio"
+                                                        checked>
+                                                    <label class="form-check-label" for="prefCardio">Cardio</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="prefStrength">
+                                                    <label class="form-check-label" for="prefStrength">Strength
+                                                        Training</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="prefHiit">
+                                                    <label class="form-check-label" for="prefHiit">HIIT</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="prefPilates">
+                                                    <label class="form-check-label" for="prefPilates">Pilates</label>
+                                                </div>
+                                            </div>
+
+                                            <h6>Thời gian tập luyện</h6>
+                                            <div class="mb-3">
+                                                <label for="preferredTime" class="form-label">Khung giờ ưa thích</label>
+                                                <select class="form-select" id="preferredTime">
+                                                    <option value="morning" selected>Sáng (6:00-12:00)</option>
+                                                    <option value="afternoon">Chiều (12:00-18:00)</option>
+                                                    <option value="evening">Tối (18:00-22:00)</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sessionDuration" class="form-label">Thời lượng buổi tập
+                                                    (phút)</label>
+                                                <select class="form-select" id="sessionDuration">
+                                                    <option value="30">30 phút</option>
+                                                    <option value="45">45 phút</option>
+                                                    <option value="60" selected>60 phút</option>
+                                                    <option value="90">90 phút</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Lưu sở thích</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Settings -->
+                            <div class="tab-pane fade" id="account">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Cài đặt tài khoản</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <strong>Lưu ý:</strong> Một số thay đổi có thể ảnh hưởng đến tài khoản của
+                                            bạn.
+                                        </div>
+
+                                        <h6>Thông tin tài khoản</h6>
+                                        <div class="mb-3">
+                                            <label for="accountEmail" class="form-label">Email đăng nhập</label>
+                                            <input type="email" class="form-control" id="accountEmail"
+                                                value="nguyenthib@email.com" readonly>
+                                            <small class="text-muted">Email không thể thay đổi</small>
+                                        </div>
+
+                                        <hr>
+
+                                        <h6>Xóa tài khoản</h6>
+                                        <p class="text-muted">Hành động này sẽ xóa vĩnh viễn tài khoản và tất cả dữ liệu
+                                            của bạn.</p>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteAccountModal">
+                                            <i class="fas fa-trash"></i> Xóa tài khoản
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác!
+                    </div>
+                    <p>Bạn có chắc chắn muốn xóa tài khoản của mình không? Tất cả dữ liệu sẽ bị mất vĩnh viễn.</p>
+                    <div class="mb-3">
+                        <label for="deleteConfirm" class="form-label">Nhập "DELETE" để xác nhận</label>
+                        <input type="text" class="form-control" id="deleteConfirm" placeholder="DELETE">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteAccount" disabled>Xóa tài
+                        khoản</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../shared/js/jquery.min.js"></script>
+    <script src="../../shared/js/bootstrap.bundle.min.js"></script>
+    <script src="../../shared/js/admin.js"></script>
+</body>
+
+</html>

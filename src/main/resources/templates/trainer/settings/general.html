@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - Trainer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/trainer.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-dumbbell"></i> GymFitness</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="index.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="schedule.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Lịch làm việc</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="classes.html">
+                        <i class="fas fa-users"></i>
+                        <span>Lớp học</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="members.html">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Thành viên</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="progress.html">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Tiến độ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile.html">
+                        <i class="fas fa-user"></i>
+                        <span>Hồ sơ</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebar-collapse" class="btn btn-info">
+                        <i class="fas fa-bars"></i>
+                        <span>Thu gọn</span>
+                    </button>
+                    <div class="ms-auto">
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="userDropdown"
+                                data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Nguyễn Văn A</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user"></i> Hồ sơ</a>
+                                </li>
+                                <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Cài đặt</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-4">Cài đặt</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <!-- Settings Navigation -->
+                        <div class="card shadow">
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="settingsTabs" role="tablist">
+                                    <a class="list-group-item list-group-item-action active" id="general-tab"
+                                        data-bs-toggle="list" href="#general" role="tab">
+                                        <i class="fas fa-cog me-2"></i>Cài đặt chung
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="profile-tab"
+                                        data-bs-toggle="list" href="#profile" role="tab">
+                                        <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="schedule-tab"
+                                        data-bs-toggle="list" href="#schedule" role="tab">
+                                        <i class="fas fa-calendar me-2"></i>Lịch làm việc
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="notifications-tab"
+                                        data-bs-toggle="list" href="#notifications" role="tab">
+                                        <i class="fas fa-bell me-2"></i>Thông báo
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" id="security-tab"
+                                        data-bs-toggle="list" href="#security" role="tab">
+                                        <i class="fas fa-shield-alt me-2"></i>Bảo mật
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <!-- Settings Content -->
+                        <div class="tab-content" id="settingsTabContent">
+                            <!-- General Settings -->
+                            <div class="tab-pane fade show active" id="general" role="tabpanel">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Cài đặt chung</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="generalSettingsForm">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Ngôn ngữ</label>
+                                                    <select class="form-select" name="language">
+                                                        <option value="vi" selected>Tiếng Việt</option>
+                                                        <option value="en">English</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Múi giờ</label>
+                                                    <select class="form-select" name="timezone">
+                                                        <option value="Asia/Ho_Chi_Minh" selected>GMT+7 (Việt Nam)
+                                                        </option>
+                                                        <option value="UTC">UTC</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Định dạng ngày</label>
+                                                    <select class="form-select" name="dateFormat">
+                                                        <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                                        <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                                        <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Định dạng thời gian</label>
+                                                    <select class="form-select" name="timeFormat">
+                                                        <option value="24" selected>24 giờ</option>
+                                                        <option value="12">12 giờ</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="autoSave"
+                                                        checked>
+                                                    <label class="form-check-label" for="autoSave">
+                                                        Tự động lưu dữ liệu
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="darkMode">
+                                                    <label class="form-check-label" for="darkMode">
+                                                        Chế độ tối
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Lưu cài đặt</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Profile Settings -->
+                            <div class="tab-pane fade" id="profile" role="tabpanel">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Thông tin cá nhân</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="profileSettingsForm">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Họ và tên</label>
+                                                    <input type="text" class="form-control" name="fullName"
+                                                        value="Nguyễn Văn A">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email"
+                                                        value="trainer@gymfitness.com">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Số điện thoại</label>
+                                                    <input type="tel" class="form-control" name="phone"
+                                                        value="0901234567">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Ngày sinh</label>
+                                                    <input type="date" class="form-control" name="birthDate"
+                                                        value="1990-01-01">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Chuyên môn</label>
+                                                    <select class="form-select" name="specialization">
+                                                        <option value="yoga" selected>Yoga</option>
+                                                        <option value="cardio">Cardio</option>
+                                                        <option value="strength">Tập tạ</option>
+                                                        <option value="pilates">Pilates</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Kinh nghiệm (năm)</label>
+                                                    <input type="number" class="form-control" name="experience"
+                                                        value="5" min="0" max="50">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Mô tả</label>
+                                                <textarea class="form-control" name="description"
+                                                    rows="3">Huấn luyện viên chuyên nghiệp với 5 năm kinh nghiệm trong lĩnh vực fitness.</textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Schedule Settings -->
+                            <div class="tab-pane fade" id="schedule" role="tabpanel">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Lịch làm việc</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="scheduleSettingsForm">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Giờ làm việc bắt đầu</label>
+                                                    <input type="time" class="form-control" name="workStart"
+                                                        value="06:00">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Giờ làm việc kết thúc</label>
+                                                    <input type="time" class="form-control" name="workEnd"
+                                                        value="22:00">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Ngày làm việc</label>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="monday"
+                                                                checked>
+                                                            <label class="form-check-label" for="monday">T2</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="tuesday"
+                                                                checked>
+                                                            <label class="form-check-label" for="tuesday">T3</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="wednesday" checked>
+                                                            <label class="form-check-label" for="wednesday">T4</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="thursday" checked>
+                                                            <label class="form-check-label" for="thursday">T5</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="friday"
+                                                                checked>
+                                                            <label class="form-check-label" for="friday">T6</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="saturday">
+                                                            <label class="form-check-label" for="saturday">T7</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Thời gian nghỉ trưa</label>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input type="time" class="form-control" name="lunchStart"
+                                                            value="12:00">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="time" class="form-control" name="lunchEnd"
+                                                            value="13:00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="autoSchedule"
+                                                        checked>
+                                                    <label class="form-check-label" for="autoSchedule">
+                                                        Tự động sắp xếp lịch
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Lưu lịch làm việc</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notifications Settings -->
+                            <div class="tab-pane fade" id="notifications" role="tabpanel">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Thông báo</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="notificationSettingsForm">
+                                            <h6 class="mb-3">Thông báo email</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailSchedule"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailSchedule">
+                                                        Lịch làm việc hàng ngày
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailMembers"
+                                                        checked>
+                                                    <label class="form-check-label" for="emailMembers">
+                                                        Thành viên mới đăng ký
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="emailReviews">
+                                                    <label class="form-check-label" for="emailReviews">
+                                                        Đánh giá mới
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <h6 class="mb-3 mt-4">Thông báo trong ứng dụng</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appSchedule"
+                                                        checked>
+                                                    <label class="form-check-label" for="appSchedule">
+                                                        Nhắc nhở lịch làm việc
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appMessages"
+                                                        checked>
+                                                    <label class="form-check-label" for="appMessages">
+                                                        Tin nhắn từ thành viên
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="appUpdates">
+                                                    <label class="form-check-label" for="appUpdates">
+                                                        Cập nhật hệ thống
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <h6 class="mb-3 mt-4">Tần suất thông báo</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nhắc nhở trước lịch làm việc</label>
+                                                <select class="form-select" name="reminderTime">
+                                                    <option value="5">5 phút</option>
+                                                    <option value="10" selected>10 phút</option>
+                                                    <option value="15">15 phút</option>
+                                                    <option value="30">30 phút</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Lưu cài đặt thông báo</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Security Settings -->
+                            <div class="tab-pane fade" id="security" role="tabpanel">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Bảo mật</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="securitySettingsForm">
+                                            <h6 class="mb-3">Đổi mật khẩu</h6>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Mật khẩu hiện tại</label>
+                                                    <input type="password" class="form-control" name="currentPassword">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Mật khẩu mới</label>
+                                                    <input type="password" class="form-control" name="newPassword">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Xác nhận mật khẩu mới</label>
+                                                    <input type="password" class="form-control" name="confirmPassword">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
+
+                                            <hr class="my-4">
+
+                                            <h6 class="mb-3">Bảo mật tài khoản</h6>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="twoFactor">
+                                                    <label class="form-check-label" for="twoFactor">
+                                                        Xác thực 2 yếu tố
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="loginAlerts"
+                                                        checked>
+                                                    <label class="form-check-label" for="loginAlerts">
+                                                        Thông báo đăng nhập mới
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="sessionTimeout">
+                                                    <label class="form-check-label" for="sessionTimeout">
+                                                        Tự động đăng xuất sau 30 phút
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-4">
+
+                                            <h6 class="mb-3">Hoạt động đăng nhập</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Thời gian</th>
+                                                            <th>Địa điểm</th>
+                                                            <th>Thiết bị</th>
+                                                            <th>Trạng thái</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Hôm nay, 08:30</td>
+                                                            <td>Hà Nội, Việt Nam</td>
+                                                            <td>Chrome - Windows</td>
+                                                            <td><span class="badge bg-success">Thành công</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hôm qua, 15:45</td>
+                                                            <td>Hà Nội, Việt Nam</td>
+                                                            <td>Mobile - Android</td>
+                                                            <td><span class="badge bg-success">Thành công</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/trainer.js"></script>
+</body>
+
+</html>

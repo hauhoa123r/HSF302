@@ -43,6 +43,15 @@ public class TrainerEntity {
     @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
     private Set<PersonalBookingEntity> personalBookingEntities;
 
+    @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
+    private List<MealTemplateEntity> mealTemplateEntities;
+
+    @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
+    private List<WorkoutGoalEntity> workoutGoalEntities;
+
+    @OneToMany(mappedBy = "trainerEntity", fetch = FetchType.LAZY)
+    private List<MemberEntity> memberEntities;
+
     @Lob
     @Column(name = "specialization")
     private String specialization;

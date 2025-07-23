@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chi tiết kế hoạch dinh dưỡng - GymFitness">
+    <title>Chi tiết kế hoạch dinh dưỡng - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" th:href="@{/shared/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/shared/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/trainer/css/trainer-style.css}">
+</head>
+
+<body>
+<div class="dashboard-container">
+    <!-- Sidebar Begin -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Gym<span>Fitness</span></h3>
+            <div class="trainer-profile">
+                <img th:src="@{/shared/assets/img/avatar-default.jpg}" class="rounded-circle" width="60" height="60"
+                     alt="HLV">
+                <h5>Nguyễn Văn A</h5>
+                <span class="badge badge-success">HLV Chính</span>
+            </div>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/trainer/index}"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+            </li>
+            <li>
+                <a href="#scheduleSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-calendar-alt"></i> Lịch làm việc
+                </a>
+                <ul class="collapse list-unstyled" id="scheduleSubmenu">
+                    <li>
+                        <a th:href="@{/trainer/schedule/view}">Xem lịch</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/trainer/schedule/manage}">Quản lý lịch</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/trainer/schedule/add}">Thêm lịch mới</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#membersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-users"></i> Quản lý thành viên
+                </a>
+                <ul class="collapse list-unstyled" id="membersSubmenu">
+                    <li>
+                        <a th:href="@{/trainer/members/list}">Danh sách thành viên</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/trainer/members/progress}">Theo dõi tiến độ</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#classesSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                </a>
+                <ul class="collapse list-unstyled" id="classesSubmenu">
+                    <li>
+                        <a th:href="@{/trainer/classes/list}">Lớp học của tôi</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/trainer/classes/attendance}">Điểm danh</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active">
+                <a th:href="@{/trainer/nutrition}"><i class="fas fa-apple-alt"></i> Chế độ dinh dưỡng</a>
+            </li>
+            <li>
+                <a th:href="@{/trainer/assessments/index}"><i class="fas fa-clipboard-list"></i> Đánh giá thể chất</a>
+            </li>
+            <li>
+                <a th:href="@{/trainer/messages/index}"><i class="fas fa-comments"></i> Tin nhắn</a>
+            </li>
+            <li>
+                <a th:href="@{/trainer/profile/view}"><i class="fas fa-user"></i> Thông tin cá nhân</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Sidebar End -->
+
+    <!-- Content Begin -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebar-collapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Thu gọn</span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge badge-danger">3</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Lớp học mới được giao</a>
+                                <a class="dropdown-item" href="#">Thành viên đăng ký</a>
+                                <a class="dropdown-item" href="#">Lịch hẹn mới từ Trần Thị B</a>
+                                <a class="dropdown-item" href="#">Tin nhắn mới từ Nguyễn Văn C</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Xem tất cả thông báo</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img th:src="@{/shared/assets/img/avatar-default.jpg}" class="rounded-circle" width="30"
+                                     height="30">
+                                <span>Nguyễn Văn A</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" th:href="@{/trainer/profile/view}">Thông tin cá nhân</a>
+                                <a class="dropdown-item" th:href="@{/trainer/settings/general}">Cài đặt</a>
+                                <a class="dropdown-item" th:href="@{/trainer/messages/index}">Tin nhắn</a>
+                                <a class="dropdown-item" th:href="@{/trainer/reports}">Báo cáo</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Chi tiết kế hoạch dinh dưỡng</h2>
+                        <div>
+                            <a th:href="@{/trainer/nutrition/edit/{id}(id=${nutritionPlan.id})}" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Chỉnh sửa
+                            </a>
+                            <a th:href="@{/trainer/nutrition}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member Info -->
+            <div class="row mb-4">
+                <div class="col-lg-8">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Thông tin thành viên</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 text-center">
+                                    <img th:src="@{/shared/assets/img/avatar-default.jpg}" class="rounded-circle mb-3"
+                                         width="120" height="120">
+                                    <h5 th:text="${nutritionPlan.memberName}">Nguyễn Thị B</h5>
+                                    <span class="badge badge-primary">Thành viên</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Tuổi:</strong> <span th:text="${nutritionPlan.memberAge}">28</span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Thời gian:</strong> <span th:text="${nutritionPlan.totalTime}">12</span> tuần</p>
+                                            <p><strong>Ngày tạo:</strong> <span th:text="${#dates.format(nutritionPlan.createdAt, 'dd/MM/yyyy')}">01/01/2024</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Tiến độ</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <div class="progress-circle" style="width: 120px; height: 120px; margin: 0 auto;">
+                                    <div class="progress-circle-inner"
+                                         style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#28a745 0deg 180deg, #e9ecef 180deg 360deg); display: flex; align-items: center; justify-content: center;">
+                                        <div
+                                                style="background: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                            <span style="font-size: 18px; font-weight: bold;" th:text="${plan.progress + '%'}">50%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-2">Hoàn thành <span th:text="${plan.completedWeeks}">6</span>/<span th:text="${plan.duration}">12</span> tuần</p>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h5 class="text-success" th:text="'-' + ${plan.weightLost} + ' kg'">-2.5 kg</h5>
+                                    <small>Đã giảm</small>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="text-primary" th:text="${plan.weightLeft} + ' kg'">2.5 kg</h5>
+                                    <small>Còn lại</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition Details -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Chỉ số dinh dưỡng hàng ngày</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 text-center mb-3">
+                                    <div class="nutrition-card bg-primary text-white p-3 rounded">
+                                        <h3 th:text="${nutritionPlan.calories}">1,800</h3>
+                                        <p class="mb-0">Calories</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-center mb-3">
+                                    <div class="nutrition-card bg-success text-white p-3 rounded">
+                                        <h3 th:text="${nutritionPlan.protein} + 'g'">120g</h3>
+                                        <p class="mb-0">Protein</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-center mb-3">
+                                    <div class="nutrition-card bg-warning text-white p-3 rounded">
+                                        <h3 th:text="${nutritionPlan.carb} + 'g'">180g</h3>
+                                        <p class="mb-0">Carbs</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-center mb-3">
+                                    <div class="nutrition-card bg-info text-white p-3 rounded">
+                                        <h3 th:text="${nutritionPlan.fat} + 'g'">60g</h3>
+                                        <p class="mb-0">Fat</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h6>Phân bố dinh dưỡng</h6>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-success" th:style="'width:' + ${plan.proteinPercentage} + '%'">Protein <span th:text="${plan.proteinPercentage}">27</span>%</div>
+                                    </div>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-warning" th:style="'width:' + ${plan.carbsPercentage} + '%'">Carbs <span th:text="${plan.carbsPercentage}">40</span>%</div>
+                                    </div>
+                                    <div class="progress mb-2">
+                                        <div class="progress-bar bg-info" th:style="'width:' + ${plan.fatPercentage} + '%'">Fat <span th:text="${plan.fatPercentage}">33</span>%</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Chỉ số khác</h6>
+                                    <p><strong>Chất xơ:</strong> <span th:text="${nutritionPlan.fiber}">25</span>g/ngày</p>
+                                    <p><strong>Nước:</strong> <span th:text="${nutritionPlan.water}">2.5</span> lít/ngày</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Lịch sử thực hiện</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Ngày</th>
+                                        <th>Calories</th>
+                                        <th>Protein</th>
+                                        <th>Carbs</th>
+                                        <th>Fat</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="log : ${nutritionPlanDetail}">
+                                        <td th:text="${#dates.format(log.date, 'dd/MM/yyyy')}">15/01/2024</td>
+                                        <td th:text="${log.calories}">1,750</td>
+                                        <td th:text="${log.protein}">115g</td>
+                                        <td th:text="${log.carb}">175g</td>
+                                        <td th:text="${log.fat}">58g</td>
+                                        <td>
+                                            <span th:if="${log.status == 'Đạt'}" class="badge badge-success">Đạt</span>
+                                            <span th:if="${log.status != 'Đạt'}" class="badge badge-warning" th:text="${log.status}">Thiếu</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Ghi chú</h6>
+                        </div>
+                        <div class="card-body">
+                            <div th:utext="${plan.notes}">
+                                <p><strong>Mục tiêu:</strong> Giảm 5kg trong 12 tuần</p>
+                                <p><strong>Phương pháp:</strong> Calorie deficit 300-500 cal/ngày</p>
+                                <p><strong>Lưu ý:</strong> Tăng protein để bảo vệ cơ bắp</p>
+                                <p><strong>Thực phẩm nên tránh:</strong> Đường, đồ chiên, nước ngọt</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">Hướng dẫn thực hiện</h6>
+                        </div>
+                        <div class="card-body">
+                            <div th:utext="${plan.instructions}">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success"></i> Ăn 5-6 bữa nhỏ/ngày</li>
+                                    <li><i class="fas fa-check text-success"></i> Uống nước trước bữa ăn</li>
+                                    <li><i class="fas fa-check text-success"></i> Ăn rau xanh trước</li>
+                                    <li><i class="fas fa-check text-success"></i> Nhai chậm, nhai kỹ</li>
+                                    <li><i class="fas fa-check text-success"></i> Không ăn sau 8h tối</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content End -->
+</div>
+
+<!-- JavaScript Files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/shared/assets/js/main.js}"></script>
+<script th:src="@{/trainer/js/trainer.js}"></script>
+<script>
+    $(document).ready(function () {
+        // Sidebar toggle
+        $('#sidebar-collapse').on('click', function () {
+            $('#sidebar').toggleClass('sidebar-collapsed');
+            $('#content').toggleClass('content-collapsed');
+            // Update button text
+            var span = $(this).find("span");
+            if ($('#sidebar').hasClass('sidebar-collapsed')) {
+                span.text("Mở rộng");
+            } else {
+                span.text("Thu gọn");
+            }
+        });
+    });
+</script>
+</body>
+
+</html>

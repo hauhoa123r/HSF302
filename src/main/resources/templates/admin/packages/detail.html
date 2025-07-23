@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${3}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết gói tập - GymFitness</title>
+</head>
+<body>
+<section class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h1>Chi tiết gói tập</h1>
+                <a class="btn btn-secondary" th:href="@{/admin/package}">
+                    <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                </a>
+            </div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Mã gói</th>
+                            <td th:text="${package.id}"></td>
+                        </tr>
+                        <tr>
+                            <th>Tên gói tập</th>
+                            <td th:text="${package.name}"></td>
+                        </tr>
+                        <tr>
+                            <th>Loại gói</th>
+                            <td th:text="${package.packageType}"></td>
+                        </tr>
+                        <tr>
+                            <th>Thời hạn</th>
+                            <td th:text="${package.durationDays + ' ngày'}"></td>
+                        </tr>
+                        <tr>
+                            <th>Giá</th>
+                            <td th:text="${#numbers.formatCurrency(package.price)}"></td>
+                        </tr>
+                        <tr>
+                            <th>Số thành viên</th>
+                            <td th:text="${package.memberCount}"></td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái</th>
+                            <td>
+                                <span class="badge badge-success"
+                                      th:if="${package.status == 'ACTIVE'}">Đang hoạt động</span>
+                                <span class="badge badge-secondary" th:if="${package.status == 'INACTIVE'}">Ngưng hoạt động</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Mô tả</th>
+                            <td th:text="${package.description}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

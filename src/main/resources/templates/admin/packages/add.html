@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${3}, subNavActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thêm gói tập - GymFitness</title>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h1>Thêm gói tập mới</h1>
+                <a class="btn btn-secondary" th:href="@{/admin/package}">
+                    <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                </a>
+            </div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <form id="form" th:object="${package}">
+                        <div class="form-group">
+                            <label for="packageId">Mã gói <span class="text-danger">*</span></label>
+                            <input class="form-control" id="packageId" required th:field="*{packageCode}"
+                                   type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="packageName">Tên gói tập <span class="text-danger">*</span></label>
+                            <input class="form-control" id="packageName" required th:field="*{name}" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="packageType">Loại gói <span class="text-danger">*</span></label>
+                            <select class="form-control" id="packageType" required th:field="*{packageType}">
+                                <option value="DAILY">Hàng ngày</option>
+                                <option value="WEEKLY">Hàng tuần</option>
+                                <option value="MONTHLY">Hàng tháng</option>
+                                <option value="YEARLY">Hàng năm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Thời hạn(ngày) <span class="text-danger">*</span></label>
+                            <input class="form-control" id="duration" required th:field="*{durationDays}"
+                                   type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Giá (VNĐ) <span class="text-danger">*</span></label>
+                            <input class="form-control" id="price" required th:field="*{price}" type="number">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Trạng thái <span class="text-danger">*</span></label>
+                            <select class="form-control" id="status" required th:field="*{status}">
+                                <option value="ACTIVE">Đang hoạt động</option>
+                                <option value="INACTIVE">Ngưng hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Mô tả</label>
+                            <textarea class="form-control" id="description" rows="3"
+                                      th:field="*{description}"></textarea>
+                        </div>
+                        <div class="form-group d-flex justify-content-end">
+                            <button class="btn btn-success mr-2" type="submit"><i class="fas fa-plus"></i>
+                                Thêm mới
+                            </button>
+                            <a class="btn btn-secondary" th:href="@{/admin/package}">Hủy</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="custom-js">
+    <script type="module">
+        import {AddUtils} from "/templates/shared/assets/js/utils/add-utils.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const addUtils = new AddUtils({
+                apiUrl: "/api/admin/package"
+            });
+            await addUtils.setupFormEvents();
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

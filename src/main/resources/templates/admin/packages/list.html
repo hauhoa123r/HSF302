@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${3}, subNavActive=${1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Danh sách gói tập - GymFitness</title>
+</head>
+
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h1>Danh sách gói tập</h1>
+                <a class="btn btn-success" th:href="@{/admin/package/add}">
+                    <i class="fas fa-plus"></i> Thêm gói tập mới
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thống kê nhanh -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 th:text="${packagesCount}"></h4>
+                            <p class="mb-0">Tổng số gói tập</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-box fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 th:text="${activePackagesCount}"></h4>
+                            <p class="mb-0">Gói đang hoạt động</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-play-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 th:text="${inactivePackagesCount}"></h4>
+                            <p class="mb-0">Gói ngưng hoạt động</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-pause-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4 th:text="${activeMemberPackagesCount}"></h4>
+                            <p class="mb-0">Thành viên đăng ký</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bộ lọc và tìm kiếm -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <form class="card-body" id="filter-form">
+                    <!-- Hàng 1: Tìm kiếm -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input class="form-control" name="name" placeholder="Tìm kiếm theo tên gói" type="text">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search"></i> Tìm kiếm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hàng 2: Filter, Sort, Export, Đặt lại, Áp dụng -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-end flex-wrap">
+                                <!-- Lọc theo trạng thái -->
+                                <div class="form-group mr-2 mb-2">
+                                    <label for="status"><i class="fas fa-filter"></i> Lọc theo trạng thái</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="">Tất cả gói tập</option>
+                                        <option value="ACTIVE">Đang hoạt động</option>
+                                        <option value="INACTIVE">Ngưng hoạt động</option>
+                                    </select>
+                                </div>
+                                <!-- Sort field -->
+                                <div class="form-group mr-2 mb-2">
+                                    <label for="fieldSortName"><i class="fas fa-sort"></i> Sắp xếp theo trường</label>
+                                    <select class="form-control" id="fieldSortName" name="sortFieldName">
+                                        <option value="name">Tên gói</option>
+                                        <option value="price">Giá</option>
+                                        <option value="durationDays">Thời hạn</option>
+                                    </select>
+                                </div>
+                                <!-- Sort direction -->
+                                <div class="form-group mr-2 mb-2">
+                                    <label for="sortDirection"><i class="fas fa-sort"></i> Chiều sắp xếp</label>
+                                    <select class="form-control" id="sortDirection" name="sortDirection">
+                                        <option value="ASC">Tăng dần</option>
+                                        <option value="DESC">Giảm dần</option>
+                                    </select>
+                                </div>
+                                <!-- Đặt lại -->
+                                <button class="btn btn-warning mr-2 mb-2" type="reset">Đặt lại</button>
+                                <!-- Áp dụng -->
+                                <button class="btn btn-success mr-2 mb-2" type="submit">Áp dụng</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Kết thúc hàng 2 -->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bảng danh sách gói tập -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>Mã gói</th>
+                                <th>Tên gói tập</th>
+                                <th>Loại gói</th>
+                                <th>Thời hạn</th>
+                                <th>Giá (VNĐ)</th>
+                                <th>Số thành viên</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Phân trang và thao tác hàng loạt -->
+                    <nav id="pagination"></nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/package/list.js}" type="module"></script>
+</th:block>
+</body>
+
+</html>

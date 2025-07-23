@@ -1,6 +1,10 @@
 package com.web.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 
 import java.sql.Date;
@@ -9,6 +13,10 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "class_schedules")
 @FieldNameConstants
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClassScheduleEntity {
     @Column(name = "schedule_id")
     @Id

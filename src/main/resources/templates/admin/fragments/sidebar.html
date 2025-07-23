@@ -60,10 +60,10 @@
             </a>
             <ul class="collapse list-unstyled" id="classSubmenu">
                 <li th:classappend="${navActive == 5 && subNavActive == 1} ? 'active'">
-                    <a th:href="@{/admin/classes/list.html}">Danh sách lớp</a>
+                    <a th:href="@{/admin/getAllClasses}">Danh sách lớp</a>
                 </li>
                 <li th:classappend="${navActive == 5 && subNavActive == 2} ? 'active'">
-                    <a th:href="@{/admin/classes/add.html}">Thêm lớp</a>
+                    <a th:href="@{/admin/addClass}">Thêm lớp</a>
                 </li>
                 <li th:classappend="${navActive == 5 && subNavActive == 3} ? 'active'">
                     <a th:href="@{/admin/classes/schedule.html}">Lịch học</a>
@@ -76,10 +76,10 @@
             </a>
             <ul class="collapse list-unstyled" id="equipmentSubmenu">
                 <li th:classappend="${navActive == 6 && subNavActive == 1} ? 'active'">
-                    <a th:href="@{/admin/equipment/list.html}">Danh sách thiết bị</a>
+                    <a th:href="@{/admin/getAllEquipment}">Danh sách thiết bị</a>
                 </li>
                 <li th:classappend="${navActive == 6 && subNavActive == 2} ? 'active'">
-                    <a th:href="@{/admin/equipment/add.html}">Thêm thiết bị</a>
+                    <a th:href="@{/admin/addEquipment}">Thêm thiết bị</a>
                 </li>
                 <li th:classappend="${navActive == 6 && subNavActive == 3} ? 'active'">
                     <a th:href="@{/admin/equipment/maintenance.html}">Bảo trì</a>
@@ -92,10 +92,10 @@
             </a>
             <ul class="collapse list-unstyled" id="promotionSubmenu">
                 <li th:classappend="${navActive == 7 && subNavActive == 1} ? 'active'">
-                    <a th:href="@{/admin/promotions/list.html}">Danh sách KM</a>
+                    <a th:href="@{/admin/getAllPromotions}">Danh sách KM</a>
                 </li>
                 <li th:classappend="${navActive == 7 && subNavActive == 2} ? 'active'">
-                    <a th:href="@{/admin/promotions/add.html}">Thêm KM</a>
+                    <a th:href="@{/admin/addPromotion}">Thêm KM</a>
                 </li>
             </ul>
         </li>

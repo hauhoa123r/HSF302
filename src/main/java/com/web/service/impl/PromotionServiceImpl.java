@@ -1,11 +1,14 @@
 package com.web.service.impl;
 
 import com.web.converter.PromotionConverter;
+import com.web.entity.EquipmentEntity;
 import com.web.entity.PromotionEntity;
 import com.web.enums.operation.AggregationFunction;
 import com.web.enums.operation.ComparisonOperator;
 import com.web.enums.operation.LogicalOperator;
 import com.web.enums.operation.SortDirection;
+import com.web.model.dto.EquipmentDTO;
+import com.web.model.dto.PromotionsDTO;
 import com.web.model.response.PromotionResponse;
 import com.web.repository.PromotionRepository;
 import com.web.service.PromotionService;
@@ -15,6 +18,8 @@ import com.web.utils.specification.sort.SortCriteria;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,5 +58,22 @@ public class PromotionServiceImpl implements PromotionService {
                 ).
                 stream()
                 .map(promotionConverter::toResponse).toList();
+    }
+
+    @Override
+    public Page<PromotionsDTO> getAllPromotions(String name, Pageable pageable) {
+        Page<PromotionEntity> page;
+        if (name != null && !name.isBlank()) {
+            page = promotionRepository.findByNameContainingIgnoreCase(name, pageable);
+        } else {
+            page = promotionRepository.findAll(pageable);
+        }
+        return page.map(promotionConverter::toDTO);
+    }
+
+    @Override
+    public String deletePromotion(Long id) {
+        promotionRepository.deleteById(id);
+        return "Deleted Successfully";
     }
 }

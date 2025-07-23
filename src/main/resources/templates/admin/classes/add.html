@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${2}, subNavActive=${2}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thêm lớp học mới - GymFitness</title>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Thêm lớp học mới</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="addClassForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Vui lòng điền đầy đủ thông tin lớp
+                                    học.
+                                    Các trường có dấu (*) là bắt buộc.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Thông tin cơ bản -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-info-circle"></i> Thông tin
+                                    cơ
+                                    bản</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="className">Tên lớp học <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="className" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="classType">Loại lớp <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" id="classType" required>
+                                        <option value="">-- Chọn loại lớp --</option>
+                                        <option value="bodybuilding">Thể hình</option>
+                                        <option value="cardio">Cardio</option>
+                                        <option value="yoga">Yoga</option>
+                                        <option value="pilates">Pilates</option>
+                                        <option value="boxing">Boxing</option>
+                                        <option value="kickboxing">Kickboxing</option>
+                                        <option value="crossfit">Crossfit</option>
+                                        <option value="calisthenics">Calisthenics</option>
+                                        <option value="zumba">Zumba</option>
+                                        <option value="spinning">Spinning</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="classLevel">Cấp độ <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" id="classLevel" required>
+                                        <option value="">-- Chọn cấp độ --</option>
+                                        <option value="beginner">Cơ bản</option>
+                                        <option value="intermediate">Trung cấp</option>
+                                        <option value="advanced">Nâng cao</option>
+                                        <option value="all">Tất cả cấp độ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="capacity">Sức chứa tối đa <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="capacity" min="1"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="description">Mô tả lớp học</label>
+                                    <textarea class="form-control" id="description" rows="3"
+                                              placeholder="Mô tả chi tiết về lớp học, mục tiêu, đối tượng phù hợp..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Huấn luyện viên -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-user-tie"></i> Huấn luyện
+                                    viên</h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerSelect">Huấn luyện viên chính <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" id="trainerSelect" name="trainerId" required>
+                                        <option value="">-- Chọn huấn luyện viên --</option>
+                                        <th:block th:each="trainer : ${trainers}">
+                                            <option th:value="${trainer.id}" th:text="${trainer.fullName}">Tên HLV</option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lịch học -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-calendar-alt"></i> Lịch học
+                                </h4>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="startTime">Giờ bắt đầu <span
+                                            class="text-danger">*</span></label>
+                                    <input type="time" class="form-control" id="startTime" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="endTime">Giờ kết thúc <span
+                                            class="text-danger">*</span></label>
+                                    <input type="time" class="form-control" id="endTime" required>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-secondary mr-2"
+                                        onclick="window.location.href='./list.html'">Hủy</button>
+                                <button type="button" class="btn btn-success" id="addClassBtn">Tạo lớp học</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="custom-js">
+    <script th:src="@{/admin/assets/js/class/add.js}" type="module"></script>
+</th:block>
+</body>
+</html>

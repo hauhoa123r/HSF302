@@ -13,6 +13,8 @@ public interface MemberPackageRepository extends JpaRepository<MemberPackageEnti
 
     Long countByPromotionEntityId(Long promotionEntityId);
 
+    int countByMemberEntity_Id(Long memberEntityId);
+
     Long countByIsActive(boolean isActive);
 
     boolean existsByPackageEntityId(Long packageEntityId);

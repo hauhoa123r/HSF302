@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "equipments")
@@ -34,4 +36,28 @@ public class EquipmentEntity {
 
     @Column(name = "last_maintenance")
     private Date lastMaintenance;
+    @Column(name="brand")
+    private String brand;
+    @Column(name="purchase_date")
+    private String purchaseDate;
+    @Column(name = "location")
+    private String location;
+    @Column(name = "image_url")
+    private String imageUrl;
+    @Column(name = "code")
+    private String code;
+    @Column(name="model")
+    private String model;
+    @Column(name="serial_number")
+    private String serialNumber;
+    @Column(name="description")
+    private String description;
+    @Column(name = "purchase_price")
+    private Long purchasePrice;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private SupplierEntity supplier;
+
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MaintenanceRecordEntity> maintenanceRecords = new ArrayList<>();
 }

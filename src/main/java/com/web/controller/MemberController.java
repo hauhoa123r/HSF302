@@ -1,12 +1,16 @@
 package com.web.controller;
 
+import com.web.converter.MemberConverter;
+import com.web.model.response.MemberHomePageResponse;
 import com.web.model.response.MemberResponse;
 import com.web.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -16,6 +20,9 @@ public class MemberController {
     private PackageService packageService;
     private TrainerService trainerService;
     private PromotionService promotionService;
+
+    @Autowired
+    private MemberConverter memberConverter;
 
     @Autowired
     public void setMemberService(MemberService memberService) {
@@ -92,5 +99,14 @@ public class MemberController {
         modelMap.put("member", memberService.getMember(memberId));
         modelMap.put("packages", packageService.getAllPackages());
         return "admin/members/register-package";
+    }
+
+    @GetMapping("/member/homepage")
+    public ModelAndView viewHomePage(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("member/index");
+        Long userId = (Long) request.getSession().getAttribute("userId");
+        MemberHomePageResponse memberHomePageResponse = memberConverter.toHomePageResponse(userId);
+        mv.addObject("userInfo", memberHomePageResponse);
+        return mv;
     }
 }

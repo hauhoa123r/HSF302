@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="dashboard-container" layout:fragment="">
+<div class="dashboard-container">
     <!-- Sidebar Begin -->
     <nav th:replace="~{/admin/fragments/sidebar :: sidebar}"></nav>
     <!-- Sidebar End -->
@@ -36,6 +36,21 @@
 <script th:src="@{/templates/shared/assets/js/main.js}"></script>
 <script th:src="@{/templates/admin/assets/js/admin.js}"></script>
 <th:block layout:fragment="custom-js"></th:block>
+<script th:inline="javascript" type="module">
+    import toast from "/templates/shared/assets/js/utils/toast.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const toastType = /*[[${toastType}]]*/ null;
+        const toastMessage = /*[[${toastMessage}]]*/ null;
+        if (toastType && toastMessage) {
+            toast[toastType](toastMessage, {
+                duration: 3000,
+                icon: true,
+                progress: toastType === "success"
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -17,11 +17,11 @@
                 <i class="fas fa-users"></i> Quản lý thành viên
             </a>
             <ul class="collapse list-unstyled" id="userSubmenu">
-                <li th:classappend="${subNavActive == 1} ? 'active'">
+                <li th:classappend="${navActive == 2 && subNavActive == 1} ? 'active'">
                     <a th:href="@{/admin/member}">Danh sách thành viên</a>
                 </li>
-                <li th:classappend="${subNavActive == 3} ? 'active'">
-                    <a th:href="@{/admin/members/attendance}">Điểm danh</a>
+                <li th:classappend="${navActive == 2 && subNavActive == 3} ? 'active'">
+                    <a th:href="@{/admin/member/attendance}">Điểm danh</a>
                 </li>
             </ul>
         </li>
@@ -31,10 +31,10 @@
             </a>
             <ul class="collapse list-unstyled" id="packageSubmenu">
                 <li th:classappend="${navActive == 3 && subNavActive == 1} ? 'active'">
-                    <a th:href="@{/admin/packages/list.html}">Danh sách gói tập</a>
+                    <a th:href="@{/admin/package}">Danh sách gói tập</a>
                 </li>
                 <li th:classappend="${navActive == 3 && subNavActive == 2} ? 'active'">
-                    <a th:href="@{/admin/packages/add.html}">Thêm gói tập</a>
+                    <a th:href="@{/admin/package/add}">Thêm gói tập</a>
                 </li>
             </ul>
         </li>
@@ -44,13 +44,13 @@
             </a>
             <ul class="collapse list-unstyled" id="trainerSubmenu">
                 <li th:classappend="${navActive == 4 && subNavActive == 1} ? 'active'">
-                    <a th:href="@{/admin/trainers/list.html}">Danh sách HLV</a>
+                    <a th:href="@{/admin/trainer}">Danh sách HLV</a>
                 </li>
                 <li th:classappend="${navActive == 4 && subNavActive == 2} ? 'active'">
-                    <a th:href="@{/admin/trainers/add.html}">Thêm HLV</a>
+                    <a th:href="@{/admin/trainer/add}">Thêm HLV</a>
                 </li>
                 <li th:classappend="${navActive == 4 && subNavActive == 3} ? 'active'">
-                    <a th:href="@{/admin/trainers/schedule.html}">Lịch làm việc</a>
+                    <a th:href="@{/admin/trainer/schedule}">Lịch làm việc</a>
                 </li>
             </ul>
         </li>

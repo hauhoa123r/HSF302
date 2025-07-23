@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 responseClass: MemberResponse,
                 apiUrl: "/api/admin/member",
                 renderStrategy: renderResponseListForAdmin,
-                customFormSelector: ["#filter-form", "#search-form"]
+                formSelector: ["#filter-form", "#search-form"]
             }
     );
     await renderUtils.init();

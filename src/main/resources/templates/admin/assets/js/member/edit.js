@@ -1,39 +1,18 @@
 import {MemberDTO} from "/templates/admin/assets/js/model/dto/MemberDTO.js";
 import {Base64Utils} from "/templates/shared/assets/js/utils/base64-utils.js";
-import {FetchingUtils} from "/templates/shared/assets/js/utils/fetching-utils.js";
-import {FormDataUtils} from "/templates/shared/assets/js/utils/form-data.js";
-import toast from "/templates/shared/assets/js/utils/toast.js";
-
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+import {EditUtils} from "/templates/shared/assets/js/utils/edit-utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    await setupFormEvents();
-});
-
-async function setupFormEvents() {
-    const editMemberForm = $("#edit-member-form");
-    if (!editMemberForm) return;
-    editMemberForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const formData = new FormData(editMemberForm);
-        const memberDTO = FormDataUtils.getObjectFromFormData(new MemberDTO(), formData);
-        if (memberDTO?.userEntity && memberDTO?.userEntity.avatar instanceof File) {
-            memberDTO.userEntity.avatar = await Base64Utils.getBase64(memberDTO.userEntity.avatar);
-        }
-        const data = await FetchingUtils.fetch(`/api/admin/member/${memberDTO.id}`, {
-            method: "PUT",
-            body: JSON.stringify(memberDTO),
-            headers: {
-                "Content-Type": "application/json"
+    const editUtils = new EditUtils({
+        formSelector: "#edit-member-form",
+        dtoInstance: new MemberDTO(),
+        apiUrl: "/api/admin/member",
+        prepareDto: async (dto) => {
+            if (dto?.userEntity && dto?.userEntity.avatar instanceof File) {
+                dto.userEntity.avatar = await Base64Utils.getBase64(dto.userEntity.avatar);
             }
-        }, "text");
-        if (data !== null) {
-            toast.success("Cập nhật thành công", {
-                progress: true,
-                duration: 3000,
-                icon: true
-            });
+            return dto;
         }
     });
-}
+    await editUtils.setupFormEvents();
+});

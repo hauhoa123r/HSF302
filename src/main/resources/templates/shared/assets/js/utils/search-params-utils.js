@@ -1,5 +1,8 @@
 export class SearchParamsUtils {
     static toSearchParams(obj, prefix = "") {
+        if (obj === null || obj === undefined) {
+            return new URLSearchParams();
+        }
         const searchParams = new URLSearchParams();
 
         function appendParams(o, p = "") {

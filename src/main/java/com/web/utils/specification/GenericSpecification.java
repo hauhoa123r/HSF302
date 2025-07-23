@@ -1,8 +1,5 @@
 package com.web.utils.specification;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.*;
-import lombok.*;
 import com.web.enums.operation.LogicalOperator;
 import com.web.enums.operation.SortDirection;
 import com.web.exception.ResourceUnsupportedException;
@@ -10,6 +7,9 @@ import com.web.utils.NumberTypeUtils;
 import com.web.utils.PathUtils;
 import com.web.utils.specification.search.SearchCriteria;
 import com.web.utils.specification.sort.SortCriteria;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.*;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.domain.Specification;
@@ -24,7 +24,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Component
 @Scope("prototype") // Use prototype scope to allow multiple instances with different sort criteria
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class GenericSpecification<T> implements Specification<T> {
     private Map<SortCriteria, LogicalOperator> sortCriteriaLogicalOperatorMap = new HashMap<>();
     private Map<SearchCriteria, LogicalOperator> searchCriteriaLogicalOperatorMap = new HashMap<>();
@@ -36,7 +36,7 @@ public class GenericSpecification<T> implements Specification<T> {
     }
 
     private Predicate getPredicate(@NonNull Root<T> root, CriteriaQuery<?> criteriaQuery,
-            @NonNull CriteriaBuilder criteriaBuilder, SearchCriteria searchCriteria, Map<String, Join<?, ?>> joinMap) {
+                                   @NonNull CriteriaBuilder criteriaBuilder, SearchCriteria searchCriteria, Map<String, Join<?, ?>> joinMap) {
         // Tạo đường dẫn truy cập thuộc tính
         PathUtils.join(root, searchCriteria.getFieldName(), searchCriteria.getJoinType(), joinMap);
         Path<Object> realPath = PathUtils.getRealPath(root, searchCriteria.getFieldName(), joinMap);
@@ -327,7 +327,7 @@ public class GenericSpecification<T> implements Specification<T> {
     }
 
     private Predicate getPredicate(@NonNull Root<T> root, CriteriaQuery<?> query,
-            @NonNull CriteriaBuilder criteriaBuilder, SortCriteria sortCriteria, Map<String, Join<?, ?>> joinMap) {
+                                   @NonNull CriteriaBuilder criteriaBuilder, SortCriteria sortCriteria, Map<String, Join<?, ?>> joinMap) {
         PathUtils.join(root, sortCriteria.getFieldName(), sortCriteria.getJoinType(), joinMap);
         Path<Object> realPath = PathUtils.getRealPath(root, sortCriteria.getFieldName(), joinMap);
         Class<?> javaType = root.getJavaType();
@@ -379,8 +379,8 @@ public class GenericSpecification<T> implements Specification<T> {
     }
 
     private <C> Predicate mapToPredicate(@NonNull Root<T> root, CriteriaQuery<?> criteriaQuery,
-            @NonNull CriteriaBuilder criteriaBuilder, Map<String, Join<?, ?>> joinMap,
-            Map<C, LogicalOperator> criteriaLogicalOperatorMap) {
+                                         @NonNull CriteriaBuilder criteriaBuilder, Map<String, Join<?, ?>> joinMap,
+                                         Map<C, LogicalOperator> criteriaLogicalOperatorMap) {
         Predicate predicate = criteriaBuilder.conjunction();
         for (Map.Entry<C, LogicalOperator> entry : criteriaLogicalOperatorMap.entrySet()) {
             C criteria = entry.getKey();
@@ -388,7 +388,7 @@ public class GenericSpecification<T> implements Specification<T> {
             if (criteria != null && logicalOperator != null) {
                 if (criteria instanceof SortCriteria sortCriteria) {
                     if (sortCriteria.getFieldName() == null || sortCriteria.getSortDirection() == null
-                            || sortCriteria.getAggregationFunction() == null || sortCriteria.getJoinType() == null) {
+                            || sortCriteria.getAggregationFunction() == null) {
                         continue; // Skip if sort criteria is incomplete
                     }
                     Predicate sortPredicate = getPredicate(root, criteriaQuery, criteriaBuilder, sortCriteria, joinMap);
@@ -399,7 +399,7 @@ public class GenericSpecification<T> implements Specification<T> {
                     }
                 } else if (criteria instanceof SearchCriteria searchCriteria) {
                     if (searchCriteria.getFieldName() == null || searchCriteria.getComparisonOperator() == null
-                            || searchCriteria.getComparedValue() == null || searchCriteria.getJoinType() == null) {
+                            || searchCriteria.getComparedValue() == null) {
                         continue; // Skip if search criteria is incomplete
                     }
                     Predicate searchPredicate = getPredicate(root, criteriaQuery, criteriaBuilder, searchCriteria,
@@ -417,7 +417,7 @@ public class GenericSpecification<T> implements Specification<T> {
 
     @Override
     public Predicate toPredicate(@NonNull Root<T> root, CriteriaQuery<?> query,
-            @NonNull CriteriaBuilder criteriaBuilder) {
+                                 @NonNull CriteriaBuilder criteriaBuilder) {
         Map<String, Join<?, ?>> joinMap = new HashMap<>();
         Predicate searchPredicate = mapToPredicate(root, query, criteriaBuilder, joinMap,
                 searchCriteriaLogicalOperatorMap);

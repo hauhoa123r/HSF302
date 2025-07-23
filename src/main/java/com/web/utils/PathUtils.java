@@ -42,6 +42,9 @@ public class PathUtils {
         if (!fieldName.contains(".")) {
             return;
         }
+        if (joinType == null) {
+            joinType = JoinType.INNER; // Default to INNER join if not specified
+        }
         String[] fieldParts = fieldName.split("\\.");
         Join<?, ?> join;
         StringBuilder joinKey = new StringBuilder();

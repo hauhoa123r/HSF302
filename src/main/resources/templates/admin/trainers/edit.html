@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${4}, subNavActive=${1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Chỉnh sửa huấn luyện viên - GymFitness</title>
+</head>
+
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Chỉnh sửa huấn luyện viên</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Form chỉnh sửa HLV, đồng bộ với add.html -->
+                    <form id="form" th:object="${trainer}">
+                        <input th:field="*{id}" type="hidden">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i> Vui lòng chỉnh sửa thông tin HLV. Các
+                                    trường có dấu (*) là bắt buộc.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thông tin cá nhân -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-user"></i> Thông tin cá nhân
+                                </h4>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerFullName">Họ và tên <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerFullName" required
+                                           th:field="*{userEntity.fullName}" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerEmail">Email <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerEmail" required
+                                           th:field="*{userEntity.email}" type="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerPhone">Số điện thoại <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerPhone" required
+                                           th:field="*{userEntity.phone}"
+                                           type="tel">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerBirthday">Ngày sinh <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerBirthday" name="userEntity.dateOfBirth"
+                                           required
+                                           th:value="${#dates.format(trainer.userEntity.dateOfBirth, 'yyyy-MM-dd')}"
+                                           type="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Giới tính <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-control" id="trainerGender" required
+                                            th:field="*{userEntity.gender}">
+                                        <option value="MALE">Nam</option>
+                                        <option value="FEMALE">Nữ</option>
+                                        <option value="OTHER">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerIdCard">Số CMND/CCCD <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerIdCard" required
+                                           th:field="*{userEntity.idCard}" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="trainerAddress">Địa chỉ <span
+                                            class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="trainerAddress" required
+                                              rows="2" th:field="*{userEntity.address}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="memberAvatar">Ảnh đại diện</label>
+                                    <img alt="" class="img-thumbnail mb-2" id="currentAvatar"
+                                         style="max-width: 150px; max-height: 150px;"
+                                         th:src="${trainer.userEntity.avatar}">
+                                    <input accept="image/*" class="form-control-file" id="memberAvatar"
+                                           onchange="document.getElementById('currentAvatar').src = window.URL.createObjectURL(this.files[0])"
+                                           th:field="*{userEntity.avatar}" type="file">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="trainerEmergencyContact">Liên hệ khẩn cấp <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="trainerEmergencyContact"
+                                           placeholder="Tên và số điện thoại" required
+                                           th:field="*{userEntity.emergencyContact}"
+                                           type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thông tin nghề nghiệp -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-md-12">
+                                <h4 class="form-section-title"><i class="fas fa-briefcase"></i> Thông tin
+                                    nghề nghiệp</h4>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="experienceYears">Số năm kinh nghiệm <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="experienceYears" required
+                                           th:field="*{experienceYears}" type="number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="specialization">Chuyên môn <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="specialization" required
+                                           th:field="*{specialization}" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="certificates">Chứng chỉ</label>
+                                    <input class="form-control" id="certificates"
+                                           placeholder="Nhập các chứng chỉ liên quan"
+                                           th:field="*{certificates}" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="employmentType">Loại hợp đồng</label>
+                                    <select class="form-control" id="employmentType" th:field="*{employmentType}">
+                                        <option value="FULLTIME">Toàn thời gian</option>
+                                        <option value="PARTTIME">Bán thời gian</option>
+                                        <option value="CONTRACT">Hợp đồng</option>
+                                        <option value="FREELANCE">Tự do</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="baseSalary">Lương cơ bản <span
+                                            class="text-danger">*</span></label>
+                                    <input class="form-control" id="baseSalary" required th:field="*{baseSalary}"
+                                           type="number">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="status">Trạng thái</label>
+                                    <select class="form-control" id="status" th:field="*{status}">
+                                        <option value="ACTIVE">Đang làm việc</option>
+                                        <option value="INACTIVE">Nghỉ việc</option>
+                                        <option value="SUSPENDED">Tạm dừng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bankAccount">Tài khoản ngân hàng</label>
+                                    <input class="form-control" id="bankAccount" th:field="*{bankAccount}" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="taxCode">Mã số thuế</label>
+                                    <input class="form-control" id="taxCode" th:field="*{taxCode}" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-secondary mr-2" onclick="window.location.href='/admin/trainer'"
+                                        type="button">Hủy
+                                </button>
+                                <button class="btn btn-success" type="submit">Lưu thay đổi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="custom-js">
+    <script type="module">
+        import {Base64Utils} from "/templates/shared/assets/js/utils/base64-utils.js";
+        import {EditUtils} from "/templates/shared/assets/js/utils/edit-utils.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const editUtils = new EditUtils({
+                apiUrl: "/api/admin/trainer",
+                prepareDto: async (dto) => {
+                    if (dto?.userEntity && dto?.userEntity.avatar instanceof File) {
+                        dto.userEntity.avatar = await Base64Utils.getBase64(dto.userEntity.avatar);
+                    }
+                    return dto;
+                }
+            });
+            await editUtils.setupFormEvents();
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

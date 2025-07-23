@@ -1,9 +1,10 @@
 export class UserResponse {
-    constructor(id, fullName, email, phone) {
+    constructor(id, fullName, email, phone, avatar) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
+        this.avatar = avatar; // Optional, can be used for user profile picture
     }
 
     static fromJson(json) {
@@ -12,7 +13,8 @@ export class UserResponse {
                 json.id,
                 json.fullName,
                 json.email,
-                json.phone
+                json.phone,
+                json.avatar || null // Default to null if avatar is not provided
         );
     }
 

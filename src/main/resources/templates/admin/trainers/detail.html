@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${4}, subNavActive=${1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Chi tiết huấn luyện viên - GymFitness</title>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>Chi tiết huấn luyện viên</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <img alt="Avatar" class="img-fluid rounded-circle mb-3" height="120"
+                                 th:src="${trainer.userEntity.avatar}" width="120">
+                            <p><strong>Mã HLV:</strong> <span th:text="${trainer.id}"></span></p>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="card-title mb-3" th:text="${trainer.userEntity.fullName}"></h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="mb-2">Thông tin cá nhân</h5>
+                                    <table class="table table-sm table-borderless mb-3">
+                                        <tr>
+                                            <th>Email:</th>
+                                            <td th:text="${trainer.userEntity.email}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số điện thoại:</th>
+                                            <td th:text="${trainer.userEntity.phone}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày sinh:</th>
+                                            <td th:text="${#dates.format(trainer.userEntity.dateOfBirth, 'dd/MM/yyyy')}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Giới tính:</th>
+                                            <th:block th:switch="${trainer.userEntity.gender}">
+                                                <th th:case="MALE">Name</th>
+                                                <th th:case="FEMALE">Nữ</th>
+                                                <th th:case="OTHER">Khác</th>
+                                            </th:block>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ:</th>
+                                            <td th:text="${trainer.userEntity.address}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số CMND/CCCD:</th>
+                                            <td th:text="${trainer.userEntity.idCard}"></td>
+                                        </tr>
+                                    </table>
+                                    <h5 class="mb-2">Liên hệ khẩn cấp</h5>
+                                    <table class="table table-sm table-borderless mb-3">
+                                        <tr>
+                                            <th>Người liên hệ:</th>
+                                            <td th:text="${trainer.userEntity.emergencyContact}"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="mb-2">Thông tin nghề nghiệp</h5>
+                                    <table class="table table-sm table-borderless mb-3">
+                                        <tr>
+                                            <th>Kinh nghiệm:</th>
+                                            <td th:text="${trainer.experienceYears}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chuyên môn:</th>
+                                            <td th:text="${trainer.specialization}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chứng chỉ:</th>
+                                            <td th:text="${trainer.certificates}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hợp đồng:</th>
+                                            <th:block th:switch="${trainer.employmentType}">
+                                                <th th:case="'FULLTIME'">Toàn thời gian</th>
+                                                <th th:case="'PARTTIME'">Bán thời gian</th>
+                                                <th th:case="'FREELANCE'">Tự do</th>
+                                                <th th:case="'CONTRACT'">Hợp đồng</th>
+                                            </th:block>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày bắt đầu:</th>
+                                            <td th:text="${#dates.format(trainer.startDate, 'dd/MM/yyyy')}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lương cơ bản:</th>
+                                            <td th:text="${#numbers.formatCurrency(trainer.baseSalary)}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trạng thái:</th>
+                                            <td>
+                                                <span class="badge badge-success" th:if="${trainer.status == 'ACTIVE'}">Đang hoạt động</span>
+                                                <span class="badge badge-secondary"
+                                                      th:if="${trainer.status == 'INACTIVE'}">Ngưng hoạt động</span>
+                                                <span class="badge badge-warning"
+                                                      th:if="${trainer.status == 'SUSPENDED'}">Bị đình chỉ</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tài khoản NH:</th>
+                                            <td th:text="${trainer.bankAccount}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã số thuế:</th>
+                                            <td th:text="${trainer.taxCode}"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-secondary mt-3" th:href="@{/admin/trainer}">Quay lại danh sách</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

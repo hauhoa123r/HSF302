@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Thêm huấn luyện viên mới GymFitness" name="description">
+    <title>Thêm huấn luyện viên mới - GymFitness</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" th:href="@{/templates/shared/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/templates/shared/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/templates/admin/assets/css/admin-style.css}">
+</head>
+
+<body>
+<div class="dashboard-container">
+    <!-- Sidebar Begin -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Gym<span>Fitness</span></h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a th:href="@{/adminindex.html}"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#userSubmenu}">
+                    <i class="fas fa-users"></i> Quản lý thành viên
+                </a>
+                <ul class="collapse list-unstyled" id="userSubmenu">
+                    <li>
+                        <a th:href="@{/adminmembers/list.html}">Danh sách thành viên</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminmembers/add.html}">Thêm thành viên</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminmembers/attendance.html}">Điểm danh</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse"
+                   th:href="@{#packageSubmenu}">
+                    <i class="fas fa-box"></i> Quản lý gói tập
+                </a>
+                <ul class="collapse list-unstyled" id="packageSubmenu">
+                    <li>
+                        <a th:href="@{/adminpackages/list.html}">Danh sách gói tập</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminpackages/add.html}">Thêm gói tập</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="active">
+                <a aria-expanded="true" class="dropdown-toggle" data-toggle="collapse" th:href="@{#trainerSubmenu}">
+                    <i class="fas fa-user-tie"></i> Quản lý huấn luyện viên
+                </a>
+                <ul class="collapse list-unstyled show" id="trainerSubmenu">
+                    <li>
+                        <a th:href="@{/admin/list.html}">Danh sách HLV</a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{/admin/add.html}">Thêm HLV</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/schedule.html}">Lịch làm việc</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" th:href="@{#classSubmenu}">
+                    <i class="fas fa-dumbbell"></i> Quản lý lớp học
+                </a>
+                <ul class="collapse list-unstyled" id="classSubmenu">
+                    <li>
+                        <a th:href="@{/adminclasses/list.html}">Danh sách lớp</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminclasses/add.html}">Thêm lớp</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminclasses/schedule.html}">Lịch học</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse"
+                   th:href="@{#equipmentSubmenu}">
+                    <i class="fas fa-tools"></i> Quản lý thiết bị
+                </a>
+                <ul class="collapse list-unstyled" id="equipmentSubmenu">
+                    <li>
+                        <a th:href="@{/adminequipment/list.html}">Danh sách thiết bị</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminequipment/add.html}">Thêm thiết bị</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminequipment/maintenance.html}">Bảo trì</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse"
+                   th:href="@{#promotionSubmenu}">
+                    <i class="fas fa-tags"></i> Quản lý khuyến mãi
+                </a>
+                <ul class="collapse list-unstyled" id="promotionSubmenu">
+                    <li>
+                        <a th:href="@{/adminpromotions/list.html}">Danh sách KM</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/adminpromotions/add.html}">Thêm KM</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a th:href="@{/adminreports.html}"><i class="fas fa-chart-line"></i> Báo cáo doanh thu</a>
+            </li>
+            <li>
+                <a th:href="@{/adminsettings.html}"><i class="fas fa-cog"></i> Cài đặt</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Sidebar End -->
+
+    <!-- Content Begin -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="btn btn-info" id="sidebar-collapse" type="button">
+                    <i class="fas fa-align-left"></i>
+                    <span>Thu gọn</span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                               data-toggle="dropdown" id="navbarDropdown" role="button" th:href="@{#}">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge badge-danger">3</span>
+                            </a>
+                            <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" th:href="@{#}">Thông báo mới về huấn luyện viên</a>
+                                <a class="dropdown-item" th:href="@{#}">Thông báo về lịch làm việc</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" th:href="@{#}">Xem tất cả thông báo</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle"
+                               data-toggle="dropdown" id="userDropdown" role="button" th:href="@{#}">
+                                <img class="rounded-circle" height="30" th:src="@{/adminimg/admin-avatar.jpg}"
+                                     width="30">
+                                <span>Admin</span>
+                            </a>
+                            <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" th:href="@{/adminprofile.html}">Thông tin cá nhân</a>
+                                <a class="dropdown-item" th:href="@{/adminsettings.html}">Cài đặt</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" th:href="@{/shared/login.html}">Đăng xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="page-header d-flex justify-content-between align-items-center">
+                        <h1>Thêm huấn luyện viên mới</h1>
+                        <a class="btn btn-secondary" href="./list.html">
+                            <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <form id="addTrainerForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i> Vui lòng điền đầy đủ thông tin huấn
+                                            luyện viên. Các trường có dấu (*) là bắt buộc.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Thông tin cá nhân -->
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <h4 class="form-section-title"><i class="fas fa-user"></i> Thông tin cá nhân
+                                        </h4>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="trainerName">Họ và tên <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="trainerName" required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="avatar">Ảnh đại diện</label>
+                                            <input class="form-control-file" id="avatar" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="specialty">Chuyên môn <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="specialty" required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Số điện thoại <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="phone" required type="tel">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Email <span class="text-danger">*</span></label>
+                                            <input class="form-control" id="email" required type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status">Trạng thái</label>
+                                            <select class="form-control" id="status">
+                                                <option>Đang làm việc</option>
+                                                <option>Nghỉ phép</option>
+                                                <option>Đã nghỉ việc</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="description">Mô tả</label>
+                                            <textarea class="form-control" id="description" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Thông tin chuyên môn -->
+                                <div class="row mt-5 mb-4">
+                                    <div class="col-md-12">
+                                        <h4 class="form-section-title"><i class="fas fa-graduation-cap"></i> Thông
+                                            tin chuyên môn</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="specialization">Chuyên môn <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-control" id="specialization" multiple required>
+                                                <option value="bodybuilding">Thể hình</option>
+                                                <option value="cardio">Cardio</option>
+                                                <option value="yoga">Yoga</option>
+                                                <option value="pilates">Pilates</option>
+                                                <option value="boxing">Boxing</option>
+                                                <option value="kickboxing">Kickboxing</option>
+                                                <option value="crossfit">Crossfit</option>
+                                                <option value="calisthenics">Calisthenics</option>
+                                                <option value="nutrition">Dinh dưỡng</option>
+                                                <option value="weightloss">Giảm cân</option>
+                                            </select>
+                                            <small class="form-text text-muted">Giữ Ctrl để chọn nhiều chuyên
+                                                môn</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="experience">Kinh nghiệm <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="experience" min="0" required
+                                                       type="number">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">năm</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="certificates">Chứng chỉ</label>
+                                            <textarea class="form-control" id="certificates"
+                                                      placeholder="Liệt kê các chứng chỉ, bằng cấp liên quan..."
+                                                      rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="biography">Tiểu sử</label>
+                                            <textarea class="form-control" id="biography"
+                                                      placeholder="Mô tả ngắn về kinh nghiệm, thành tựu, phong cách huấn luyện..."
+                                                      rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Thông tin làm việc -->
+                                <div class="row mt-5 mb-4">
+                                    <div class="col-md-12">
+                                        <h4 class="form-section-title"><i class="fas fa-briefcase"></i> Thông tin
+                                            làm việc</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="employmentType">Loại hợp đồng <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-control" id="employmentType" required>
+                                                <option value="">-- Chọn loại hợp đồng --</option>
+                                                <option value="fulltime">Toàn thời gian</option>
+                                                <option value="parttime">Bán thời gian</option>
+                                                <option value="contract">Hợp đồng</option>
+                                                <option value="freelance">Cộng tác viên</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="startDate">Ngày bắt đầu <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="startDate" required type="date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="baseSalary">Lương cơ bản <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="baseSalary" required type="number">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">VNĐ/tháng</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="sessionRate">Phí buổi tập cá nhân</label>
+                                            <div class="input-group">
+                                                <input class="form-control" id="sessionRate" type="number">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">VNĐ/buổi</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="maxClients">Số khách hàng tối đa</label>
+                                            <input class="form-control" id="maxClients" min="0" type="number">
+                                            <small class="form-text text-muted">Số lượng khách hàng tối đa có thể
+                                                huấn luyện cùng lúc</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Có thể dạy lớp</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="canTeachClasses"
+                                                       type="checkbox">
+                                                <label class="form-check-label" for="canTeachClasses">
+                                                    Có thể dạy các lớp tập theo nhóm
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Thông tin tài khoản -->
+                                <div class="row mt-5 mb-4">
+                                    <div class="col-md-12">
+                                        <h4 class="form-section-title"><i class="fas fa-user-lock"></i> Thông tin
+                                            tài khoản</h4>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="username">Tên đăng nhập <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="username" required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="password">Mật khẩu <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="password" required type="password">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="confirmPassword">Xác nhận mật khẩu <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" id="confirmPassword" required
+                                                   type="password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Quyền hạn</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="canManageMembers"
+                                                       type="checkbox">
+                                                <label class="form-check-label" for="canManageMembers">
+                                                    Quản lý thành viên
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="canManageClasses"
+                                                       type="checkbox">
+                                                <label class="form-check-label" for="canManageClasses">
+                                                    Quản lý lớp học
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ghi chú -->
+                                <div class="row mt-5 mb-4">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="adminNotes">Ghi chú của quản trị viên</label>
+                                            <textarea class="form-control" id="adminNotes" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="agreeTerms" required
+                                                   type="checkbox">
+                                            <label class="form-check-label" for="agreeTerms">
+                                                Huấn luyện viên đã đọc và đồng ý với <a th:href="@{#}">quy định làm
+                                                việc</a> và <a th:href="@{#}">chính sách bảo mật</a> của
+                                                GymFitness
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-md-12 text-center">
+                                        <button class="btn btn-secondary mr-2"
+                                                onclick="window.location.href='./list.html'" type="button">Hủy
+                                        </button>
+                                        <button class="btn btn-primary mr-2" type="button">Lưu nháp</button>
+                                        <button class="btn btn-success" type="submit">Thêm huấn luyện viên</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content End -->
+</div>
+
+<!-- JavaScript Files -->
+<script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/templates/shared/assets/js/main.js}"></script>
+<script th:src="@{/adminjs/admin.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi" layout:decorate="~{/admin/layout/main-layout}" th:with="navActive=${4}, subNavActive=${1}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Danh sách huấn luyện viên - GymFitness</title>
+</head>
+
+<body>
+<div class="container-fluid" layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header d-flex justify-content-between align-items-center">
+                <h1>Danh sách huấn luyện viên</h1>
+                <a class="btn btn-success" th:href="@{/admin/add.html}">
+                    <i class="fas fa-plus"></i> Thêm HLV mới
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thanh tìm kiếm đơn giản -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <form id="search-form">
+                <div class="input-group">
+                    <input class="form-control" name="keyword" placeholder="Tìm kiếm theo tên"
+                           type="text">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bộ lọc nâng cao -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <form class="form-row" id="filter-form">
+                <div class="form-group col-md-3">
+                    <label>Trạng thái</label>
+                    <select class="form-control" name="status">
+                        <option value="">Tất cả</option>
+                        <option value="ACTIVE">Đang hoạt động</option>
+                        <option value="INACTIVE">Ngưng hoạt động</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Số điện thoại</label>
+                    <input class="form-control" name="phone" placeholder="Nhập SĐT">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Email</label>
+                    <input class="form-control" name="email" placeholder="Nhập Email">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Sắp xếp theo</label>
+                    <select class="form-control" name="sortFieldName">
+                        <option value="">Chọn trường</option>
+                        <option value="userEntity.fullName">Họ và tên</option>
+                        <option value="specialization">Chuyên môn</option>
+                        <option value="userEntity.phone">Số điện thoại</option>
+                        <option value="userEntity.email">Email</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Thứ tự</label>
+                    <select class="form-control" name="sortDirection">
+                        <option value="ASC">Tăng dần</option>
+                        <option value="DESC">Giảm dần</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12 text-right">
+                    <button class="btn btn-secondary mr-2" type="reset">Đặt lại</button>
+                    <button class="btn btn-primary" type="submit">Áp dụng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ảnh</th>
+                                <th>Họ và tên</th>
+                                <th>Chuyên môn</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Trạng thái</th>
+                                <th>Thành viên đang huấn luyện</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody id="list"></tbody>
+                        </table>
+                    </div>
+                    <nav id="pagination"></nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="custom-js">
+    <script type="module">
+        import {
+            TrainerResponse, renderTrainerForAdmin
+        } from "/templates/admin/assets/js/model/response/TrainerRepsonse.js";
+        import {RenderUtils} from "/templates/shared/assets/js/utils/render-utils.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            const renderUtils = new RenderUtils({
+                apiUrl: "/api/admin/trainer",
+                responseClass: TrainerResponse,
+                formSelector: [
+                    "#search-form",
+                    "#filter-form"
+                ],
+                renderStrategy: renderTrainerForAdmin
+            });
+            await renderUtils.init();
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

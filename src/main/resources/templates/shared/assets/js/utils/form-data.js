@@ -6,18 +6,19 @@ export class FormDataUtils {
      * @returns {InstanceType} - Object kết quả, có nested field nếu key dạng a.b.c.
      */
     static getObjectFromFormData(instance, formData) {
+        // Nếu instance null thì tạo object rỗng
+        if (instance === null || instance === undefined) {
+            instance = {};
+        }
         for (const [key, value] of formData.entries()) {
-            // Tách key theo dấu chấm (.)
             const parts = key.split(".");
             let current = instance;
-            // Duyệt từng phần để tạo object lồng nhau
             for (let i = 0; i < parts.length - 1; i++) {
                 if (!current[parts[i]]) {
                     current[parts[i]] = {};
                 }
                 current = current[parts[i]];
             }
-            // Gán giá trị cho key cuối cùng
             const lastKey = parts[parts.length - 1];
             if (Array.isArray(value)) {
                 current[lastKey] = value.map(item => item.trim());
